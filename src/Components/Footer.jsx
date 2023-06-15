@@ -82,37 +82,37 @@ function Footer() {
               <div className="footer-links d-flex flex-column">
                 <Link
                   className="text-white py-2 mb-1 text-decoration-none"
-                  href="#"
+                  to="/privacy-policy"
                 >
                   Privacy Policy
                 </Link>
                 <Link
                   className="text-white py-2 mb-1 text-decoration-none"
-                  href="#"
+                  to="/refund-policy"
                 >
                   Refund Policy
                 </Link>
-                <Link
+                {/* <Link
                   className="text-white py-2 mb-1 text-decoration-none"
-                  href="#"
+                  to="/privacy-policy"
                 >
                   Tablets
-                </Link>
+                </Link> */}
                 <Link
                   className="text-white py-2 mb-1 text-decoration-none"
-                  href="#"
+                  to="/shipping-policy"
                 >
                   Shipping Policy
                 </Link>
                 <Link
                   className="text-white py-2 mb-1 text-decoration-none"
-                  href="#"
+                  to="/term-conditions"
                 >
                   Terms & Conditions
                 </Link>
                 <Link
                   className="text-white py-2 mb-1 text-decoration-none"
-                  href="#"
+                  to="/blogs"
                 >
                   Blogs
                 </Link>

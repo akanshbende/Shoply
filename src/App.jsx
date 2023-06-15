@@ -5,7 +5,7 @@ import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./Components/Layout";
 import Home from "./Home";
-import About from "./About";
+// import About from "./About";
 import Contact from "./pages/Contact";
 import OurStore from "./pages/OurStore";
 import Blogs from "./pages/Blogs";
@@ -21,6 +21,7 @@ import TermAndConditions from "./pages/TermAndConditions";
 import ShippingPolicy from "./pages/ShippingPolicy";
 import RefundPolicy from "./pages/RefundPolicy";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import SingleProduct from "./pages/SingleProduct";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -31,9 +32,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path="about" element={<About />} />
+            {/* <Route path="about" element={<About />} /> */}
             <Route path="contact" element={<Contact />} />
-            <Route path="store" element={<OurStore />} />
+            <Route path="product" element={<OurStore />} />
+            <Route path="product/:id" element={<SingleProduct />} />
             <Route path="blogs" element={<Blogs />} />
             <Route path="blog/:id" element={<SingleBlog />} />
             <Route path="contactUs" element={<Contact />} />

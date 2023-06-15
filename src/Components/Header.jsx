@@ -1,7 +1,10 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
-
+import CachedIcon from "@mui/icons-material/Cached";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import PersonIcon from "@mui/icons-material/Person";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 function Header() {
   return (
     <>
@@ -50,9 +53,10 @@ function Header() {
                 <div className="main-func">
                   <Link
                     to="/compare-product"
-                    className="d-flex align-items-center gap-10 text-white"
+                    className="d-flex align-items-center text-white"
                   >
-                    <img src="images/compare.svg" alt="compare" />
+                    {/* <img src="images/compare.svg" alt="" /> */}
+                    <CachedIcon />
                     <p className="mb-0">
                       Compare <br />
                       Products
@@ -62,9 +66,9 @@ function Header() {
                 <div className="main-func">
                   <Link
                     to="/wishlist"
-                    className="d-flex align-items-center gap-10 text-white"
+                    className="d-flex align-items-center text-white"
                   >
-                    <img src="images/wishlist.svg" alt="wislist" />
+                    <FavoriteBorderIcon />
                     <p className="mb-0">
                       Favourite <br /> Wishlist
                     </p>
@@ -73,9 +77,9 @@ function Header() {
                 <div className="main-func">
                   <Link
                     to="/login"
-                    className="d-flex align-items-center gap-10 text-white"
+                    className="d-flex align-items-center text-white"
                   >
-                    <img src="images/user.svg" alt="" />
+                    <PersonIcon />
                     <p className="mb-0">
                       Login <br />
                       My Account
@@ -85,10 +89,10 @@ function Header() {
                 <div className="main-func">
                   <Link
                     to="/cart"
-                    className="d-flex align-items-center gap-10 text-white"
+                    className="d-flex align-items-center text-white"
                   >
-                    <img src="images/cart.svg" alt="" />
-                    <div className="d-flex flex-column gap-10">
+                    <ShoppingCartIcon />
+                    <div className="d-flex flex-column gap-1">
                       <span className="badge bg-white text-dark">0</span>
                       <p className="mb-0">$ 500 </p>
                     </div>
@@ -114,7 +118,7 @@ function Header() {
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
-                      <img src="../../public/images/menu.svg" alt="" />
+                      <img src="/images/menu.svg" alt="" />
                       <span className="me-4 d-inline-block">
                         Shop Categories
                       </span>
@@ -147,7 +151,7 @@ function Header() {
                     <NavLink className="links" to="/">
                       Home
                     </NavLink>
-                    <NavLink className="links" to="/store">
+                    <NavLink className="links" to="/product">
                       Our Store
                     </NavLink>
                     <NavLink className="links" to="/blogs">
