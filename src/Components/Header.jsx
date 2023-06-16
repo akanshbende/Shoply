@@ -5,6 +5,7 @@ import CachedIcon from "@mui/icons-material/Cached";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Badge, Chip } from "@mui/material";
 function Header() {
   return (
     <>
@@ -91,11 +92,26 @@ function Header() {
                     to="/cart"
                     className="d-flex align-items-center text-white"
                   >
-                    <ShoppingCartIcon />
-                    <div className="d-flex flex-column gap-1">
+                    <div className="d-flex flex-row gap-3 align-items-center ms-2">
+                      <Badge color="error" badgeContent={0} showZero>
+                        <ShoppingCartIcon />
+                      </Badge>
+                      <Chip
+                        variant="outlined"
+                        label="$ 500"
+                        sx={{
+                          color: "white",
+                          fontWeight: 500,
+                          fontSize: 15,
+                          cursor: "pointer",
+                        }}
+                      />
+                    </div>
+                    {/* <ShoppingCartIcon /> */}
+                    {/* <div className="d-flex flex-column gap-1">
                       <span className="badge bg-white text-dark">0</span>
                       <p className="mb-0">$ 500 </p>
-                    </div>
+                    </div> */}
                   </Link>
                 </div>
               </div>

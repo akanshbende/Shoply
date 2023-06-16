@@ -777,4 +777,9 @@ footer .input-group-text:hover {
   color: var(--color-777777);
 }
 
+.MuiPaper-root {
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0) !important;
+}
+/* 8.3 */
+
 /*----------- MAIN PRODUCT PAGE ENDS here----------*/

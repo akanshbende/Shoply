@@ -13,9 +13,9 @@ function ProductCard(props) {
       >
         <Link to=":id" className="product-card position-relative">
           <div className="wishlist-icon position-absolute">
-            <Link>
-              <img src="../../public/images/wish.svg" alt="" />
-            </Link>
+            {/* <Link> */}
+            <img src="../../public/images/wish.svg" alt="" />
+            {/* </Link> */}
           </div>
           {/* Product image */}
           <div className="product-image">
@@ -69,11 +69,11 @@ function ProductCard(props) {
       <div
         className={`${location.pathname == "/store" ? `gr-${grid}` : "col-3"}`}
       >
-        <Link className="product-card position-relative">
+        <Link to=":id" className="product-card position-relative">
           <div className="wishlist-icon position-absolute">
-            <Link>
-              <img src="../../public/images/wish.svg" alt="" />
-            </Link>
+            {/* <Link> */}
+            <img src="../../public/images/wish.svg" alt="" />
+            {/* </Link> */}
           </div>
           {/* Product image */}
           <div className="product-image">
@@ -127,11 +127,11 @@ function ProductCard(props) {
       <div
         className={`${location.pathname == "/store" ? `gr-${grid}` : "col-3"}`}
       >
-        <Link className="product-card position-relative">
+        <Link to=":id" className="product-card position-relative">
           <div className="wishlist-icon position-absolute">
-            <Link>
-              <img src="../../public/images/wish.svg" alt="" />
-            </Link>
+            {/* <Link> */}
+            <img src="../../public/images/wish.svg" alt="" />
+            {/* </Link> */}
           </div>
           {/* Product image */}
           <div className="product-image">

@@ -23,6 +23,7 @@ function SingleProduct() {
   const [orderedProduct, setOrderedProduct] = useState(true);
   // const [hide, setHide] = useState(true);
   const [show, setShow] = useState(false);
+  const [added, setAdded] = useState(false);
   const copyToClipboard = (text) => {
     console.log("text", text);
     var textField = document.createElement("textarea");
@@ -39,15 +40,30 @@ function SingleProduct() {
       setShow(false);
     }, 2000);
   };
+
+  const showAdded = () => {
+    setAdded(true);
+    console.log("added shown");
+    setTimeout(() => {
+      setAdded(false);
+      console.log("added hidded");
+    }, 2000);
+  };
   return (
     <>
       {/* Tab heading */}
       <Meta title={"Product Name"} />
       {/* Home / Sign Up*/}
       <BreadCrumb title="Product Name" />
+
       {show && (
-        <AlertBar text={"Copied!!"} work={"Link copied to Clipboard..."} />
+        <AlertBar text={"Copied!!"} work={" Link copied to Clipboard..."} />
       )}
+
+      {added && (
+        <AlertBar text={"Added!!"} work={" Product Added to Cart..."} />
+      )}
+
       <div className="main-product-wrapper py-5 home-wrapper-2">
         <div className="container-xxl">
           <div className="row">
@@ -192,9 +208,14 @@ function SingleProduct() {
                         InputProps={{ inputProps: { min: 0, max: 10 } }}
                       />
                     </div>
-
+                    {/* buy item and addd to cart button */}
                     <div className="d-flex gap-30 align-items-center ms-5">
-                      <button className="button border-0">Add to Cart</button>
+                      <button
+                        onClick={(e) => showAdded()}
+                        className="button border-0"
+                      >
+                        Add to Cart
+                      </button>
                       <Link to="" className="button signup">
                         Buy Item Now
                       </Link>
@@ -202,7 +223,7 @@ function SingleProduct() {
                   </div>
                   <div className="d-flex align-items-center gap-15">
                     <div className="">
-                      <Link to="">
+                      <Link>
                         <AiOutlineHeart /> Add to Compare
                       </Link>
                     </div>
