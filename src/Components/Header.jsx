@@ -6,6 +6,10 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Badge, Chip } from "@mui/material";
+import Select, { selectClasses } from "@mui/joy/Select";
+import { KeyboardArrowDown } from "@mui/icons-material";
+import { Option } from "@mui/joy";
+import LocalMallIcon from "@mui/icons-material/LocalMall";
 function Header() {
   return (
     <>
@@ -14,7 +18,7 @@ function Header() {
           <div className="row">
             <div className="col-6">
               <p className="text-white mb-0">
-                Free Delivery Over Rs.599 & Free Return{" "}
+                Free Delivery Over <strong>$ 599</strong> & Free Return{" "}
               </p>
             </div>
             <div className="col-6">
@@ -27,15 +31,15 @@ function Header() {
       </header>
       <header className="header-upper">
         <div className="container-xxl">
-          <div className="row align-items-center">
-            <div className="col-2">
+          <div className="row align-items-center d-flex flex-grow-1">
+            <div className="col-lg-2 col-md-12 col-sm-12 mt-sm-2">
               <h1>
                 <Link href="/" className="text-white py-2" id="header-logo">
                   Shoply
                 </Link>
               </h1>
             </div>
-            <div className="col-5 ">
+            <div className="col-lg-5 col-md-12 col-sm-12 mt-sm-3 mb-lg-3">
               <div className="input-group ">
                 <input
                   type="text"
@@ -49,7 +53,7 @@ function Header() {
                 </span>
               </div>
             </div>
-            <div className="col-5">
+            <div className="col-lg-5 col-md-12 col-sm-12 mt-sm-3 mb-sm-3">
               <div className="header-upper-links d-flex align-items-center justify-content-between">
                 <div className="main-func">
                   <Link
@@ -127,6 +131,36 @@ function Header() {
               <div className="menu-bottom d-flex align-items-center gap-30 ">
                 <div className="d-flex align-items-center gap-10">
                   <div className="dropdown">
+                    <Select
+                      placeholder="Shop By Category"
+                      startDecorator={<LocalMallIcon />}
+                      indicator={<KeyboardArrowDown />}
+                      size="md"
+                      sx={{
+                        // width: 200,
+                        color: "#ffffff",
+                        [`& .${selectClasses.indicator}`]: {
+                          transition: "0.2s",
+                          [`&.${selectClasses.expanded}`]: {
+                            transform: "rotate(-180deg)",
+                          },
+                        },
+                        background: "transparent",
+                        outline: "none",
+                        border: "none",
+                        ":hover": {
+                          color: "#16171d",
+                          backgroundColor: "#16171d",
+                        },
+                      }}
+                    >
+                      <Option value="dog">Dog</Option>
+                      <Option value="cat">Cat</Option>
+                      <Option value="fish">Fish</Option>
+                      <Option value="bird">Bird</Option>
+                    </Select>
+                  </div>
+                  {/* <div className="dropdown">
                     <button
                       className="btn btn-secondary dropdown-toggle bg-transparent border-0 gap-15 d-flex align-items-center"
                       type="button"
@@ -159,7 +193,7 @@ function Header() {
                         </a>
                       </li>
                     </ul>
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className="menu-links">

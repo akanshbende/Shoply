@@ -4,7 +4,7 @@ import { useState } from "react";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./Components/Layout";
-import Home from "./Home";
+
 // import About from "./About";
 import Contact from "./pages/Contact";
 import OurStore from "./pages/OurStore";
@@ -23,6 +23,7 @@ import RefundPolicy from "./pages/RefundPolicy";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import SingleProduct from "./pages/SingleProduct";
 import Checkout from "./pages/Checkout";
+import Home from "./pages/Home";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -45,6 +46,7 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<SignUp />} />
             <Route path="forgot-password" element={<ForgotPassword />} />
+            <Route path="reset-password" element={<ResetPassword />} />
             <Route path="cart" element={<Cart />} />
             <Route path="checkout" element={<Checkout />} />
             <Route path="privacy-policy" element={<PrivacyPolicy />} />

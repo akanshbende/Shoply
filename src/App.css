@@ -226,7 +226,7 @@ footer .input-group-text:hover {
 }
 
 .categories > div {
-  width: 25%;
+  /* width: 25%; */
   padding: 10px 0px 10px 20px;
 }
 .categories > div > div {
@@ -322,9 +322,10 @@ footer .input-group-text:hover {
   border-radius: 0.8rem;
   overflow: hidden;
 }
-.product-card .product-image {
+/* for responsive i comment it  */
+/* .product-card .product-image {
   height: 270px;
-}
+} */
 .product-card .product-image img {
   object-fit: contain;
 }
@@ -378,10 +379,14 @@ footer .input-group-text:hover {
 .special-product-card {
   padding: 20px 10px;
   background-color: white;
+  border-radius: 10px;
 }
 /* End of Special Product*/
 
 /*Famous Card */
+/* .famous-card {
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+} */
 .famous-card .famous-content {
   top: 10%;
   left: 10%;
@@ -573,16 +578,20 @@ footer .input-group-text:hover {
 .wishlist-card .cross {
   top: 15px;
   right: 15px;
-  width: 25px;
+  width: 30px;
+  height: 30px;
   padding: 3px;
   cursor: pointer;
 }
+/* .compare-product-card .MuiSvgIcon-root {
+  width: 80px;
+} */
 
-.compare-product-details h5.title .wishlist-card h5.titl4 {
-  font-size: 15px;
+.compare-product-details h5.title .wishlist-card h5.title {
+  font-size: 1rem;
   line-height: 22px;
   font-weight: 500;
-  color: var();
+  color: var(--color-1c1c1b);
 }
 .compare-product-details h6.price .wishlist-card h6.price {
   font-size: 15px;
@@ -777,9 +786,33 @@ footer .input-group-text:hover {
   color: var(--color-777777);
 }
 
-.MuiPaper-root {
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0) !important;
-}
 /* 8.3 */
 
 /*----------- MAIN PRODUCT PAGE ENDS here----------*/
+
+/*------------------ Cart PAge ----------------- */
+.MuiPaper-root {
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25) !important;
+}
+/*------------------ Cart PAge ends----------------- */
+
+/* SHiping page  */
+
+.total {
+  font-size: 14px;
+  color: var(--color-lclclb);
+}
+.total-price {
+  font-size: 16px;
+  color: var(--color-777777);
+}
+/* SHiping page  ends */
+
+/*CHECKOUT PAGE OR SHIPPING PAGE */
+
+.right-side {
+  background-color: #ededed;
+  border-radius: 10px;
+  box-shadow: 5px 5px px rgba(0, 0, 0, 0.2);
+}
+/*CHECKOUT PAGE OR SHIPPING PAGE Ends*/
