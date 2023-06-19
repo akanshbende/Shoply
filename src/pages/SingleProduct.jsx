@@ -21,12 +21,15 @@ import AlertBar from "../Components/AlertBar";
 import Container from "../Components/Container";
 import ImgMagnifiHover from "../Components/ImgMagnifiHover";
 import ReactImageMagnify from "react-image-magnify";
-useState;
+// import ReactImageZoom from "react-image-zoom";
+
 function SingleProduct() {
   const [orderedProduct, setOrderedProduct] = useState(true);
   // const [hide, setHide] = useState(true);
   const [show, setShow] = useState(false);
   const [added, setAdded] = useState(false);
+
+  const props = { width: 400, height: 250, zoomWidth: 500, img: applegear };
   const copyToClipboard = (text) => {
     console.log("text", text);
     var textField = document.createElement("textarea");
