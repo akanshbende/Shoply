@@ -77,7 +77,7 @@ function SingleProduct() {
               <div className="main-product-image">
                 <div>
                   {/* <ImgMagnifiHover /> */}
-                  <ReactImageMagnify
+                  {/* <ReactImageMagnify
                     {...{
                       smallImage: {
                         alt: "Watch",
@@ -96,7 +96,8 @@ function SingleProduct() {
                       },
                     }}
                     className="magnifier"
-                  />
+                  /> */}
+                  <ImgMagnifiHover />
                 </div>
               </div>
               <div className="other-product-images d-flex flex-wrap gap-15 ">
