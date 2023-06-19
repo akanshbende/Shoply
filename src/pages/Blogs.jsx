@@ -5,7 +5,9 @@ import BreadCrumb from "../Components/BreadCrumb";
 
 import BlogCard from "../Components/BlogCard";
 import Container from "../Components/Container";
-
+{
+  /* d-flex align-items-center justify-content-center */
+}
 function Blogs() {
   return (
     <>
@@ -13,7 +15,7 @@ function Blogs() {
       <BreadCrumb title="Blogs" />
       <Container class1="blog-wrapper home-wrapper-2 py-5">
         <div className=" row">
-          <div className="col-3">
+          <div className="col-xxl-3">
             <div className="filter-card mb-3">
               <h3 className="filter-title">Find By Categories</h3>
               <div>
@@ -26,15 +28,15 @@ function Blogs() {
               </div>
             </div>
           </div>
-          <div className="col-9">
-            <div className="row">
-              <div className="col-6 mb-3">
+          <div className="col-xxl-9">
+            <div className="row d-flex align-items-center  ">
+              <div className="col-xxl-6 col-12 mb-3">
                 <BlogCard />
               </div>
-              <div className="col-6 mb-3">
+              <div className="col-xxl-6 col-12 mb-3">
                 <BlogCard />
               </div>
-              <div className="col-6 mb-3">
+              <div className="col-xxl-6 col-12 mb-3">
                 <BlogCard />
               </div>
             </div>

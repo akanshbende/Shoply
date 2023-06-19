@@ -60,10 +60,10 @@ function Checkout() {
   ];
   return (
     <>
-      <Container class1="checkout-wrapper py-5 home-wrapper-2">
+      <Container class1="checkout-wrapper py-2  py-xxl-5 home-wrapper-2">
         <div className="row">
           {/* --------------------------------------------------LEFT SIDE---------------------------------------- */}
-          <div className="col-7">
+          <div className="col-xxl-7">
             <div className="checkout-left-data">
               <h3 className="website-name">Shoply</h3>
               <Stack spacing={2}>
@@ -169,7 +169,7 @@ function Checkout() {
           </div>
 
           {/* --------------------------------------------------RIGHT SIDE---------------------------------------- */}
-          <div className="right-side col-5">
+          <div className="right-side col-xxl-5 mt-3 mb-3 my-xxl-0 mt-xxl-0">
             <div className="border-bottom py-4">
               <div className="d-flex gap-10 align-items-center">
                 <div className="w-75 d-flex gap-30">

@@ -15,7 +15,8 @@ function BlogCard() {
         <div className="blog-content">
           <p className="date">4 May 2023</p>
           <h5 className="title">A beautiful sunday morning renaissance</h5>
-          <p className="desc">
+          <p className="desc ">
+            {/* text-overflow: ellipsis */}
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint
             ratione ducimus omnis cum cumque explicabo ullam eius obcaecati
             repellat a laboriosam est, non nemo minus facere illo voluptatibus

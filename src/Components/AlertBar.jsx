@@ -11,8 +11,8 @@ function AlertBar(props) {
           alignItems: "center",
           justifyContent: "center",
           zIndex: 500,
-          top: 20,
-          right: 15,
+          top: "10vh",
+          right: "2vhvw",
           transition: "ease-out 0.5s",
         }}
       >

@@ -72,35 +72,14 @@ function SingleProduct() {
 
       <Container class1="main-product-wrapper py-5 home-wrapper-2">
         <div className="row">
-          <div className="col-6">
+          <div className="col-xxl-6">
             <div className="product-images-wrapper">
               <div className="main-product-image">
                 <div>
-                  {/* <ImgMagnifiHover /> */}
-                  {/* <ReactImageMagnify
-                    {...{
-                      smallImage: {
-                        alt: "Watch",
-                        isFluidWidth: true,
-                        src: applegear,
-                      },
-
-                      largeImage: {
-                        src: applegear,
-
-                        width: 1200,
-                        height: 1800,
-                      },
-                      lensStyle: {
-                        background: "hsla(0, 0%, 100%, .3)",
-                      },
-                    }}
-                    className="magnifier"
-                  /> */}
                   <ImgMagnifiHover />
                 </div>
               </div>
-              <div className="other-product-images d-flex flex-wrap gap-15 ">
+              <div className="other-product-images d-flex flex-wrap gap-15 d-none d-xxl-flex">
                 <div>
                   <img
                     src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg"
@@ -132,7 +111,7 @@ function SingleProduct() {
               </div>
             </div>
           </div>
-          <div className="col-6">
+          <div className="col-xxl-6 mt-3 mt-xxl-0">
             <div className="main-product-details">
               <div className="border-bottom">
                 <h3 className="title">
@@ -200,7 +179,7 @@ function SingleProduct() {
                   <h3 className="product-heading">Color : </h3>
                   <Color />
                 </div>
-                <div className="d-flex flex-row align-items-center gap-15 mt-2 mb-3">
+                <div className="d-flex flex-row flex-wrap align-items-center gap-15 mt-2 mb-3">
                   <h3 className="product-heading">Quantity :</h3>
                   <div className="">
                     <TextField

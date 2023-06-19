@@ -10,10 +10,11 @@ import Select, { selectClasses } from "@mui/joy/Select";
 import { KeyboardArrowDown } from "@mui/icons-material";
 import { Option } from "@mui/joy";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
+
 function Header() {
   return (
     <>
-      <header className="header-top-strip py-3">
+      <header className="header-top-strip py-3 d-none d-xxl-block">
         <div className="container-xxl">
           <div className="row">
             <div className="col-6">
@@ -32,9 +33,14 @@ function Header() {
       <header className="header-upper">
         <div className="container-xxl">
           <div className="row align-items-center d-flex flex-grow-1">
-            <div className="col-lg-2 col-md-12 col-sm-12 mt-sm-2">
+            <div className="col-lg-2 col-md-12 col-sm-12 mt-xs-2">
               <h1>
-                <Link href="/" className="text-white py-2" id="header-logo">
+                <Link to="/" className="text-white py-2" id="header-logo">
+                  <img
+                    src="/shoply-logo.png"
+                    alt="logo"
+                    style={{ width: "50px", height: "50px", padding: 8 }}
+                  />
                   Shoply
                 </Link>
               </h1>
@@ -54,11 +60,11 @@ function Header() {
               </div>
             </div>
             <div className="col-lg-5 col-md-12 col-sm-12 mt-sm-3 mb-sm-3">
-              <div className="header-upper-links d-flex align-items-center justify-content-between">
-                <div className="main-func">
+              <div className="header-upper-links d-flex flex-wrap m-2 m-xxl-0  align-items-center justify-content-between">
+                <div className="main-func mb-2 mb-xxl-0 ">
                   <Link
                     to="/compare-product"
-                    className="d-flex align-items-center text-white"
+                    className="d-flex align-items-center text-white mt-1"
                   >
                     {/* <img src="images/compare.svg" alt="" /> */}
                     <CachedIcon />
@@ -68,7 +74,7 @@ function Header() {
                     </p>
                   </Link>
                 </div>
-                <div className="main-func">
+                <div className="main-func mb-2 mb-xxl-0">
                   <Link
                     to="/wishlist"
                     className="d-flex align-items-center text-white"
@@ -79,7 +85,7 @@ function Header() {
                     </p>
                   </Link>
                 </div>
-                <div className="main-func">
+                <div className="main-func mb-2 mb-xxl-0">
                   <Link
                     to="/login"
                     className="d-flex align-items-center text-white"
@@ -91,14 +97,16 @@ function Header() {
                     </p>
                   </Link>
                 </div>
-                <div className="main-func">
+                <div className="main-func mb-2 mb-xxl-0">
                   <Link
                     to="/cart"
                     className="d-flex align-items-center text-white"
                   >
                     <div className="d-flex flex-row gap-3 align-items-center ms-2">
                       <Badge color="error" badgeContent={0} showZero>
-                        <ShoppingCartIcon />
+                        <ShoppingCartIcon
+                          style={{ color: "#febd69", fontSize: 30 }}
+                        />
                       </Badge>
                       <Chip
                         variant="outlined"
@@ -128,7 +136,7 @@ function Header() {
         <div className="container-xxl">
           <div className="row">
             <div className="col-12">
-              <div className="menu-bottom d-flex align-items-center gap-30 ">
+              <div className="menu-bottom d-flex flex-grow-1 flex-wrap align-items-center gap-30 ">
                 <div className="d-flex align-items-center gap-10">
                   <div className="dropdown">
                     <Select
@@ -154,49 +162,17 @@ function Header() {
                         },
                       }}
                     >
-                      <Option value="dog">Dog</Option>
-                      <Option value="cat">Cat</Option>
-                      <Option value="fish">Fish</Option>
-                      <Option value="bird">Bird</Option>
+                      <Option value="Mobile">Mobile,Computers</Option>
+                      <Option value="tv">TV,Appliances</Option>
+                      <Option value="men">Men's Fashion</Option>
+                      <Option value="women">Women's Fashion</Option>
+                      <Option value="kitchen">Home,Kitchen</Option>
+                      <Option value="sports">Sports and Fitness</Option>
                     </Select>
                   </div>
-                  {/* <div className="dropdown">
-                    <button
-                      className="btn btn-secondary dropdown-toggle bg-transparent border-0 gap-15 d-flex align-items-center"
-                      type="button"
-                      id="dropdownMenuButton1"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      <img src="/images/menu.svg" alt="" />
-                      <span className="me-4 d-inline-block">
-                        Shop Categories
-                      </span>
-                    </button>
-                    <ul
-                      className="dropdown-menu"
-                      aria-labelledby="dropdownMenuButton1"
-                    >
-                      <li>
-                        <a className="dropdown-item text-white" href="#">
-                          Action
-                        </a>
-                      </li>
-                      <li>
-                        <a className="dropdown-item text-white" href="#">
-                          Another action
-                        </a>
-                      </li>
-                      <li>
-                        <a className="dropdown-item text-white" href="#">
-                          Something else here
-                        </a>
-                      </li>
-                    </ul>
-                  </div> */}
                 </div>
 
-                <div className="menu-links">
+                <div className="menu-links mb-2 mb-xxl-0">
                   <div className="d-flex align-items-center gap-15">
                     <NavLink className="links" to="/">
                       Home

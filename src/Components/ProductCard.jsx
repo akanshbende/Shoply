@@ -9,16 +9,18 @@ function ProductCard(props) {
   return (
     <>
       <div
-        className={`${location.pathname == "/store" ? `gr-${grid}` : "col-3"}`}
+        className={`${
+          location.pathname == "/store" ? `gr-${grid}` : "col-xxl-3"
+        } col-12 `}
       >
-        <Link to=":id" className="product-card position-relative">
-          <div className="wishlist-icon position-absolute">
+        <Link to=":id" className="product-card position-relative ">
+          <div className="wishlist-icon position-absolute ">
             {/* <Link> */}
             <img src="/wish.svg" alt="" />
             {/* </Link> */}
           </div>
           {/* Product image */}
-          <div className="product-image ">
+          <div className="product-image d-flex align-items-center justify-content-center">
             <img className="img-fluid" src="/watch.jpg" alt="product image" />
             <img
               className="img-fluid"

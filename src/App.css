@@ -177,6 +177,22 @@ footer .input-group-text:hover {
   letter-spacing: 0.4;
   color: var(--color-131921);
 }
+@media screen and (max-width: 400px) {
+  .main-banner-content h4 {
+    font-size: 14px;
+    line-height: 15px;
+  }
+
+  .main-banner-content h5 {
+    font-size: 30px;
+    line-height: 54px;
+  }
+  .main-banner-content p {
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
+
 .small-banner-content {
   top: 25%;
   left: 10%;
@@ -209,12 +225,40 @@ footer .input-group-text:hover {
 .small-banner {
   width: 49%;
 }
+
+@media screen and (max-width: 400px) {
+  .small-banner {
+    width: 48%;
+    margin-top: 10px;
+  }
+  .small-banner-content h4 {
+    line-height: 20px;
+  }
+  .small-banner-content h5 {
+    font-size: 1rem;
+    line-height: 15px;
+  }
+  .small-banner-content p {
+    font-size: 10px;
+    line-height: 12px;
+  }
+}
 /* Home Page End*/
 
 /* home wrapper-2 */
 
 .home-wrapper-2 {
   background-color: var(--color-f5f5f7);
+}
+.home-wrapper-2 {
+  flex-direction: row;
+}
+/* ------------SERVICES------------- */
+@media screen and (max-width: 400px) {
+  .home-wrapper-2 .services {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 /* Categories : Camera,watch,headphones  */
@@ -232,7 +276,7 @@ footer .input-group-text:hover {
 .categories > div > div {
   width: 60%;
 }
-.categories > div:nth-child(1),
+/* .categories > div:nth-child(1),
 .categories > div:nth-child(2),
 .categories > div:nth-child(3),
 .categories > div:nth-child(4) {
@@ -247,7 +291,7 @@ footer .input-group-text:hover {
 .categories > div:nth-child(6),
 .categories > div:nth-child(7) {
   border-right: 1px solid var(--color-ededed);
-}
+} */
 /*categories section ens here */
 
 /* home wrapper-2 End */
@@ -280,7 +324,7 @@ footer .input-group-text:hover {
   color: var(--colorr-777777);
 }
 .blog-content h5 {
-  font-size: 18px;
+  font-size: 1rem;
   color: var(--color-131921);
 }
 .blog-content p {
@@ -611,7 +655,7 @@ footer .input-group-text:hover {
 .auth-card {
   padding: 20px;
   background-color: white;
-  width: 500px;
+  width: 20rem;
   margin: 30px auto;
   border-radius: 10px;
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.25);

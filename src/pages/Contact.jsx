@@ -28,10 +28,37 @@ function Contact() {
             ></iframe>
           </div>
           <div className="col-12 mt-5">
-            <div className="contact-inner-wrapper d-flex justify-content-between ">
-              <div>
+            <div className="contact-inner-wrapper d-flex  flex-wrap  justify-content-between ">
+              <div className="w-100">
+                <h3 className="contact-title mb-4"> Get In Touch With Us</h3>
+                <div className="w-100">
+                  <ul className="ps-0 ">
+                    <li className="m-3 d-flex gap-15 align-items-center">
+                      <AiOutlineHome className="fs-5 " />
+                      <address className="m-0">
+                        Hno: 301 ,Besa,Manish Nagar,Nagpur,Maharashtra
+                      </address>
+                    </li>
+                    <li className="m-3 d-flex gap-15 align-items-center">
+                      <BiPhoneCall className="fs-5" />
+                      <a href="tel:+91 8264954234">+91 8264954234</a>
+                    </li>
+                    <li className="m-3 d-flex gap-15 align-items-center">
+                      <AiOutlineMail className="fs-5" />
+                      <a href="mailto:akanshbende29@gmail.com">
+                        akanshbende29@gmail.com
+                      </a>
+                    </li>
+                    <li className="m-3 d-flex gap-15 align-items-center">
+                      <AiOutlineInfoCircle className="fs-5" />
+                      <p className="m-0">Monday - Friday 10 AM - 8 PM</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div className="w-100">
                 <h3 className="contact-title mb-4">Contact Us</h3>
-                <form action="" className="d-flex flex-column gap-15">
+                <form action="" className="d-flex flex-column gap-15 ">
                   <div>
                     <input
                       type="text"
@@ -67,33 +94,6 @@ function Contact() {
                     <button className="button border-0">Submit</button>
                   </div>
                 </form>
-              </div>
-              <div>
-                <h3 className="contact-title mb-4"> Get In Touch With Us</h3>
-                <div>
-                  <ul className="ps-0">
-                    <li className="m-3 d-flex gap-15 align-items-center">
-                      <AiOutlineHome className="fs-5 " />
-                      <address className="m-0">
-                        Hno: 301 ,Besa,Manish Nagar,Nagpur,Maharashtra
-                      </address>
-                    </li>
-                    <li className="m-3 d-flex gap-15 align-items-center">
-                      <BiPhoneCall className="fs-5" />
-                      <a href="tel:+91 8264954234">+91 8264954234</a>
-                    </li>
-                    <li className="m-3 d-flex gap-15 align-items-center">
-                      <AiOutlineMail className="fs-5" />
-                      <a href="mailto:akanshbende29@gmail.com">
-                        akanshbende29@gmail.com
-                      </a>
-                    </li>
-                    <li className="m-3 d-flex gap-15 align-items-center">
-                      <AiOutlineInfoCircle className="fs-5" />
-                      <p className="m-0">Monday - Friday 10 AM - 8 PM</p>
-                    </li>
-                  </ul>
-                </div>
               </div>
             </div>
           </div>

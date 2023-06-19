@@ -13,14 +13,14 @@ function Footer() {
     <>
       <footer className="py-4">
         <div className="container-xxl">
-          <div className="row align-items-center">
-            <div className="col-5">
+          <div className="row  align-items-center ">
+            <div className="col-xxl-5 mb-xxl-0 mb-3">
               <div className="footer-top-data d-flex gap-30 align-items-center">
                 <BsFillSendFill className="text-white fs-3 " />
                 <h2 className="mb-0 text-white">Sign Up for Newsletter</h2>
               </div>
             </div>
-            <div className="col-7">
+            <div className="col-xxl-7">
               <div className="input-group ">
                 <input
                   type="text"
@@ -39,8 +39,8 @@ function Footer() {
       </footer>
       <footer className="py-4">
         <div className="container-xxl">
-          <div className="row">
-            <div className="col-3">
+          <div className="row d-flex flex-wrap">
+            <div className="col-xxl-3 col-6 p-3">
               <h4 className="text-white mb-4">Contact Us</h4>
               <div>
                 <address className="text-white lh-2 fs-6">
@@ -57,7 +57,7 @@ function Footer() {
                 </a>
                 <a
                   href="mailto:akanshbende29@gmail.com"
-                  className="mt-2 d-block mb-0 text-white text-decoration-none "
+                  className="mt-2 d-block mb-0 text-white text-decoration-none text-justify"
                 >
                   akanshbende29@gmail.com
                 </a>
@@ -77,7 +77,7 @@ function Footer() {
                 </div>
               </div>
             </div>
-            <div className="col-4">
+            <div className="col-xxl-4 col-6 p-3">
               <h4 className="text-white mb-4">Information</h4>
               <div className="footer-links d-flex flex-column">
                 <Link
@@ -118,7 +118,7 @@ function Footer() {
                 </Link>
               </div>
             </div>
-            <div className="col-3">
+            <div className="col-xxl-3 col-6 p-3">
               <h4 className="text-white mb-4">Account</h4>
               <div className="footer-links d-flex flex-column">
                 <Link
@@ -141,7 +141,7 @@ function Footer() {
                 </Link>
               </div>
             </div>
-            <div className="col-2">
+            <div className="col-xxl-2 col-6 p-3">
               <h4 className="text-white mb-4">Quick Links</h4>
               <div className="footer-links d-flex flex-column">
                 <Link
