@@ -5,10 +5,10 @@ import ProductCard from "../Components/ProductCard";
 import ReactStars from "react-rating-stars-component";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import ReactImageMagnify from "react-image-magnify";
+
 // https://www.npmjs.com/package/react-image-magnify?activeTab=readme
 import applegear from "../../public/images/applegear.webp";
-import ReactImageZoom from "react-image-zoom";
+
 import Color from "../Components/Color";
 import { Alert, AlertTitle, Button, TextField } from "@mui/material";
 import { TbGitCompare } from "react-icons/tb";
@@ -19,6 +19,8 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import AlertBar from "../Components/AlertBar";
 import Container from "../Components/Container";
+import ImgMagnifiHover from "../Components/ImgMagnifiHover";
+import ReactImageMagnify from "react-image-magnify";
 useState;
 function SingleProduct() {
   const [orderedProduct, setOrderedProduct] = useState(true);
@@ -71,6 +73,7 @@ function SingleProduct() {
             <div className="product-images-wrapper">
               <div className="main-product-image">
                 <div>
+                  {/* <ImgMagnifiHover /> */}
                   <ReactImageMagnify
                     {...{
                       smallImage: {
