@@ -11,7 +11,7 @@ import {
   MagnifierPreview,
 } from "react-image-magnifiers";
 
-import applegear from "../../public/images/applegear.webp";
+import applegear from "/applegear.webp";
 import { Height } from "@mui/icons-material";
 function ImgMagnifiHover() {
   const img = applegear;

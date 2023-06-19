@@ -7,7 +7,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 // https://www.npmjs.com/package/react-image-magnify?activeTab=readme
-import applegear from "../../public/images/applegear.webp";
+import applegear from "/applegear.webp";
 
 import Color from "../Components/Color";
 import { Alert, AlertTitle, Button, TextField } from "@mui/material";

@@ -7,7 +7,7 @@ function BlogCard() {
         <div className="card-image">
           <img
             className="img-fluid w-100"
-            src="../../public/images/blog-1.jpg
+            src="/blog-1.jpg
                 "
             alt="blog"
           />

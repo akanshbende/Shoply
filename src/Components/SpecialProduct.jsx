@@ -8,11 +8,7 @@ function SpecialProduct() {
         <div className="special-product-card">
           <div className="d-flex justify-content-between">
             <div>
-              <img
-                className="img-fluid"
-                src="../../public/images/watch.jpg"
-                alt="watch"
-              />
+              <img className="img-fluid" src="/watch.jpg" alt="watch" />
             </div>
             <div className="special-product-content">
               <h5 className="brand">Havels</h5>

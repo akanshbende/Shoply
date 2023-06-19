@@ -145,11 +145,7 @@ function OurStore() {
               <div>
                 <div className="random-products mb-3 d-flex">
                   <div className="w-50">
-                    <img
-                      className="img-fluid"
-                      src="../../public/images/watch.jpg"
-                      alt="watch"
-                    />
+                    <img className="img-fluid" src="/watch.jpg" alt="watch" />
                   </div>
                   <div className="w-50">
                     <h5>
@@ -167,11 +163,7 @@ function OurStore() {
                 </div>
                 <div className="random-products d-flex">
                   <div className="w-50">
-                    <img
-                      className="img-fluid"
-                      src="../../public/images/watch.jpg"
-                      alt="watch"
-                    />
+                    <img className="img-fluid" src="/watch.jpg" alt="watch" />
                   </div>
                   <div className="w-50">
                     <h5>
@@ -222,7 +214,7 @@ function OurStore() {
                       onClick={() => {
                         setGrid(3);
                       }}
-                      src="../../public/images/gr4.svg"
+                      src="/gr4.svg"
                       className="d-block img-fluid"
                       alt="grid"
                     />
@@ -230,7 +222,7 @@ function OurStore() {
                       onClick={() => {
                         setGrid(4);
                       }}
-                      src="../../public/images/gr3.svg"
+                      src="/gr3.svg"
                       className="d-block img-fluid"
                       alt="grid"
                     />
@@ -238,7 +230,7 @@ function OurStore() {
                       onClick={() => {
                         setGrid(6);
                       }}
-                      src="../../public/images/gr2.svg"
+                      src="/gr2.svg"
                       className="d-block img-fluid"
                       alt="grid"
                     />
@@ -246,7 +238,7 @@ function OurStore() {
                       onClick={() => {
                         setGrid(12);
                       }}
-                      src="../../public/images/gr.svg"
+                      src="/gr.svg"
                       className="d-block img-fluid"
                       alt="grid"
                     />

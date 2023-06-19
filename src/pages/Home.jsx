@@ -18,7 +18,7 @@ function Home() {
             <div className="main-banner position-relative ">
               <img
                 className="img-fluid rounded-3"
-                src={"../public/images/main-banner-1.jpg"}
+                src={"/main-banner-1.jpg"}
                 alt="main banner"
               />
               <div className="main-banner-content position-absolute">
@@ -35,7 +35,7 @@ function Home() {
               <div className="small-banner position-relative ">
                 <img
                   className="img-fluid rounded-3"
-                  src={"../public/images/catbanner-01.jpg"}
+                  src={"/catbanner-01.jpg"}
                   alt="main banner"
                 />
                 <div className="small-banner-content position-absolute">
@@ -51,7 +51,7 @@ function Home() {
               <div className="small-banner position-relative">
                 <img
                   className="img-fluid rounded-3"
-                  src={"../public/images/catbanner-02.jpg"}
+                  src={"/catbanner-02.jpg"}
                   alt="main banner"
                 />
                 <div className="small-banner-content position-absolute">
@@ -67,7 +67,7 @@ function Home() {
               <div className="small-banner position-relative">
                 <img
                   className="img-fluid rounded-3"
-                  src={"../public/images/catbanner-03.jpg"}
+                  src={"/catbanner-03.jpg"}
                   alt="main banner"
                 />
                 <div className="small-banner-content position-absolute">
@@ -83,7 +83,7 @@ function Home() {
               <div className="small-banner position-relative">
                 <img
                   className="img-fluid rounded-3"
-                  src={"../public/images/catbanner-04.jpg"}
+                  src={"/catbanner-04.jpg"}
                   alt="main banner"
                 />
                 <div className="small-banner-content position-absolute">
@@ -132,28 +132,28 @@ function Home() {
                   <h6>Music & Gaming</h6>
                   <p>10 Items</p>
                 </div>
-                <img src="../public/images/camera.jpg" alt="camera" />
+                <img src="/camera.jpg" alt="camera" />
               </div>
               <div className="d-flex  align-items-center ">
                 <div>
                   <h6>Cameras</h6>
                   <p>10 Items</p>
                 </div>
-                <img src="../public/images/tv.jpg" alt="camera" />
+                <img src="/tv.jpg" alt="camera" />
               </div>
               <div className="d-flex  align-items-center ">
                 <div>
                   <h6>Smart Tv</h6>
                   <p>10 Items</p>
                 </div>
-                <img src="../public/images/camera.jpg" alt="camera" />
+                <img src="/camera.jpg" alt="camera" />
               </div>
               <div className="d-flex  align-items-center ">
                 <div>
                   <h6>Smart Watches</h6>
                   <p>10 Items</p>
                 </div>
-                <img src="../public/images/headphone.jpg" alt="camera" />
+                <img src="/headphone.jpg" alt="camera" />
               </div>
             </div>
           </div>
@@ -180,11 +180,7 @@ function Home() {
           <div className="col-lg-3 col-md-6 col-sm-12 mt-sm-3 d-flex align-items-center justify-content-center">
             <div className="famous-card position-relative ">
               {/* d-flex  align-items-center justify-content-center */}
-              <img
-                className="img-fluid"
-                src="../public/images/famous-1.png"
-                alt="famous"
-              />
+              <img className="img-fluid" src="/famous-1.png" alt="famous" />
               <div className="famous-content position-absolute">
                 <h5>Big Screen</h5>
                 <h6>Smart Watch Series</h6>
@@ -194,11 +190,7 @@ function Home() {
           </div>
           <div className="col-lg-3 col-md-6 col-sm-12 mt-sm-3 d-flex align-items-center justify-content-center">
             <div className="famous-card position-relative">
-              <img
-                className="img-fluid"
-                src="../public/images/famous-2.png"
-                alt="famous"
-              />
+              <img className="img-fluid" src="/famous-2.png" alt="famous" />
               <div className="famous-content position-absolute">
                 <h5 className="text-dark">Studio Display</h5>
                 <h6 className="text-dark">600 nits of brightness.</h6>
@@ -208,11 +200,7 @@ function Home() {
           </div>
           <div className="col-lg-3 col-md-6 col-sm-12 mt-sm-3 d-flex align-items-center justify-content-center">
             <div className="famous-card position-relative">
-              <img
-                className="img-fluid"
-                src="../public/images/famous-3.png"
-                alt="famous"
-              />
+              <img className="img-fluid" src="/famous-3.png" alt="famous" />
               <div className="famous-content position-absolute">
                 <h5 className="text-dark">SMARTPHONES</h5>
                 <h6 className="text-dark">Smartphone 13 Pro.</h6>
@@ -224,11 +212,7 @@ function Home() {
           </div>
           <div className="col-lg-3 col-md-6 col-sm-12 mt-sm-3 d-flex align-items-center justify-content-center">
             <div className="famous-card position-relative">
-              <img
-                className="img-fluid"
-                src="../public/images/famous-4.png"
-                alt="famous"
-              />
+              <img className="img-fluid" src="/famous-4.png" alt="famous" />
               <div className="famous-content position-absolute">
                 <h5 className="text-dark">HOME SPEAKERS</h5>
                 <h6 className="text-dark">Room-filling sound.</h6>
@@ -280,28 +264,28 @@ function Home() {
             <div className="marquee-inner-wrapper card-wrapper">
               <Marquee className="d-flex">
                 <div className="mx-4 w-25">
-                  <img src="../public/images/brand-01.png" alt="brand" />
+                  <img src="/brand-01.png" alt="brand" />
                 </div>
                 <div className="mx-4 w-25">
-                  <img src="../public/images/brand-02.png" alt="brand" />
+                  <img src="/brand-02.png" alt="brand" />
                 </div>
                 <div className="mx-4 w-25">
-                  <img src="../public/images/brand-03.png" alt="brand" />
+                  <img src="/brand-03.png" alt="brand" />
                 </div>
                 <div>
-                  <img src="../public/images/brand-04.png" alt="brand" />
+                  <img src="/brand-04.png" alt="brand" />
                 </div>
                 <div className="mx-4 w-25">
-                  <img src="../public/images/brand-05.png" alt="brand" />
+                  <img src="/brand-05.png" alt="brand" />
                 </div>
                 <div>
-                  <img src="../public/images/brand-06.png" alt="brand" />
+                  <img src="/brand-06.png" alt="brand" />
                 </div>
                 <div className="mx-4 w-25">
-                  <img src="../public/images/brand-07.png" alt="brand" />
+                  <img src="/brand-07.png" alt="brand" />
                 </div>
                 <div className="mx-4 w-25">
-                  <img src="../public/images/brand-08.png" alt="brand" />
+                  <img src="/brand-08.png" alt="brand" />
                 </div>
               </Marquee>
             </div>

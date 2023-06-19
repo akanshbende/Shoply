@@ -21,7 +21,7 @@ function SingleBlog() {
               </Link>
               <h3 className="title">A Beautiful Sunday Morning</h3>
               <img
-                src="../../public/images/blog-1.jpg"
+                src="/blog-1.jpg"
                 alt="blog"
                 className="img-fluid w-100 my-4"
               />

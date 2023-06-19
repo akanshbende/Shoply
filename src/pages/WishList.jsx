@@ -16,17 +16,13 @@ function WishList() {
           <div className="col-3">
             <div className="wishlist-card position-relative">
               {/* <img
-                  src="../../public/images/cross.svg"
+                  src="/cross.svg"
                   alt="cross"
                   className="position-absolute cross img-fluid"
                 /> */}
               <ClearIcon className="position-absolute cross img-fluid" />
               <div className="wishlist-card-image">
-                <img
-                  src="../../public/images/watch.jpg"
-                  className="img-fluid w-100"
-                  alt="watch"
-                />
+                <img src="/watch.jpg" className="img-fluid w-100" alt="watch" />
               </div>
               <div className=" py-3 px-3">
                 <h5 className="title">

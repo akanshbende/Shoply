@@ -17,8 +17,8 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useState } from "react";
 import ButtonMui from "../Components/ButtonMui";
-import newipad from "../../public/images/newipad.jpg";
-import applewatch from "../../public/images/applewatch.jpg";
+import newipad from "/newipad.jpg";
+import applewatch from "/applewatch.jpg";
 import Container from "../Components/Container";
 
 function Checkout() {

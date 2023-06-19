@@ -14,19 +14,15 @@ function ProductCard(props) {
         <Link to=":id" className="product-card position-relative">
           <div className="wishlist-icon position-absolute">
             {/* <Link> */}
-            <img src="../../public/images/wish.svg" alt="" />
+            <img src="/wish.svg" alt="" />
             {/* </Link> */}
           </div>
           {/* Product image */}
           <div className="product-image ">
+            <img className="img-fluid" src="/watch.jpg" alt="product image" />
             <img
               className="img-fluid"
-              src="../../public/images/watch.jpg"
-              alt="product image"
-            />
-            <img
-              className="img-fluid"
-              src="../../public/images/watch-1.webp"
+              src="/watch-1.webp"
               alt="product image"
               width={269}
             />
@@ -54,13 +50,13 @@ function ProductCard(props) {
           <div className="action-bar position-absolute ">
             <div className="d-flex flex-column gap-15">
               <button className="border-0 bg-transparent">
-                <img src="../../public/images/view.svg" alt="add cart" />
+                <img src="/view.svg" alt="add cart" />
               </button>
               <button className="border-0 bg-transparent">
-                <img src="../../public/images/prodcompare.svg" alt="add cart" />
+                <img src="/prodcompare.svg" alt="add cart" />
               </button>
               <button className="border-0 bg-transparent">
-                <img src="../../public/images/add-cart.svg" alt="add cart" />
+                <img src="/add-cart.svg" alt="add cart" />
               </button>
             </div>
           </div>

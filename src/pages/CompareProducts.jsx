@@ -14,17 +14,13 @@ function CompareProducts() {
             <div className="col-lg-3 col-md-6 col-sm-12 mt-3">
               <div className="compare-product-card position-relative">
                 {/* <img
-                  src="../../public/images/cross.svg"
+                  src="/cross.svg"
                   alt="cross"
                   className="position-absolute cross img-fluid"
                 /> */}
                 <ClearIcon className="position-absolute cross img-fluid" />
                 <div className="product-card-image d-flex align-items-center justify-content-center">
-                  <img
-                    className="img-fluid "
-                    src="../../public/images/watch.jpg"
-                    alt="watch"
-                  />
+                  <img className="img-fluid " src="/watch.jpg" alt="watch" />
                 </div>
                 <div className="compare-product-details">
                   <h5 className="title ">
