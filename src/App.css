@@ -85,6 +85,16 @@ a {
 .header-upper .MuiSvgIcon-root {
   width: 50px;
 }
+
+@media screen and (max-width: 400px) {
+  .header-upper .logo h3 {
+    font-size: 1.2rem;
+  }
+  .header-upper .logo img {
+    width: 40px !important;
+    height: 40px !important;
+  }
+}
 .header-bottom {
   background-color: var(--color-3b4149);
 }

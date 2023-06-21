@@ -33,23 +33,27 @@ function Header() {
       <header className="header-upper">
         <div className="container-xxl">
           <div className="row align-items-center d-flex flex-grow-1">
-            <div className="col-lg-2 col-md-12 col-sm-12 mt-xs-2">
-              <h1>
-                <Link to="/" className="text-white py-2" id="header-logo">
+            <div className="col-lg-2 col-md-12 col-4 mt-xs-2">
+              <h1 className="logo">
+                <Link
+                  to="/"
+                  className="text-white py-2 d-flex align-items-center"
+                  id="header-logo"
+                >
                   <img
                     src="/shoply-logo.png"
                     alt="logo"
                     style={{ width: "50px", height: "50px", padding: 8 }}
                   />
-                  Shoply
+                  <h3 className="mt-2">Shoply</h3>
                 </Link>
               </h1>
             </div>
-            <div className="col-lg-5 col-md-12 col-sm-12 mt-sm-3 mb-lg-3">
+            <div className="col-lg-5 col-md-12 col-8 mt-sm-3 mb-lg-3">
               <div className="input-group ">
                 <input
                   type="text"
-                  className="form-control py-2"
+                  className="form-control py-2 "
                   placeholder="Search Product Here..."
                   aria-label="Search Product Here..."
                   aria-describedby="basic-addon2"
@@ -132,11 +136,11 @@ function Header() {
         </div>
       </header>
 
-      <header className="header-bottom py-3">
+      <header className="header-bottom py-1 py-xxl-3">
         <div className="container-xxl">
           <div className="row">
             <div className="col-12">
-              <div className="menu-bottom d-flex flex-grow-1 flex-wrap align-items-center gap-30 ">
+              <div className="menu-bottom d-flex flex-grow-1 flex-wrap align-items-center gap-2 gap-xxl-30  ">
                 <div className="d-flex align-items-center gap-10">
                   <div className="dropdown">
                     <Select
