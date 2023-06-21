@@ -133,6 +133,16 @@ a {
   text-decoration: none;
 }
 
+@media screen and (max-width: 400px) {
+  .main-func {
+    margin-right: 2rem;
+  }
+  .main-func p,
+  div {
+    font-size: 0.7rem !important;
+  }
+}
+
 .header-upper .input-group-text {
   background-color: var(--color-febd69);
 }
