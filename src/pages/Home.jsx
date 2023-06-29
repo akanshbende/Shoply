@@ -31,7 +31,7 @@ function Home() {
             </div>
           </div>
           <div className=" col-xxl-6 col-lg-6  co-md-12 col-sm-12 col-12 col-12 mt-sm-3 mt-lg-0">
-            <div className="d-flex flex-wrap gap-10 justify-content-between align-items-center">
+            <div className="d-flex mt-3 mt-xxl-0 flex-wrap gap-10 justify-content-between align-items-center">
               <div className="small-banner position-relative ">
                 <img
                   className="img-fluid rounded-3"
