@@ -1,17 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Meta from "../Components/Meta";
 import BreadCrumb from "../Components/BreadCrumb";
 import BlogCard from "../Components/BlogCard";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { HiOutlineArrowLeft } from "react-icons/hi";
 import Container from "../Components/Container";
+import blog from "../../public/blog-1.jpg";
+import { useDispatch, useSelector } from "react-redux";
+import { getABlog } from "../features/blogs/blogSlice";
 function SingleBlog() {
+  const blogState = useSelector((state) => state?.blog?.singleBlog);
+  // console.log(productState);
+  const location = useLocation();
+  const getBlogId = location.pathname.split("/")[2];
+  const dispatch = useDispatch();
+  useEffect(() => {
+    getblog();
+  }, []);
+  const getblog = () => {
+    dispatch(getABlog(getBlogId));
+  };
   return (
     <>
       {/* Tab heading */}
-      <Meta title={"Dynamic blog name"} />
+      <Meta title={blogState?.title} />
       {/* Home / Sign Up*/}
-      <BreadCrumb title="Dynamic blog name" />
+      <BreadCrumb title={blogState?.title} />
       <Container className="blog-wrapper home-wrapper-2 py-5">
         <div className=" row">
           <div className="col-12">
@@ -19,22 +33,13 @@ function SingleBlog() {
               <Link to="/blogs" className="d-flex align-items-center gap-10">
                 <HiOutlineArrowLeft /> Go back to Blogs
               </Link>
-              <h3 className="title">A Beautiful Sunday Morning</h3>
+              <h3 className="title">{blogState?.title} </h3>
               <img
-                src="/blog-1.jpg"
+                src={blogState?.images[0].url ? blogState?.images[0].url : blog}
                 alt="blog"
                 className="img-fluid w-100 my-4"
               />
-              <p>
-                You're only as good as your last collection, which is an
-                enormous pressure. I think there is something about luxury -
-                it's not something people need, but it's what they want. It
-                really pulls at their heart. I have a fantastic relationship
-                with money.Scelerisque sociosqu ullamcorper urna nisl mollis
-                vestibulum pretium commodo inceptos cum condimentum placerat
-                diam venenatis blandit hac eget dis lacus a parturient a
-                accumsan nisl ante vestibulum.
-              </p>
+              <p>{blogState?.description}</p>
             </div>
           </div>
         </div>

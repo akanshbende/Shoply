@@ -5,10 +5,25 @@ import BreadCrumb from "../Components/BreadCrumb";
 
 import BlogCard from "../Components/BlogCard";
 import Container from "../Components/Container";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getAllBlogs } from "../features/blogs/blogSlice";
+import moment from "moment/moment";
+
 {
   /* d-flex align-items-center justify-content-center */
 }
 function Blogs() {
+  const blogState = useSelector((state) => state?.blog?.blog);
+  // console.log(productState);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    getblogs();
+  }, []);
+  const getblogs = () => {
+    dispatch(getAllBlogs());
+  };
+
   return (
     <>
       <Meta title={"Blogs"} />
@@ -30,15 +45,22 @@ function Blogs() {
           </div>
           <div className="col-xxl-9">
             <div className="row d-flex align-items-center  ">
-              <div className="col-xxl-6 col-12 mb-3">
-                <BlogCard />
-              </div>
-              <div className="col-xxl-6 col-12 mb-3">
-                <BlogCard />
-              </div>
-              <div className="col-xxl-6 col-12 mb-3">
-                <BlogCard />
-              </div>
+              {blogState &&
+                blogState?.map((item, index) => {
+                  return (
+                    <div key={index} className="col-xxl-6 col-12 mb-3">
+                      <BlogCard
+                        id={item?._id}
+                        title={item?.title}
+                        description={item?.description}
+                        image={item?.images[0]?.url}
+                        date={moment(item?.created_At).format(
+                          "MMMM Do YYYY, h:mm:ss a"
+                        )}
+                      />
+                    </div>
+                  );
+                })}
             </div>
           </div>
         </div>

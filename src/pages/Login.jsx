@@ -28,6 +28,8 @@ function Login() {
     validationSchema: loginSchema,
     onSubmit: (values) => {
       dispatch(loginUser(values));
+      // console.log(dispatch(loginUser(values)));
+      console.log("login clicked");
     },
   });
   return (

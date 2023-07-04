@@ -4,7 +4,7 @@ import BreadCrumb from "../Components/BreadCrumb";
 import ProductCard from "../Components/ProductCard";
 import ReactStars from "react-rating-stars-component";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 // https://www.npmjs.com/package/react-image-magnify?activeTab=readme
 import applegear from "/applegear.webp";
@@ -21,15 +21,63 @@ import AlertBar from "../Components/AlertBar";
 import Container from "../Components/Container";
 import ImgMagnifiHover from "../Components/ImgMagnifiHover";
 import ReactImageMagnify from "react-image-magnify";
+import { useEffect } from "react";
+import { getAProduct } from "../features/products/productSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { addProdToCart } from "../features/user/userSlice";
+import { getColors } from "../features/color/colorSlice";
 // import ReactImageZoom from "react-image-zoom";
 
 function SingleProduct() {
+  const [color, setColor] = useState(null);
+  console.log("Color : " + color);
+  const [quantity, setQuantity] = useState(1);
+  // console.log(quantity);
   const [orderedProduct, setOrderedProduct] = useState(true);
-  // const [hide, setHide] = useState(true);
-  const [show, setShow] = useState(false);
-  const [added, setAdded] = useState(false);
 
-  const props = { width: 400, height: 250, zoomWidth: 500, img: applegear };
+  const location = useLocation();
+  const getProductId = location.pathname.split("/")[2];
+  // console.log(getProductId);
+  const dispatch = useDispatch();
+  const productState = useSelector((state) => state.product.singleproduct);
+  console.log(productState);
+  // console.log(productState.color);
+
+  // useEffect(() => {
+  //   dispatch(getColors());
+  // }, []);
+
+  // const colorState = useSelector((state) => state.color.colors);
+
+  // console.log(colorState);
+  useEffect(() => {
+    dispatch(getAProduct(getProductId));
+    console.log(getAProduct(getProductId));
+  }, []);
+
+  const uploadCart = () => {
+    if (color === null) {
+      toast.error("Please Choose Color");
+      return false;
+    } else {
+      dispatch(
+        addProdToCart({
+          productId: productState?._id,
+          quantity,
+          color,
+          price: productState?.price,
+        })
+      );
+    }
+  };
+
+  const props = {
+    width: 400,
+    height: 250,
+    zoomWidth: 500,
+    img: applegear,
+  };
   const copyToClipboard = (text) => {
     console.log("text", text);
     var textField = document.createElement("textarea");
@@ -40,35 +88,12 @@ function SingleProduct() {
     textField.remove();
   };
 
-  const showAlert = () => {
-    setShow(true);
-    setTimeout(() => {
-      setShow(false);
-    }, 2000);
-  };
-
-  const showAdded = () => {
-    setAdded(true);
-    console.log("added shown");
-    setTimeout(() => {
-      setAdded(false);
-      console.log("added hidded");
-    }, 2000);
-  };
   return (
     <>
       {/* Tab heading */}
       <Meta title={"Product Name"} />
       {/* Home / Sign Up*/}
       <BreadCrumb title="Product Name" />
-
-      {show && (
-        <AlertBar text={"Copied!!"} work={" Link copied to Clipboard..."} />
-      )}
-
-      {added && (
-        <AlertBar text={"Added!!"} work={" Product Added to Cart..."} />
-      )}
 
       <Container class1="main-product-wrapper py-5 home-wrapper-2">
         <div className="row">
@@ -80,50 +105,31 @@ function SingleProduct() {
                 </div>
               </div>
               <div className="other-product-images d-flex flex-wrap gap-15 d-none d-xxl-flex">
-                <div>
-                  <img
-                    src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg"
-                    className="img-fluid rounded"
-                    alt=""
-                  />
-                </div>
-                <div>
-                  <img
-                    src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg"
-                    className="img-fluid rounded"
-                    alt=""
-                  />
-                </div>
-                <div>
-                  <img
-                    src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg"
-                    className="img-fluid rounded"
-                    alt=""
-                  />
-                </div>
-                <div>
-                  <img
-                    src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg"
-                    className="img-fluid rounded"
-                    alt=""
-                  />
-                </div>
+                {productState &&
+                  productState?.images.map((item, index) => {
+                    <div key={index}>
+                      <img
+                        // src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg"
+                        src={item?.url}
+                        className="img-fluid rounded"
+                        alt=""
+                      />
+                    </div>;
+                  })}
               </div>
             </div>
           </div>
           <div className="col-xxl-6 mt-3 mt-xxl-0">
             <div className="main-product-details">
               <div className="border-bottom">
-                <h3 className="title">
-                  Kids Headphones Bulk 10 Pack Multi Colored For Students
-                </h3>
+                <h3 className="title">{productState?.title}</h3>
               </div>
               <div className="border-bottom py-3">
-                <p className="price">$ 100.00</p>
+                <p className="price">$ {productState?.price}</p>
                 <div className="d-flex align-items-center gap-10 ">
                   <ReactStars
                     count={5}
-                    value={3}
+                    value={productState?.totalrating}
                     edit={false}
                     size={24}
                     activeColor="#ffd700"
@@ -141,15 +147,15 @@ function SingleProduct() {
                 </div>
                 <div className="d-flex align-items-center gap-10 my-2">
                   <h3 className="product-heading">Brand : </h3>
-                  <p className="product-data">Havells</p>
+                  <p className="product-data">{productState?.brand}</p>
                 </div>
                 <div className="d-flex align-items-center gap-10 my-2">
                   <h3 className="product-heading">Category : </h3>
-                  <p className="product-data">Watch</p>
+                  <p className="product-data">{productState?.catagory}</p>
                 </div>
                 <div className="d-flex align-items-center gap-10 my-2">
                   <h3 className="product-heading">Tags : </h3>
-                  <p className="product-data">Watch</p>
+                  <p className="product-data">{productState?.tags}</p>
                 </div>
                 <div className="d-flex align-items-center gap-10 my-2">
                   <h3 className="product-heading">Availability : </h3>
@@ -177,7 +183,7 @@ function SingleProduct() {
                 </div>
                 <div className="d-flex flex-column gap-10  mt-2 mb-3">
                   <h3 className="product-heading">Color : </h3>
-                  <Color />
+                  <Color colorData={productState?.color} setColor={setColor} />
                 </div>
                 <div className="d-flex flex-row flex-wrap align-items-center gap-15 mt-2 mb-3">
                   <h3 className="product-heading">Quantity :</h3>
@@ -192,12 +198,14 @@ function SingleProduct() {
                         shrink: true,
                       }}
                       InputProps={{ inputProps: { min: 0, max: 10 } }}
+                      onChange={(e) => setQuantity(e.target.value)}
+                      value={quantity}
                     />
                   </div>
                   {/* buy item and addd to cart button */}
                   <div className="d-flex gap-30 align-items-center ms-5">
                     <button
-                      onClick={(e) => showAdded()}
+                      onClick={(e) => uploadCart(productState?._id)}
                       className="button border-0"
                     >
                       Add to Cart
@@ -240,8 +248,9 @@ function SingleProduct() {
                   <Link
                     to=""
                     onClick={(e) => {
-                      copyToClipboard("applegear");
-                      showAlert();
+                      copyToClipboard(window.location.href);
+                      // showAlert();
+                      toast.success("Copied to Clipboard");
                     }}
                   >
                     <Button variant="contained" size="small">
@@ -259,19 +268,7 @@ function SingleProduct() {
           <div className="col-12">
             <h4>Description</h4>
             <div className="description-text bg-white p-3">
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Mollitia nihil accusantium facilis optio repudiandae recusandae
-                iste magni dolorem earum? Eos rem nostrum corrupti incidunt,
-                illo quam. Blanditiis ipsa sunt voluptate? Lorem ipsum dolor sit
-                amet consectetur adipisicing elit. Assumenda at a tempore,
-                aliquid consequatur illo iste ab, quasi adipisci molestiae,
-                voluptatum tenetur quibusdam eligendi ex quas earum quae autem
-                dignissimos? Lorem ipsum dolor sit amet consectetur adipisicing
-                elit. Dicta ab sint laboriosam adipisci amet ullam explicabo eos
-                officia nisi aliquid, minima dignissimos animi id! Dignissimos,
-                consectetur? Quod libero doloribus accusamus.
-              </p>
+              <p>{productState?.description}</p>
             </div>
           </div>
         </div>

@@ -14,12 +14,22 @@ import LeftCategory from "../Components/LeftCategory";
 import Select, { selectClasses } from "@mui/joy/Select";
 import { Option } from "@mui/joy";
 import { KeyboardArrowDown } from "@mui/icons-material";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllProducts } from "../features/products/productSlice";
 
 function OurStore() {
   const [grid, setGrid] = useState(4);
-  // alert(grid);
-
   const [width, setWidth] = useState(window.innerWidth);
+
+  const productState = useSelector((state) => state.product.product);
+  // console.log(productState);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    getProducts();
+  }, []);
+  const getProducts = () => {
+    dispatch(getAllProducts());
+  };
 
   const getWidth = () => {
     setWidth(window.innerWidth);
@@ -46,7 +56,7 @@ function OurStore() {
           {/* Left Side column: Filters etc.. */}
           <div className="col-3 ">
             {/* {(width = {400} ? <LeftPopOver /> : <LeftCategory />)} */}
-            {width <= 400 ? <LeftPopOver /> : <LeftCategory />}
+            {width <= 425 ? <LeftPopOver /> : <LeftCategory />}
           </div>
 
           {/* Right Side column: Filters etc.. */}
@@ -58,20 +68,7 @@ function OurStore() {
                   <p className="mb-0 d-block" style={{ width: "100px" }}>
                     Sort By :
                   </p>
-                  {/* <select name="" className="form-control form-select" id="">
-                    <option value="manual">Featured </option>
-                    <option value="best-selling" defaultValue="selected">
-                      Best Selling
-                    </option>
-                    <option value="title-asceqding">Alphabetically, A-Z</option>
-                    <option value="title-descénding">
-                      Alphabetically, Z-A
-                    </option>
-                    <option value="price-ascending">Price, Iow to high</option>
-                    <option value="price-descending">Price, high to low</option>
-                    <option value="created-ascending">Date, old to new</option>
-                    <option value="created-descending">Date, new to old</option>
-                  </select> */}
+
                   <Select
                     placeholder="Featured"
                     indicator={<KeyboardArrowDown />}
@@ -137,8 +134,12 @@ function OurStore() {
               <div className="d-flex gap-10 flex-wrap">
                 {/* getting props form ProductCard */}
                 {/* sending grid as a prop to child */}
-                <ProductCard grid={grid} />
-                <ProductCard grid={grid} />
+                {productState && (
+                  <ProductCard
+                    grid={grid}
+                    data={productState ? productState : []}
+                  />
+                )}
               </div>
             </div>
           </div>

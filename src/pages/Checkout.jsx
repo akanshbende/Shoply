@@ -6,7 +6,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import BreadCrumb from "../Components/BreadCrumb";
 import Meta from "../Components/Meta";
@@ -20,8 +20,20 @@ import ButtonMui from "../Components/ButtonMui";
 import newipad from "/newipad.jpg";
 import applewatch from "/applewatch.jpg";
 import Container from "../Components/Container";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserCart } from "../features/user/userSlice";
 
 function Checkout() {
+  const dispatch = useDispatch();
+
+  const userCartState = useSelector((state) => state.auth.cartProducts);
+
+  console.log(userCartState);
+
+  useEffect(() => {
+    dispatch(getUserCart());
+  }, []);
+
   function handleClick(event) {
     event.preventDefault();
     console.info("You clicked a breadcrumb.");
