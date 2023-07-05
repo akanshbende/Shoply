@@ -26,7 +26,7 @@ import { getAProduct } from "../features/products/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { addProdToCart } from "../features/user/userSlice";
-import { getColors } from "../features/color/colorSlice";
+
 // import ReactImageZoom from "react-image-zoom";
 
 function SingleProduct() {
@@ -43,13 +43,6 @@ function SingleProduct() {
   const productState = useSelector((state) => state.product.singleproduct);
   console.log(productState);
   // console.log(productState.color);
-
-  useEffect(() => {
-    dispatch(getColors());
-  }, []);
-
-  const colorState = useSelector((state) => state.color.colors);
-  console.log(colorState);
 
   useEffect(() => {
     dispatch(getAProduct(getProductId));
