@@ -18,6 +18,7 @@ export const loginUser = createAsyncThunk(
   async (userData, thunkAPI) => {
     try {
       return await authService.login(userData);
+      console.log(userData);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -52,6 +53,18 @@ export const getUserCart = createAsyncThunk(
   async (thunkAPI) => {
     try {
       return await authService.getCart();
+      console.log(userData);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+      console.log(error);
+    }
+  }
+);
+export const deleteCartProduct = createAsyncThunk(
+  "user/cart/product/delete",
+  async (cartItemId, thunkAPI) => {
+    try {
+      return await authService.removeProductFromCart(cartItemId);
       console.log(userData);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -109,8 +122,9 @@ export const authSlice = createSlice({
         state.user = action.payload;
 
         if (state.isSuccess === true) {
-          // localStorage.setItem("token", action.payload.token);
+          localStorage.setItem("token", action.payload.token);
           console.log("Login successful");
+          // console.log(localStorage.getItem("token"));
           toast.success("User Logged in Sucessfully");
         }
       })
@@ -176,9 +190,29 @@ export const authSlice = createSlice({
         state.isError = true;
         state.isSuccess = false;
         state.message = action.payload; // Convert to a serializable value
+      })
+      .addCase(deleteCartProduct.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteCartProduct.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.deletedCartProduct = action.payload;
+        if (state.isSuccess === true) {
+          toast.success("Product Removed From Cart Successfully");
+        }
+      })
+      .addCase(deleteCartProduct.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.payload; // Convert to a serializable value
+        if (state.isError === true) {
+          toast.error("Something Went Wrong!!");
+        }
       });
   },
 });
 
 export default authSlice.reducer;
-getUserCart;

@@ -17,12 +17,13 @@ const getSingleProduct = async (id) => {
 };
 
 const addToWishlist = async (prodId) => {
-  console.log(`${base_url}product/wishlist`);
+  // console.log(`${base_url}product/wishlist`);
   const response = await axios.put(
     `${base_url}product/wishlist`,
-    prodId,
+    { prodId },
     config
   );
+  console.log(response);
 
   if (response.data) {
     // console.log(response.data);

@@ -28,10 +28,12 @@ function Login() {
     validationSchema: loginSchema,
     onSubmit: (values) => {
       dispatch(loginUser(values));
-      // console.log(dispatch(loginUser(values)));
+      // console.log(values);
+      // console.log(loginUser(values));
       console.log("login clicked");
     },
   });
+
   return (
     <>
       {/* Tab heading */}

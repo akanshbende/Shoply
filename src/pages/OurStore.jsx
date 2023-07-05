@@ -22,7 +22,7 @@ function OurStore() {
   const [width, setWidth] = useState(window.innerWidth);
 
   const productState = useSelector((state) => state.product.product);
-  // console.log(productState);
+  console.log(productState);
   const dispatch = useDispatch();
   useEffect(() => {
     getProducts();

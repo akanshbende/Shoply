@@ -44,13 +44,13 @@ function SingleProduct() {
   console.log(productState);
   // console.log(productState.color);
 
-  // useEffect(() => {
-  //   dispatch(getColors());
-  // }, []);
+  useEffect(() => {
+    dispatch(getColors());
+  }, []);
 
-  // const colorState = useSelector((state) => state.color.colors);
+  const colorState = useSelector((state) => state.color.colors);
+  console.log(colorState);
 
-  // console.log(colorState);
   useEffect(() => {
     dispatch(getAProduct(getProductId));
     console.log(getAProduct(getProductId));

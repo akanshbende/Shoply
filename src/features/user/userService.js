@@ -7,17 +7,17 @@ const register = async (userData) => {
   // console.log(userData);
   // console.log(response);
   if (response.data) {
-    if (response.data) {
-      localStorage.setItem("customer", JSON.stringify(response.data));
-    }
     return response.data;
   }
 };
 const login = async (userData) => {
   const response = await axios.post(`${base_url}user/login`, userData);
-  // console.log(userData);
+  console.log(userData);
   // console.log(response);
   if (response.data) {
+    if (response.data) {
+      localStorage.setItem("customer", JSON.stringify(response.data));
+    }
     return response.data;
   }
 };
@@ -25,7 +25,7 @@ const login = async (userData) => {
 const getUserWishlist = async () => {
   const response = await axios.get(`${base_url}user/wishlist`, config);
 
-  console.log(response);
+  // console.log(response);
   if (response.data) {
     return response.data;
   }
@@ -49,10 +49,24 @@ const getCart = async () => {
   }
 };
 
+const removeProductFromCart = async (cartItemId) => {
+  // console.log(id);
+  const response = await axios.delete(
+    `${base_url}user/delete-product-cart/${cartItemId}`,
+    config
+  );
+
+  // console.log(response);
+  if (response.data) {
+    return response.data;
+  }
+};
+
 export const authService = {
   register,
   login,
   getUserWishlist,
   addToCart,
   getCart,
+  removeProductFromCart,
 };

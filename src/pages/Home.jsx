@@ -15,6 +15,8 @@ import ReactStars from "react-rating-stars-component";
 // import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { addTooWishlist } from "../features/products/productSlice";
+import Meta from "../Components/Meta";
+import BreadCrumb from "../Components/BreadCrumb";
 
 //2.08 hr
 function Home() {
@@ -46,6 +48,11 @@ function Home() {
   return (
     <>
       {/* large images and small images */}
+      {/* Tab heading */}
+      {/* <Meta title={"Shoply"} />
+      {/* Home / Login*/}
+      {/* <BreadCrumb title="Shoply" />  */}
+
       <Container class1="home-wrapper-1 py-5">
         <div className="row">
           <div className="col-lg-6 col-md-12 col-sm-12 ">

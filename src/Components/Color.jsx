@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 
 function Color(props) {
   const { colorData, setColor } = props;
-
+  console.log(colorData);
   const [selectedItem, setSelectedItem] = useState(null);
   const handleItemClick = (item) => {
     setSelectedItem(item);
@@ -29,7 +29,9 @@ function Color(props) {
                 className={`color-item ${
                   selectedItem === item ? "selected" : ""
                 }`}
-              ></li>
+              >
+                {/* {console.log(item.title)} */}
+              </li>
             );
           })}
       </ul>

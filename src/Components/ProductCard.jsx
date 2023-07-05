@@ -19,8 +19,8 @@ function ProductCard(props) {
   const addToWish = (id) => {
     console.log("Product Card > id : ", id);
     dispatch(addTooWishlist(id));
-    // console.log("Product Card : ", addToWishlist(id));
-    // console.log("Product Card : ", dispatch(addToWishlist(id)));
+    // console.log("Product Card : ", addTooWishlist(id));
+    // console.log("Product Card : ", dispatch(addTooWishlist(id)));
   };
   return (
     <>
@@ -35,16 +35,13 @@ function ProductCard(props) {
             <div className="product-card position-relative ">
               <div
                 className="wishlist-icon position-absolute cursor-pointer"
-                onClick={() => {
+                onClick={(e) => {
                   addToWish(item?._id);
                 }}
               >
-                {/* <Link> */}
-                {/* <img src="/wish.svg" alt="" /> */}
                 <IconButton aria-label="delete">
                   <FavoriteBorderIcon />
                 </IconButton>
-                {/* </Link> */}
               </div>
               {/* Product image */}
               <div className="product-image d-flex align-items-center justify-content-center">

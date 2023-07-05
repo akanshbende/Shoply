@@ -24,16 +24,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserCart } from "../features/user/userSlice";
 
 function Checkout() {
-  const dispatch = useDispatch();
-
-  const userCartState = useSelector((state) => state.auth.cartProducts);
-
-  console.log(userCartState);
-
-  useEffect(() => {
-    dispatch(getUserCart());
-  }, []);
-
   function handleClick(event) {
     event.preventDefault();
     console.info("You clicked a breadcrumb.");
