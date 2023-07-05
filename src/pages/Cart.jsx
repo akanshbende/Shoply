@@ -21,11 +21,15 @@ function Cart() {
   // console.log(userCartState.productID?.title);
 
   useEffect(() => {
-    dispatch(getUserCart());
+    // dispatch(getUserCart());
+    dispatch(getUserCart()); // get all cart data
   }, []);
 
   const deleteACartProduct = (id) => {
     dispatch(deleteCartProduct(id));
+    setTimeout(() => {
+      dispatch(getUserCart());
+    });
   };
 
   return (
@@ -66,7 +70,7 @@ function Cart() {
                             <ul className="colors ps-0">
                               <li
                                 style={{
-                                  backgroundColor: item?.title,
+                                  backgroundColor: item?.color?.title,
                                 }}
                                 className={`color-item`}
                               ></li>
@@ -91,6 +95,7 @@ function Cart() {
                             onChange={(e) => setQuantity(e.target.value)}
                             value={item?.quantity}
                           />
+                          {/* {item?.quantity} */}
                         </div>
                         <div>
                           <Tooltip title="Delete">
