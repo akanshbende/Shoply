@@ -172,7 +172,7 @@ function Checkout() {
 
     const result = await axios.post(
       "http://localhost:5000/api/user/order/checkout",
-      totalAmount,
+      { amount: totalAmount + shippingCharges },
       config
     );
     if (!result) {
