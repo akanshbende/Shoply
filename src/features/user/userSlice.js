@@ -1,6 +1,7 @@
 import { toast } from "react-toastify";
 import { authService } from "./userService";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { useNavigate } from "react-router-dom";
 
 export const registerUser = createAsyncThunk(
   "/auth/register",
@@ -72,7 +73,30 @@ export const deleteCartProduct = createAsyncThunk(
     }
   }
 );
-
+export const updateCartProduct = createAsyncThunk(
+  "user/cart/product/update",
+  async (cartDetail, thunkAPI) => {
+    try {
+      return await authService.updateProductFromCart(cartDetail);
+      console.log(userData);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+      console.log(error);
+    }
+  }
+);
+export const createAnOrder = createAsyncThunk(
+  "user/cart/create-order",
+  async (orderDetail, thunkAPI) => {
+    try {
+      return await authService.createOrder(orderDetail);
+      console.log(userData);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+      console.log(error);
+    }
+  }
+);
 const getCustomerfromLocalStorage = localStorage.getItem("customer")
   ? JSON.parse(localStorage.getItem("customer"))
   : null;
@@ -208,6 +232,49 @@ export const authSlice = createSlice({
         state.isError = true;
         state.isSuccess = false;
         state.message = action.payload; // Convert to a serializable value
+        if (state.isError === true) {
+          toast.error("Something Went Wrong!!");
+        }
+      })
+      .addCase(updateCartProduct.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateCartProduct.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.updatedCartProduct = action.payload;
+        if (state.isSuccess === true) {
+          toast.success("Product Updated Successfully");
+        }
+      })
+      .addCase(updateCartProduct.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.payload; // Convert to a serializable value
+        if (state.isError === true) {
+          toast.error("Something Went Wrong!!");
+        }
+      })
+      .addCase(createAnOrder.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(createAnOrder.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.orderedProduct = action.payload;
+        if (state.isSuccess === true) {
+          toast.success("Ordered Sucessfully");
+        }
+      })
+      .addCase(createAnOrder.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.payload;
+        // Convert to a serializable value
         if (state.isError === true) {
           toast.error("Something Went Wrong!!");
         }

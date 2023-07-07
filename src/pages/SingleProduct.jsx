@@ -43,11 +43,15 @@ function SingleProduct() {
   const productState = useSelector((state) => state.product.singleproduct);
   console.log(productState);
   // console.log(productState.color);
-
+  const [toggle, setToggle] = useState(false);
   useEffect(() => {
     dispatch(getAProduct(getProductId));
-    console.log(getAProduct(getProductId));
+    // console.log(getAProduct(getProductId));
   }, []);
+  useEffect(() => {
+    dispatch(getAProduct(getProductId));
+    // console.log(getAProduct(getProductId));
+  }, [toggle]);
 
   const uploadCart = () => {
     if (color === null) {
@@ -198,7 +202,9 @@ function SingleProduct() {
                   {/* buy item and addd to cart button */}
                   <div className="d-flex gap-30 align-items-center ms-5">
                     <button
-                      onClick={(e) => uploadCart(productState?._id)}
+                      onClick={(e) => {
+                        uploadCart(productState?._id);
+                      }}
                       className="button border-0"
                     >
                       Add to Cart

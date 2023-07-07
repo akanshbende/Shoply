@@ -65,8 +65,10 @@ a {
 .button {
   background-color: var(--color-232f3e);
   color: white;
-  padding: 13px 33px;
+  padding: 10px 30px;
   border-radius: 25px;
+  outline: none;
+  border: none;
 }
 
 @media screen and (max-width: 400px) {

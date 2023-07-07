@@ -10,11 +10,35 @@ import Select, { selectClasses } from "@mui/joy/Select";
 import { KeyboardArrowDown } from "@mui/icons-material";
 import { Option } from "@mui/joy";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
-
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useState } from "react";
+import {
+  deleteCartProduct,
+  getUserCart,
+  updateCartProduct,
+} from "../features/user/userSlice";
 function Header() {
+  const dispatch = useDispatch();
+  const [total, setTotal] = useState(null);
+  const cartState = useSelector((state) => state?.auth?.cartProducts);
+  // console.log(cartState.length);
+  // console.log(cartState);
+  // console.log(total);
+  useEffect(() => {
+    let sum = 0;
+    for (let index = 0; index < cartState?.length; index++) {
+      sum = sum + Number(cartState[index].quantity * cartState[index].price);
+      setTotal(sum);
+    }
+    // setTimeout(() => {
+    //   dispatch(getUserCart());
+    // }, 200);
+  }, [cartState]);
+
   return (
     <>
-      <header className="header-top-strip py-3 d-none d-xxl-block">
+      <header className="header-top-strip py-1 d-none d-xxl-block">
         <div className="container-xxl">
           <div className="row">
             <div className="col-6">
@@ -107,14 +131,18 @@ function Header() {
                     className="d-flex align-items-center text-white"
                   >
                     <div className="d-flex flex-row gap-3 align-items-center ms-2">
-                      <Badge color="error" badgeContent={0} showZero>
+                      <Badge
+                        color="error"
+                        badgeContent={cartState?.length ? cartState?.length : 0}
+                        showZero
+                      >
                         <ShoppingCartIcon
                           style={{ color: "#febd69", fontSize: 30 }}
                         />
                       </Badge>
                       <Chip
                         variant="outlined"
-                        label="$ 500"
+                        label={`$ ${total ? total : 0}`}
                         sx={{
                           color: "white",
                           fontWeight: 500,

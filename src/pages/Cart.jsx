@@ -3,7 +3,11 @@ import Meta from "../Components/Meta";
 import BreadCrumb from "../Components/BreadCrumb";
 import Checkout from "./Checkout";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCartProduct, getUserCart } from "../features/user/userSlice";
+import {
+  deleteCartProduct,
+  getUserCart,
+  updateCartProduct,
+} from "../features/user/userSlice";
 import newipad from "/newipad.jpg";
 import { TextField } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -12,25 +16,59 @@ import Tooltip from "@mui/material/Tooltip";
 import { Link } from "react-router-dom";
 
 function Cart() {
-  const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
 
-  const userCartState = useSelector((state) => state.auth.cartProducts);
+  const [totalAmount, setTotalAmount] = useState(null);
 
-  console.log(userCartState);
+  // const [refresh, setRefresh] = useState(false);
+  const [isToggled, setIsToggled] = useState(false);
+
+  // console.log(totalAmount);
+  const userCartState = useSelector((state) => state.auth.cartProducts);
+  // console.log(userCartState);
+  // console.log(userCartState.length);
   // console.log(userCartState.productID?.title);
+
+  const [productUpdateDetail, setProductUpdateDetail] = useState(null);
 
   useEffect(() => {
     // dispatch(getUserCart());
-    dispatch(getUserCart()); // get all cart data
+    dispatch(getUserCart()); // get all cart prosucts
   }, []);
+
+  useEffect(() => {
+    if (productUpdateDetail !== null) {
+      dispatch(
+        updateCartProduct({
+          cartItemId: productUpdateDetail?.cartItemId,
+          quantity: productUpdateDetail?.quantity,
+        })
+      );
+
+      setTimeout(() => {
+        dispatch(getUserCart());
+      }, 200);
+    }
+  }, [productUpdateDetail]);
 
   const deleteACartProduct = (id) => {
     dispatch(deleteCartProduct(id));
     setTimeout(() => {
       dispatch(getUserCart());
-    });
+    }, 200);
   };
+
+  useEffect(() => {
+    let sum = 0;
+
+    for (let index = 0; index < userCartState?.length; index++) {
+      sum =
+        sum +
+        Number(userCartState[index].quantity) * userCartState[index].price;
+
+      setTotalAmount(sum);
+    }
+  }, [userCartState]);
 
   return (
     <>
@@ -81,7 +119,7 @@ function Cart() {
                       <div className="cart-col-2"> $ {item?.price}</div>
                       <div className="cart-col-3 d-flex align-items-center gap-15">
                         <div>
-                          {" "}
+                          {/* {console.log(productUpdateDetail?.quantity)} */}
                           <TextField
                             sx={{ marginTop: 1, width: 100 }}
                             size="small"
@@ -92,9 +130,19 @@ function Cart() {
                               shrink: true,
                             }}
                             InputProps={{ inputProps: { min: 0, max: 10 } }}
-                            onChange={(e) => setQuantity(e.target.value)}
-                            value={item?.quantity}
+                            value={
+                              productUpdateDetail?.quantity
+                                ? productUpdateDetail?.quantity
+                                : item?.quantity
+                            }
+                            onChange={(e) =>
+                              setProductUpdateDetail({
+                                cartItemId: item?._id,
+                                quantity: e.target.value,
+                              })
+                            }
                           />
+                          {/* {console.log(cartItemId)} */}
                           {/* {item?.quantity} */}
                         </div>
                         <div>
@@ -125,15 +173,17 @@ function Cart() {
                     Continue to Shopping
                   </Link>
                 </div>
-                <div className="d-flex flex-column justify-content-end">
-                  <h4>SubTotal : $100</h4>
-                  <p className="">Tax and Total Calculated at Checkout</p>
-                  <div>
-                    <Link to="/checkout" className="button">
-                      Checkout
-                    </Link>
+                {(totalAmount !== null || totalAmount !== 0) && (
+                  <div className="d-flex flex-column justify-content-end">
+                    <h4>SubTotal : {totalAmount}</h4>
+                    <p className="">Tax and Total Calculated at Checkout</p>
+                    <div>
+                      <Link to="/checkout" className="button">
+                        Checkout
+                      </Link>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </div>
