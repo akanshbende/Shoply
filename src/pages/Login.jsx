@@ -1,12 +1,12 @@
 import React from "react";
 import Meta from "../Components/Meta";
 import BreadCrumb from "../Components/BreadCrumb";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Container from "../Components/Container";
 import CustomInput from "../Components/CustomInput";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../features/user/userSlice";
 
 const loginSchema = yup.object({
@@ -18,7 +18,10 @@ const loginSchema = yup.object({
 });
 
 function Login() {
+  const navigate = useNavigate();
   // console.log(email, password);
+
+  // const authState = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -28,9 +31,9 @@ function Login() {
     validationSchema: loginSchema,
     onSubmit: (values) => {
       dispatch(loginUser(values));
-      // console.log(values);
-      // console.log(loginUser(values));
-      console.log("login clicked");
+      // console.log("login clicked");
+
+      navigate("/");
     },
   });
 

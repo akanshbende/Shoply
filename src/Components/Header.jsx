@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, Navigate } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import CachedIcon from "@mui/icons-material/Cached";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -18,8 +18,17 @@ import {
   getUserCart,
   updateCartProduct,
 } from "../features/user/userSlice";
+import { toast } from "react-toastify";
+
 function Header() {
   const dispatch = useDispatch();
+
+  const authState = useSelector((state) => state.auth);
+  console.log(authState);
+  const updatedUserState =
+    useSelector((state) => state?.auth?.updatedUser) || [];
+  console.log(updatedUserState);
+
   const [total, setTotal] = useState(null);
   const cartState = useSelector((state) => state?.auth?.cartProducts);
   // console.log(cartState.length);
@@ -35,6 +44,13 @@ function Header() {
     //   dispatch(getUserCart());
     // }, 200);
   }, [cartState]);
+
+  const handleLogout = () => {
+    localStorage.clear();
+    toast.success("Sign Out Successfully...");
+    window.location.reload();
+    Navigate("/");
+  };
 
   return (
     <>
@@ -115,14 +131,23 @@ function Header() {
                 </div>
                 <div className="main-func mb-2 mb-xxl-0">
                   <Link
-                    to="/login"
+                    to={authState?.user === null ? "/login" : "/my-profile"}
                     className="d-flex align-items-center text-white"
                   >
                     <PersonIcon />
-                    <p className="mb-0">
-                      Login <br />
-                      My Account
-                    </p>
+                    {authState?.user === null ? (
+                      <p className="mb-0">
+                        Login <br />
+                        My Account
+                      </p>
+                    ) : (
+                      <p className="mb-0">
+                        Welcome <br />
+                        {updatedUserState?.firstname
+                          ? updatedUserState?.firstname
+                          : authState?.user?.firstname}
+                      </p>
+                    )}
                   </Link>
                 </div>
                 <div className="main-func mb-2 mb-xxl-0">
@@ -212,12 +237,22 @@ function Header() {
                     <NavLink className="links" to="/product">
                       Our Store
                     </NavLink>
+                    <NavLink className="links" to="/my-orders">
+                      My Orders
+                    </NavLink>
                     <NavLink className="links" to="/blogs">
                       Blogs
                     </NavLink>
                     <NavLink className="links" to="/contact">
                       Contact
                     </NavLink>
+                    <button
+                      className="links border-0 bg-transparent text-white fw-bold"
+                      onClick={(e) => handleLogout()}
+                      to="/contact"
+                    >
+                      Logout
+                    </button>
                   </div>
                 </div>
               </div>

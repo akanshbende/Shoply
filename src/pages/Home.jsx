@@ -66,7 +66,7 @@ function Home() {
                 <h4>SUPERCHARGED FOR PROS</h4>
 
                 <h5>iPad S13+ Pro.</h5>
-                <p>From $999 or $41/mo.</p>
+                <p>From ₹999 or ₹99/mo.</p>
                 <Link className="button">Buy Now</Link>
               </div>
             </div>
@@ -84,7 +84,7 @@ function Home() {
 
                   <h5>iPad S13+ Pro.</h5>
                   <p>
-                    From $999 <br /> or $41/mo.
+                    From ₹99,999 <br /> or ₹99/mo.
                   </p>
                   {/* <Link className="button">Buy Now</Link> */}
                 </div>
@@ -100,7 +100,7 @@ function Home() {
 
                   <h5>Buy IPad Air</h5>
                   <p>
-                    From $999 <br /> or $41/mo.
+                    From ₹999 <br /> or ₹41/mo.
                   </p>
                   {/* <Link className="button">Buy Now</Link> */}
                 </div>
@@ -116,7 +116,7 @@ function Home() {
 
                   <h5>Buy IPad Air</h5>
                   <p>
-                    From $999 <br /> or $41/mo.
+                    From ₹999 <br /> or ₹41/mo.
                   </p>
                   {/* <Link className="button">Buy Now</Link> */}
                 </div>
@@ -132,7 +132,7 @@ function Home() {
 
                   <h5>Buy IPad Air</h5>
                   <p>
-                    From $999 <br /> or $41/mo.
+                    From ₹999 <br /> or ₹41/mo.
                   </p>
                   {/* <Link className="button">Buy Now</Link> */}
                 </div>
@@ -292,7 +292,7 @@ function Home() {
               <div className="famous-content position-absolute">
                 <h5>Big Screen</h5>
                 <h6>Smart Watch Series</h6>
-                <p>From $3990r $16.62/mo. for 24 mo.*</p>
+                <p>From ₹399 or ₹16.62/mo. for 24 mo.*</p>
               </div>
             </div>
           </div>
@@ -313,7 +313,7 @@ function Home() {
                 <h5 className="text-dark">SMARTPHONES</h5>
                 <h6 className="text-dark">Smartphone 13 Pro.</h6>
                 <p className="text-dark">
-                  Now in Green. From $999.00 or $41.62/mo. for 24 mo. Footnote*
+                  Now in Green. From ₹999.00 or ₹41.62/mo. for 24 mo. Footnote*
                 </p>
               </div>
             </div>
@@ -325,7 +325,7 @@ function Home() {
                 <h5 className="text-dark">HOME SPEAKERS</h5>
                 <h6 className="text-dark">Room-filling sound.</h6>
                 <p className="text-dark">
-                  From $699 or $116.58/mo. for 12 mo.*
+                  From ₹699 or ₹116.58/mo. for 12 mo.*
                 </p>
               </div>
             </div>

@@ -26,7 +26,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import axios from "axios";
 import { config } from "../utils/axiosConfig";
-
+import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 const shippingSchema = yup.object({
   firstName: yup.string().required("First Name is Required"),
   lastName: yup.string().required("Last Name is Required"),
@@ -76,7 +76,7 @@ function Checkout() {
 
   const cartState = useSelector((state) => state.auth.cartProducts) || [];
   console.log(cartState);
-  const shippingCharges = 5;
+  const shippingCharges = 50;
 
   // console.log(totalAmount);
   const userCartState = useSelector((state) => state.auth.cartProducts);
@@ -396,7 +396,7 @@ function Checkout() {
                       <AddShoppingCartIcon /> Continue Shopping
                     </Link>
                     <button className="button" type="submit">
-                      Place Order
+                      <CurrencyRupeeIcon /> Place Order
                     </button>
                   </div>
                 </div>
@@ -432,7 +432,7 @@ function Checkout() {
                       </div>
                       <div className="flex-grow-1">
                         <h5 className="total">
-                          $ {item?.price * item?.quantity}
+                          ₹ {item?.price * item?.quantity}
                         </h5>
                       </div>
                     </div>
@@ -445,17 +445,17 @@ function Checkout() {
               <div className="d-flex justify-content-between align-items-center">
                 <p className=" total">SubTotal</p>
                 <p className=" total-price ">
-                  $ {totalAmount ? totalAmount : "0"}
+                  ₹ {totalAmount ? totalAmount : "0"}
                 </p>
               </div>
               <div className="d-flex justify-content-between align-items-center">
                 <p className="mb-0 total">Shipping</p>
-                <p className="mb-0 total-price ">$ {shippingCharges}</p>
+                <p className="mb-0 total-price ">₹ {shippingCharges}</p>
               </div>
             </div>
             <div className="d-flex justify-content-between align-items-center border-bottom py-4">
               <h4>Total</h4>
-              <h5>$ {totalAmount ? totalAmount + shippingCharges : "0"}</h5>
+              <h5>₹ {totalAmount ? totalAmount + shippingCharges : "0"}</h5>
             </div>
           </div>
         </div>

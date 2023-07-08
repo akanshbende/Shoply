@@ -24,6 +24,10 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import SingleProduct from "./pages/SingleProduct";
 import Checkout from "./pages/Checkout";
 import Home from "./pages/Home";
+import { PrivateRoutes } from "./routing/PrivateRoutes";
+import { OpenRoutes } from "./routing/OpenRoutes";
+import Orders from "./pages/Orders";
+import Profile from "./pages/Profile";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -42,13 +46,64 @@ function App() {
             <Route path="blog/:id" element={<SingleBlog />} />
             <Route path="contactUs" element={<Contact />} />
             <Route path="compare-product" element={<CompareProducts />} />
-            <Route path="wishlist" element={<WishList />} />
-            <Route path="login" element={<Login />} />
-            <Route path="signup" element={<SignUp />} />
+            <Route
+              path="my-profile"
+              element={
+                <PrivateRoutes>
+                  <Profile />
+                </PrivateRoutes>
+              }
+            />
+            <Route
+              path="wishlist"
+              element={
+                <PrivateRoutes>
+                  <WishList />
+                </PrivateRoutes>
+              }
+            />
+            <Route
+              path="login"
+              element={
+                <OpenRoutes>
+                  <Login />
+                </OpenRoutes>
+              }
+            />
+            <Route
+              path="signup"
+              element={
+                <OpenRoutes>
+                  <SignUp />
+                </OpenRoutes>
+              }
+            />
             <Route path="forgot-password" element={<ForgotPassword />} />
             <Route path="reset-password" element={<ResetPassword />} />
-            <Route path="cart" element={<Cart />} />
-            <Route path="checkout" element={<Checkout />} />
+            <Route
+              path="cart"
+              element={
+                <PrivateRoutes>
+                  <Cart />
+                </PrivateRoutes>
+              }
+            />
+            <Route
+              path="my-orders"
+              element={
+                <PrivateRoutes>
+                  <Orders />
+                </PrivateRoutes>
+              }
+            />
+            <Route
+              path="checkout"
+              element={
+                <PrivateRoutes>
+                  <Checkout />
+                </PrivateRoutes>
+              }
+            />
             <Route path="privacy-policy" element={<PrivacyPolicy />} />
             <Route path="refund-policy" element={<RefundPolicy />} />
             <Route path="shipping-policy" element={<ShippingPolicy />} />

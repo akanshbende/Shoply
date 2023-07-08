@@ -38,7 +38,8 @@ function WishList() {
       <Container class1="wishlist-wrapper home-wrapper-2 py-5">
         <div className="row">
           {/* {wishListState.length === 0 && <div className=""> No data</div>} */}
-          {wishListState &&
+          {wishListState ? (
+            wishListState &&
             wishListState?.map((item, index) => {
               return (
                 <div className="col-xxl-3" key={index}>
@@ -72,7 +73,13 @@ function WishList() {
                   </div>
                 </div>
               );
-            })}
+            })
+          ) : (
+            <div className="d-flex align-items-center gap-5 justify-content-center">
+              <img src="public\wishlist_img.webp" width={400} alt="" />
+              <h1> Your Wishlist is Empty</h1>
+            </div>
+          )}
         </div>
       </Container>
     </>

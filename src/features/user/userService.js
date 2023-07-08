@@ -12,7 +12,7 @@ const register = async (userData) => {
 };
 const login = async (userData) => {
   const response = await axios.post(`${base_url}user/login`, userData);
-  console.log(userData);
+  // console.log(userData);
   // console.log(response);
   if (response.data) {
     if (response.data) {
@@ -86,6 +86,29 @@ const createOrder = async (orderDetail) => {
     return response.data;
   }
 };
+const getUserOrders = async () => {
+  // console.log(id);
+  const response = await axios.get(`${base_url}user/getmyorders`, config);
+
+  // console.log(response);
+  if (response.data) {
+    return response.data;
+  }
+};
+const updateUser = async (data) => {
+  // console.log(id);
+  console.log(data);
+  // localStorage.removeItem("customer");
+  const response = await axios.put(`${base_url}user/edit-user`, data, config);
+  console.log(response);
+  console.log(response.data);
+  if (response.data) {
+    // if (response.data) {
+    //   localStorage.setItem("customer", JSON.stringify(response.data));
+    // }
+    return response.data;
+  }
+};
 
 export const authService = {
   register,
@@ -96,4 +119,6 @@ export const authService = {
   removeProductFromCart,
   updateProductFromCart,
   createOrder,
+  getUserOrders,
+  updateUser,
 };
