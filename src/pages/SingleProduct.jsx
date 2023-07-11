@@ -22,7 +22,11 @@ import Container from "../Components/Container";
 import ImgMagnifiHover from "../Components/ImgMagnifiHover";
 import ReactImageMagnify from "react-image-magnify";
 import { useEffect } from "react";
-import { getAProduct } from "../features/products/productSlice";
+import {
+  addRating,
+  getAProduct,
+  getAllProducts,
+} from "../features/products/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { addProdToCart } from "../features/user/userSlice";
@@ -30,28 +34,42 @@ import { addProdToCart } from "../features/user/userSlice";
 // import ReactImageZoom from "react-image-zoom";
 
 function SingleProduct() {
+  const dispatch = useDispatch();
   const [color, setColor] = useState(null);
-  console.log("Color : " + color);
+  // console.log("Color : " + color);
   const [quantity, setQuantity] = useState(1);
   // console.log(quantity);
   const [orderedProduct, setOrderedProduct] = useState(true);
 
+  const [stars, setStars] = useState(null);
+  const [comments, setComments] = useState(null);
+
+  const [popularProduct, setPopularProduct] = useState([]);
+
   const location = useLocation();
   const getProductId = location.pathname.split("/")[2];
   // console.log(getProductId);
-  const dispatch = useDispatch();
-  const productState = useSelector((state) => state.product.singleproduct);
+  const productState = useSelector((state) => state?.product?.singleproduct);
+  const productsState = useSelector((state) => state?.product?.product);
   console.log(productState);
   // console.log(productState.color);
-  const [toggle, setToggle] = useState(false);
+
   useEffect(() => {
     dispatch(getAProduct(getProductId));
     // console.log(getAProduct(getProductId));
+    // dispatch(getAllProducts());
   }, []);
+
   useEffect(() => {
-    dispatch(getAProduct(getProductId));
-    // console.log(getAProduct(getProductId));
-  }, [toggle]);
+    let data = [];
+    for (let index = 0; index < productsState.length; index++) {
+      const element = productsState[index];
+      if (element.tags === "popular") {
+        data.push(element);
+      }
+      setPopularProduct(data);
+    }
+  }, [productState]);
 
   const uploadCart = () => {
     if (color === null) {
@@ -85,13 +103,34 @@ function SingleProduct() {
     textField.remove();
   };
 
+  const addRatingToProduct = () => {
+    if (stars === null) {
+      toast.error("Please add star rating");
+      return false;
+    } else if (comments === null) {
+      toast.error("Please Review about the Product");
+      return false;
+    } else {
+      const star = stars;
+      const comment = comments;
+      const prodId = getProductId;
+      dispatch(addRating({ star, comment, prodId }));
+      console.log(star);
+      console.log(comment);
+      console.log(prodId);
+      setTimeout(() => {
+        dispatch(getAProduct(getProductId));
+      }, 100);
+      return false;
+    }
+  };
+
   return (
     <>
       {/* Tab heading */}
       <Meta title={"Product Name"} />
       {/* Home / Sign Up*/}
-      <BreadCrumb title="Product Name" />
-
+      <BreadCrumb title={productState?.title} />
       <Container class1="main-product-wrapper py-5 home-wrapper-2">
         <div className="row">
           <div className="col-xxl-6">
@@ -158,7 +197,7 @@ function SingleProduct() {
                   <h3 className="product-heading">Availability : </h3>
                   <p className="product-data">In Stock</p>
                 </div>
-                <div className="d-flex  flex-column gap-10 mt-2 mb-3">
+                {/* <div className="d-flex  flex-column gap-10 mt-2 mb-3">
                   <h3 className="product-heading">Size : </h3>
                   <div className="d-flex flex-wrap gap-15">
                     <span className="badge border border-1 bg-white text-dark border-secondary">
@@ -177,7 +216,7 @@ function SingleProduct() {
                       XXL
                     </span>
                   </div>
-                </div>
+                </div> */}
                 <div className="d-flex flex-column gap-10  mt-2 mb-3">
                   <h3 className="product-heading">Color : </h3>
                   <Color colorData={productState?.color} setColor={setColor} />
@@ -291,6 +330,7 @@ function SingleProduct() {
                     <p className="mb-0">Based on 2 Reviews</p>
                   </div>
                 </div>
+                {console.log(orderedProduct)}
                 {orderedProduct && (
                   <div>
                     <Link className="text-dark text-decoration-underline" to="">
@@ -301,50 +341,65 @@ function SingleProduct() {
               </div>
               <div className="review-form py-4">
                 <h4>Write a Review</h4>
-                <form action="" className="d-flex flex-column gap-15">
-                  <div>
-                    <ReactStars
-                      count={5}
-                      value={3}
-                      edit={true}
-                      size={24}
-                      activeColor="#ffd700"
-                    />
-                  </div>
-                  <div>
-                    <textarea
-                      className="form-control w-100"
-                      name=""
-                      id=""
-                      placeholder="Comments"
-                      cols="30"
-                      rows="4"
-                    ></textarea>
-                  </div>
-                  <div className="d-flex justify-content-end">
-                    <button className="button border-0">Submit</button>
-                  </div>
-                </form>
+
+                <div>
+                  <ReactStars
+                    count={5}
+                    value={stars}
+                    edit={true}
+                    size={24}
+                    activeColor="#ffd700"
+                    onChange={(e) => {
+                      setStars(e);
+                    }}
+                  />
+                  {console.log(stars)}
+                </div>
+                <div>
+                  <textarea
+                    className="form-control w-100"
+                    name=""
+                    id=""
+                    placeholder="Comments"
+                    cols="30"
+                    rows="4"
+                    value={comments}
+                    onChange={(e) => {
+                      // console.log(e);
+                      setComments(e.target.value);
+                    }}
+                  ></textarea>
+                  {console.log(comments)}
+                </div>
+                <div className="d-flex justify-content-end">
+                  <button
+                    className="button border-0 mt-3"
+                    type="button"
+                    onClick={addRatingToProduct}
+                  >
+                    Submit
+                  </button>
+                </div>
               </div>
               <div className="reviews mt-4 ">
-                <div className="review ">
-                  <div className="d-flex gap-10 align-items-center">
-                    <h6 className="mb-0">Akansh</h6>
-                    <ReactStars
-                      count={5}
-                      value={3}
-                      edit={false}
-                      size={24}
-                      activeColor="#ffd700"
-                    />
-                  </div>
-                  <p className="mt-3">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Sint voluptatem non impedit totam vitae odio quae nihil
-                    repudiandae, ut dignissimos officia dolores illo dolore
-                    neque possimus laboriosam doloribus, autem vel.
-                  </p>
-                </div>
+                {productState &&
+                  productState?.ratings?.map((item, index) => {
+                    return (
+                      <div key={index} className="review ">
+                        <div className="d-flex gap-10 align-items-center">
+                          <h6 className="mb-0">Akansh</h6>
+                          <ReactStars
+                            count={5}
+                            value={item?.star}
+                            edit={false}
+                            size={24}
+                            activeColor="#ffd700"
+                          />
+                        </div>
+                        <p className="mt-3">{item?.comment}</p>
+                      </div>
+                    );
+                  })}
               </div>
             </div>
           </div>
@@ -357,10 +412,7 @@ function SingleProduct() {
           </div>
         </div>
         <div className="row">
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
+          <ProductCard data={popularProduct} />
         </div>
       </Container>
     </>

@@ -41,7 +41,7 @@ function Profile() {
   const dispatch = useDispatch();
   const userState = useSelector((state) => state?.auth?.user);
   const updatedUserState = useSelector((state) => state?.auth?.updatedUser);
-  console.log(updatedUserState);
+
   console.log(userState);
   const formik = useFormik({
     enableReinitialize: true,
@@ -63,7 +63,7 @@ function Profile() {
     },
   });
   console.log(userState);
-
+  console.log(updatedUserState);
   // useEffect(() => {
   //   dispatch(updatedProfile());
   // }, [userState]);

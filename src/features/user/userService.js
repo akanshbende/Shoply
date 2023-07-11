@@ -109,6 +109,41 @@ const updateUser = async (data) => {
     return response.data;
   }
 };
+const forgotPassToken = async (data) => {
+  // console.log(id);
+  console.log(data);
+  // localStorage.removeItem("customer");
+  const response = await axios.post(
+    `${base_url}user/forgot-password-token`,
+    data
+  );
+  console.log(response);
+  console.log(response.data);
+  if (response.data) {
+    // if (response.data) {
+    //   localStorage.setItem("customer", JSON.stringify(response.data));
+    // }
+    return response.data;
+  }
+};
+const resetPass = async (data) => {
+  // console.log(id);
+  console.log(data);
+  // localStorage.removeItem("customer");
+  console.log(`${base_url}user/reset-password/${data.token}`);
+  const response = await axios.put(
+    `${base_url}user/reset-password/${data.token}`,
+    { password: data?.password }
+  );
+  console.log(response);
+  console.log(response.data);
+  if (response.data) {
+    // if (response.data) {
+    //   localStorage.setItem("customer", JSON.stringify(response.data));
+    // }
+    return response.data;
+  }
+};
 
 export const authService = {
   register,
@@ -121,4 +156,6 @@ export const authService = {
   createOrder,
   getUserOrders,
   updateUser,
+  forgotPassToken,
+  resetPass,
 };

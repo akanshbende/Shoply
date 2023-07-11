@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Link, Navigate } from "react-router-dom";
+import { NavLink, Link, Navigate, useNavigate } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import CachedIcon from "@mui/icons-material/Cached";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -13,27 +13,31 @@ import LocalMallIcon from "@mui/icons-material/LocalMall";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
-import {
-  deleteCartProduct,
-  getUserCart,
-  updateCartProduct,
-} from "../features/user/userSlice";
+import { Typeahead } from "react-bootstrap-typeahead";
+import "react-bootstrap-typeahead/css/Typeahead.css";
 import { toast } from "react-toastify";
 
 function Header() {
   const dispatch = useDispatch();
-
-  const authState = useSelector((state) => state.auth);
+  const [total, setTotal] = useState(null);
+  const [paginate, setPaginate] = useState(true);
+  const [productOpt, setProductOpt] = useState([]);
+  // const options = range(0, 1000).map((o) => `Item ${o}`);
+  const Navigate = useNavigate();
+  const authState = useSelector((state) => state?.auth);
   console.log(authState);
+
   const updatedUserState =
     useSelector((state) => state?.auth?.updatedUser) || [];
   console.log(updatedUserState);
 
-  const [total, setTotal] = useState(null);
   const cartState = useSelector((state) => state?.auth?.cartProducts);
   // console.log(cartState.length);
   // console.log(cartState);
   // console.log(total);
+
+  const productState = useSelector((state) => state?.product?.product);
+  console.log(productState);
   useEffect(() => {
     let sum = 0;
     for (let index = 0; index < cartState?.length; index++) {
@@ -44,6 +48,20 @@ function Header() {
     //   dispatch(getUserCart());
     // }, 200);
   }, [cartState]);
+
+  //Search Functionality
+  useEffect(() => {
+    let data = [];
+    for (let index = 0; index < productState?.length; index++) {
+      const element = productState[index];
+      let id = index;
+      let prodId = element?._id;
+      let name = element?.title;
+      data.push({ id, prodId, name });
+    }
+    setProductOpt(data);
+    console.log(productOpt);
+  }, [productState]);
 
   const handleLogout = () => {
     localStorage.clear();
@@ -91,12 +109,18 @@ function Header() {
             </div>
             <div className="col-lg-5 col-md-12 col-8 mt-sm-3 mb-lg-3">
               <div className="input-group ">
-                <input
-                  type="text"
-                  className="form-control py-2 "
-                  placeholder="Search Product Here..."
-                  aria-label="Search Product Here..."
-                  aria-describedby="basic-addon2"
+                {/* Search functonality */}
+                <Typeahead
+                  id="pagination-example"
+                  onPaginate={() => console.log("Results paginated")}
+                  options={productOpt} //array of productOpt
+                  onChange={(selected) => {
+                    Navigate(`/product/${selected[0].prodId}`);
+                  }}
+                  minLength={2}
+                  paginate={paginate}
+                  labelKey={"name"}
+                  placeholder="Search For Products Here..."
                 />
                 <span className="input-group-text p-3" id="basic-addon2">
                   <BsSearch className="fs-6" />
@@ -248,7 +272,13 @@ function Header() {
                     </NavLink>
                     <button
                       className="links border-0 bg-transparent text-white fw-bold"
-                      onClick={(e) => handleLogout()}
+                      onClick={(e) =>
+                        authState?.user === null || updatedUserState === [] ? (
+                          <>{toast.error("User Not Found...")}</>
+                        ) : (
+                          handleLogout()
+                        )
+                      }
                       to="/contact"
                     >
                       Logout
