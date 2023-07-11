@@ -16,6 +16,7 @@ import { useState } from "react";
 import { Typeahead } from "react-bootstrap-typeahead";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import { toast } from "react-toastify";
+import { getAProduct } from "../features/products/productSlice";
 
 function Header() {
   const dispatch = useDispatch();
@@ -25,11 +26,11 @@ function Header() {
   // const options = range(0, 1000).map((o) => `Item ${o}`);
   const Navigate = useNavigate();
   const authState = useSelector((state) => state?.auth);
-  console.log(authState);
+  // console.log(authState);
 
   const updatedUserState =
     useSelector((state) => state?.auth?.updatedUser) || [];
-  console.log(updatedUserState);
+  // console.log(updatedUserState);
 
   const cartState = useSelector((state) => state?.auth?.cartProducts);
   // console.log(cartState.length);
@@ -37,7 +38,7 @@ function Header() {
   // console.log(total);
 
   const productState = useSelector((state) => state?.product?.product);
-  console.log(productState);
+  // console.log(productState);
   useEffect(() => {
     let sum = 0;
     for (let index = 0; index < cartState?.length; index++) {
@@ -60,7 +61,7 @@ function Header() {
       data.push({ id, prodId, name });
     }
     setProductOpt(data);
-    console.log(productOpt);
+    // console.log(productOpt);
   }, [productState]);
 
   const handleLogout = () => {
@@ -77,7 +78,7 @@ function Header() {
           <div className="row">
             <div className="col-6">
               <p className="text-white mb-0">
-                Free Delivery Over <strong>$ 599</strong> & Free Return{" "}
+                Free Delivery Over <strong>₹ 599</strong> & Free Return{" "}
               </p>
             </div>
             <div className="col-6">
@@ -115,7 +116,8 @@ function Header() {
                   onPaginate={() => console.log("Results paginated")}
                   options={productOpt} //array of productOpt
                   onChange={(selected) => {
-                    Navigate(`/product/${selected[0].prodId}`);
+                    Navigate(`/product/${selected[0]?.prodId}`);
+                    dispatch(getAProduct(selected[0]?.prodId));
                   }}
                   minLength={2}
                   paginate={paginate}
@@ -129,19 +131,18 @@ function Header() {
             </div>
             <div className="col-lg-5 col-md-12 col-sm-12 mt-sm-3 mb-sm-3">
               <div className="header-upper-links d-flex flex-wrap   m-xxl-0  align-items-center justify-content-xxl-between  justify-content-between">
-                <div className="main-func mb-2 mb-xxl-0 ">
+                {/* <div className="main-func mb-2 mb-xxl-0 ">
                   <Link
                     to="/compare-product"
                     className="d-flex align-items-center text-white mt-1"
                   >
-                    {/* <img src="images/compare.svg" alt="" /> */}
                     <CachedIcon />
                     <p className="mb-0">
                       Compare <br />
                       Products
                     </p>
                   </Link>
-                </div>
+                </div> */}
                 <div className="main-func mb-2 mb-xxl-0">
                   <Link
                     to="/wishlist"
@@ -191,7 +192,7 @@ function Header() {
                       </Badge>
                       <Chip
                         variant="outlined"
-                        label={`$ ${total ? total : 0}`}
+                        label={`₹ ${total ? total : 0}`}
                         sx={{
                           color: "white",
                           fontWeight: 500,

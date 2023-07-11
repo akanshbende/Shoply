@@ -590,8 +590,9 @@ footer .input-group-text:hover {
 }
 
 .sub-title {
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 600;
+
   color: var(--color-1c1c1b);
   margin-top: 15px;
   margin-bottom: 20px;

@@ -267,12 +267,12 @@ function Home() {
                               alt="add cart"
                             />
                           </button>
-                          <button className="border-0 bg-transparent">
+                          {/* <button className="border-0 bg-transparent">
                             <img src="/prodcompare.svg" alt="add cart" />
-                          </button>
-                          <button className="border-0 bg-transparent">
+                          </button> */}
+                          {/* <button className="border-0 bg-transparent">
                             <img src="/add-cart.svg" alt="add cart" />
-                          </button>
+                          </button> */}
                         </div>
                       </div>
                     </div>
@@ -428,12 +428,12 @@ function Home() {
                               alt="add cart"
                             />
                           </button>
-                          <button className="border-0 bg-transparent">
+                          {/* <button className="border-0 bg-transparent">
                             <img src="/prodcompare.svg" alt="add cart" />
                           </button>
                           <button className="border-0 bg-transparent">
                             <img src="/add-cart.svg" alt="add cart" />
-                          </button>
+                          </button> */}
                         </div>
                       </div>
                     </div>

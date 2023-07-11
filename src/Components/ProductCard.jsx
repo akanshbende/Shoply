@@ -86,18 +86,16 @@ function ProductCard(props) {
                     </IconButton>
                     {/*  <img src="/view.svg" alt="add cart" /> */}
                   </Link>
-                  <Link className="border-0 bg-transparent">
+                  {/* <Link className="border-0 bg-transparent">
                     <IconButton className="product-btn" aria-label="delete">
                       <CompareArrowsIcon />
                     </IconButton>
-                    {/* <img src="/prodcompare.svg" alt="add cart" /> */}
-                  </Link>
-                  <Link className="border-0 bg-transparent">
+                  </Link> */}
+                  {/* <Link className="border-0 bg-transparent">
                     <IconButton className="product-btn" aria-label="delete">
                       <WorkOutlineIcon />
                     </IconButton>
-                    {/* <img src="/add-cart.svg" alt="add cart" /> */}
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
             </div>
