@@ -15,7 +15,7 @@ import moment from "moment/moment";
 }
 function Blogs() {
   const blogState = useSelector((state) => state?.blog?.blog);
-  // console.log(productState);
+  console.log(blogState);
   const dispatch = useDispatch();
   useEffect(() => {
     getblogs();
@@ -39,6 +39,7 @@ function Blogs() {
                   <li>TV</li>
                   <li>Camera</li>
                   <li>Laptop</li>
+                  <li>General</li>
                 </ul>
               </div>
             </div>
@@ -48,16 +49,20 @@ function Blogs() {
               {blogState &&
                 blogState?.map((item, index) => {
                   return (
-                    <div key={index} className="col-xxl-6 col-12 mb-3">
+                    <div
+                      key={index}
+                      className="col-xxl-4 col-xl-4 col-md-6 col-sm-6   col-12 mb-3"
+                    >
                       <BlogCard
                         id={item?._id}
                         title={item?.title}
                         description={item?.description}
-                        image={item?.images[0]?.url}
+                        image={item?.images}
                         date={moment(item?.created_At).format(
                           "MMMM Do YYYY, h:mm:ss a"
                         )}
                       />
+                      {console.log(item?.images)}
                     </div>
                   );
                 })}

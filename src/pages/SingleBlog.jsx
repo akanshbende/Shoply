@@ -9,8 +9,8 @@ import blog from "../../public/blog-1.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { getABlog } from "../features/blogs/blogSlice";
 function SingleBlog() {
-  const blogState = useSelector((state) => state?.blog?.singleBlog);
-  // console.log(productState);
+  const blogState = useSelector((state) => state?.blog.blog);
+  console.log(blogState);
   const location = useLocation();
   const getBlogId = location.pathname.split("/")[2];
   const dispatch = useDispatch();
@@ -29,18 +29,33 @@ function SingleBlog() {
       <Container className="blog-wrapper home-wrapper-2 py-5">
         <div className=" row">
           <div className="col-12">
-            <div className="single-blog-card">
-              <Link to="/blogs" className="d-flex align-items-center gap-10">
-                <HiOutlineArrowLeft /> Go back to Blogs
-              </Link>
-              <h3 className="title">{blogState?.title} </h3>
-              <img
-                src={blogState?.images[0].url ? blogState?.images[0].url : blog}
-                alt="blog"
-                className="img-fluid w-100 my-4"
-              />
-              <p>{blogState?.description}</p>
-            </div>
+            {blogState &&
+              blogState?.map((item, index) => {
+                return (
+                  <div key={index} className="single-blog-card ">
+                    <Link
+                      to="/blogs"
+                      className="d-flex align-items-center gap-10"
+                    >
+                      <HiOutlineArrowLeft /> Go back to Blogs
+                    </Link>
+                    <h3 className="title d-flex align-items-center text-align-center justify-content-center ">
+                      {item?.title}{" "}
+                    </h3>
+
+                    <p className="m-5">
+                      <img
+                        // src={blogState?.images[0].url ? blogState?.images[0].url : blog}
+                        src={item?.images}
+                        alt="blog"
+                        className="img-fluid rounded-3 "
+                        style={{ float: "left", marginRight: "20px" }}
+                      />
+                      {item?.description}
+                    </p>
+                  </div>
+                );
+              })}
           </div>
         </div>
       </Container>

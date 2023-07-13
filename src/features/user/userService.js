@@ -40,20 +40,22 @@ const addToCart = async (cartData) => {
   }
 };
 
-const getCart = async () => {
-  const response = await axios.get(`${base_url}user/cart`, config);
-
+const getCart = async (data) => {
+  console.log(data);
+  const response = await axios.get(`${base_url}user/cart`, data);
+  console.log(response.data);
   // console.log(response);
   if (response.data) {
     return response.data;
   }
 };
 
-const removeProductFromCart = async (cartItemId) => {
+const removeProductFromCart = async (data) => {
   // console.log(id);
+  console.log(data);
   const response = await axios.delete(
-    `${base_url}user/delete-product-cart/${cartItemId}`,
-    config
+    `${base_url}user/delete-product-cart/${data.idNew}`,
+    data.configNew
   );
 
   // console.log(response);
@@ -97,11 +99,16 @@ const getUserOrders = async () => {
 };
 const updateUser = async (data) => {
   // console.log(id);
-  console.log(data);
+  console.log(data.data);
+  console.log(data.config2_);
   // localStorage.removeItem("customer");
-  const response = await axios.put(`${base_url}user/edit-user`, data, config);
-  console.log(response);
-  console.log(response.data);
+  const response = await axios.put(
+    `${base_url}user/edit-user`,
+    data.data,
+    data.config2_
+  );
+  // console.log(response);
+  // console.log(response.data);
   if (response.data) {
     // if (response.data) {
     //   localStorage.setItem("customer", JSON.stringify(response.data));
@@ -127,20 +134,22 @@ const forgotPassToken = async (data) => {
   }
 };
 const resetPass = async (data) => {
-  // console.log(id);
-  console.log(data);
-  // localStorage.removeItem("customer");
-  console.log(`${base_url}user/reset-password/${data.token}`);
+  // console.log(`${base_url}user/reset-password/${data.token}`);
   const response = await axios.put(
     `${base_url}user/reset-password/${data.token}`,
     { password: data?.password }
   );
-  console.log(response);
-  console.log(response.data);
+
   if (response.data) {
-    // if (response.data) {
-    //   localStorage.setItem("customer", JSON.stringify(response.data));
-    // }
+    return response.data;
+  }
+};
+
+const emptyCart = async (data) => {
+  // console.log(`${base_url}user/reset-password/${data.token}`);
+  const response = await axios.delete(`${base_url}user/empty-cart`, data);
+
+  if (response.data) {
     return response.data;
   }
 };
@@ -158,4 +167,5 @@ export const authService = {
   updateUser,
   forgotPassToken,
   resetPass,
+  emptyCart,
 };

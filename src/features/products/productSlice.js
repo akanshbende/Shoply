@@ -30,6 +30,7 @@ export const addTooWishlist = createAsyncThunk(
 export const getAProduct = createAsyncThunk(
   "product/getAProduct",
   async (id, thunkAPI) => {
+    console.log(id);
     try {
       return await productService.getSingleProduct(id);
       // console.log("product slice", userData);

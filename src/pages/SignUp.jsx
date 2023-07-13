@@ -1,14 +1,15 @@
 import React from "react";
 import Meta from "../Components/Meta";
 import BreadCrumb from "../Components/BreadCrumb";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import Container from "../Components/Container";
 import CustomInput from "../Components/CustomInput";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../features/user/userSlice";
 import { toast } from "react-toastify";
+import { useEffect } from "react";
 
 const signUpSchema = yup.object({
   firstname: yup.string().required("First Name is Required"),
@@ -21,6 +22,13 @@ const signUpSchema = yup.object({
 
 function SignUp() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const authState = useSelector((state) => state.auth);
+  console.log(authState);
+  console.log(authState.createdUser);
+  console.log(authState.isError);
+
   const formik = useFormik({
     initialValues: {
       firstname: "",
@@ -34,6 +42,12 @@ function SignUp() {
       dispatch(registerUser(values));
     },
   });
+  useEffect(() => {
+    if (authState.createdUser !== undefined && authState.isError === false) {
+      navigate("/login");
+    }
+  }, [authState]);
+
   return (
     <>
       {/* Tab heading */}
@@ -41,8 +55,24 @@ function SignUp() {
       {/* Home / Sign Up*/}
       <BreadCrumb title="Sign Up" />
 
-      <Container class1="login-wrapper py-5 home-wrapper-2 ">
+      <Container class1="login-wrapper py-2 home-wrapper-2 ">
         <div className="row">
+          <div className="col-12">
+            <div className="d-flex align-items-center justify-content-center">
+              <img
+                src="/shoply_inverted.png"
+                alt="logo"
+                style={{
+                  width: "50px",
+                  height: "50px",
+                  padding: 10,
+                }}
+              />
+              <h3 style={{ color: "#16171d" }} className="mt-2">
+                Shoply
+              </h3>
+            </div>
+          </div>
           <div className="col-12">
             <div className="auth-card">
               <h3 className="text-center">Sign Up</h3>

@@ -17,10 +17,19 @@ import { Typeahead } from "react-bootstrap-typeahead";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import { toast } from "react-toastify";
 import { getAProduct } from "../features/products/productSlice";
-
+import { getUserCart } from "../features/user/userSlice";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import HomeIcon from "@mui/icons-material/Home";
+import StoreIcon from "@mui/icons-material/Store";
+import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
+import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
+import ContactMailIcon from "@mui/icons-material/ContactMail";
 function Header() {
   const dispatch = useDispatch();
   const [total, setTotal] = useState(null);
+  const [totalProducts, setTotalProducts] = useState(null);
   const [paginate, setPaginate] = useState(true);
   const [productOpt, setProductOpt] = useState([]);
   // const options = range(0, 1000).map((o) => `Item ${o}`);
@@ -33,23 +42,52 @@ function Header() {
   // console.log(updatedUserState);
 
   const cartState = useSelector((state) => state?.auth?.cartProducts);
+  console.log(cartState);
   // console.log(cartState.length);
   // console.log(cartState);
   // console.log(total);
+
+  const customerData = localStorage.getItem("customer");
+  const getTokenFromLocalStorage = customerData
+    ? JSON.parse(customerData)
+    : null;
+
+  const config2 = {
+    headers: {
+      Authorization: `Bearer ${
+        getTokenFromLocalStorage !== null ? getTokenFromLocalStorage.token : ""
+      }`,
+      Accept: "application/json",
+    },
+  };
+
+  useEffect(() => {
+    dispatch(getUserCart(config2));
+  }, []);
 
   const productState = useSelector((state) => state?.product?.product);
   // console.log(productState);
   useEffect(() => {
     let sum = 0;
+    let totalProduct = 0;
     for (let index = 0; index < cartState?.length; index++) {
-      sum = sum + Number(cartState[index].quantity * cartState[index].price);
+      sum = sum + Number(cartState[index]?.quantity * cartState[index]?.price);
+      totalProduct = totalProduct + Number(cartState[index]?.quantity);
       setTotal(sum);
+      setTotalProducts(totalProduct);
     }
-    // setTimeout(() => {
-    //   dispatch(getUserCart());
-    // }, 200);
   }, [cartState]);
+  console.log(cartState);
+  console.log(cartState?.length);
 
+  console.log(total);
+  console.log(totalProducts);
+
+  const badgeMark = cartState?.length === 0 ? 0 : totalProducts;
+  console.log(badgeMark);
+
+  const totalMoney = cartState?.length === 0 ? 0 : total;
+  console.log(totalMoney);
   //Search Functionality
   useEffect(() => {
     let data = [];
@@ -69,6 +107,15 @@ function Header() {
     toast.success("Sign Out Successfully...");
     window.location.reload();
     Navigate("/");
+  };
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   return (
@@ -156,7 +203,7 @@ function Header() {
                 </div>
                 <div className="main-func mb-2 mb-xxl-0">
                   <Link
-                    to={authState?.user === null ? "/login" : "/my-profile"}
+                    to={authState?.user === null ? "/login" : ""}
                     className="d-flex align-items-center text-white"
                   >
                     <PersonIcon />
@@ -166,12 +213,52 @@ function Header() {
                         My Account
                       </p>
                     ) : (
-                      <p className="mb-0">
-                        Welcome <br />
-                        {updatedUserState?.firstname
-                          ? updatedUserState?.firstname
-                          : authState?.user?.firstname}
-                      </p>
+                      <>
+                        <div>
+                          <Button
+                            id="basic-button"
+                            aria-controls={open ? "basic-menu" : undefined}
+                            aria-haspopup="true"
+                            aria-expanded={open ? "true" : undefined}
+                            onClick={handleClick}
+                          >
+                            <h6 className="text-white text-capitalize mb-0">
+                              Welcome <br />
+                              {authState?.user?.firstname}
+                            </h6>
+                          </Button>
+                          <Menu
+                            id="basic-menu"
+                            anchorEl={anchorEl}
+                            open={open}
+                            onClose={handleClose}
+                            MenuListProps={{
+                              "aria-labelledby": "basic-button",
+                            }}
+                          >
+                            <MenuItem onClick={handleClose}>
+                              <Link
+                                className="links border-0 bg-transparent"
+                                to="/my-profile"
+                              >
+                                Profile
+                              </Link>
+                            </MenuItem>
+
+                            <MenuItem onClick={handleClose}>
+                              <button
+                                className="links border-0 bg-transparent fw-bold"
+                                onClick={(e) => handleLogout()}
+                              >
+                                Logout
+                              </button>
+                            </MenuItem>
+                          </Menu>
+                        </div>
+                      </>
+                      // updatedUserState?.firstname
+                      // ? updatedUserState?.firstname
+                      // :
                     )}
                   </Link>
                 </div>
@@ -181,18 +268,15 @@ function Header() {
                     className="d-flex align-items-center text-white"
                   >
                     <div className="d-flex flex-row gap-3 align-items-center ms-2">
-                      <Badge
-                        color="error"
-                        badgeContent={cartState?.length ? cartState?.length : 0}
-                        showZero
-                      >
+                      {/* {console.log(cartState)} */}
+                      <Badge color="error" badgeContent={badgeMark} showZero>
                         <ShoppingCartIcon
                           style={{ color: "#febd69", fontSize: 30 }}
                         />
                       </Badge>
                       <Chip
                         variant="outlined"
-                        label={`₹ ${total ? total : 0}`}
+                        label={`₹ ${totalMoney}`}
                         sx={{
                           color: "white",
                           fontWeight: 500,
@@ -256,34 +340,30 @@ function Header() {
 
                 <div className="menu-links mb-2 mb-xxl-0">
                   <div className="d-flex align-items-center gap-15">
-                    <NavLink className="links" to="/">
-                      Home
+                    <NavLink className="links align-items-center" to="/">
+                      <HomeIcon /> Home
                     </NavLink>
-                    <NavLink className="links" to="/product">
-                      Our Store
+                    <NavLink
+                      className="links align-items-center "
+                      to="/product"
+                    >
+                      <StoreIcon /> Our Store
                     </NavLink>
-                    <NavLink className="links" to="/my-orders">
-                      My Orders
+                    <NavLink
+                      className="links align-items-center "
+                      to="/my-orders"
+                    >
+                      <AssignmentTurnedInIcon /> My Orders
                     </NavLink>
-                    <NavLink className="links" to="/blogs">
-                      Blogs
+                    <NavLink className="links align-items-center " to="/blogs">
+                      <LibraryBooksIcon /> Blogs
                     </NavLink>
-                    <NavLink className="links" to="/contact">
-                      Contact
-                    </NavLink>
-                    <button
-                      className="links border-0 bg-transparent text-white fw-bold"
-                      onClick={(e) =>
-                        authState?.user === null || updatedUserState === [] ? (
-                          <>{toast.error("User Not Found...")}</>
-                        ) : (
-                          handleLogout()
-                        )
-                      }
+                    <NavLink
+                      className="links align-items-center "
                       to="/contact"
                     >
-                      Logout
-                    </button>
+                      <ContactMailIcon /> Contact
+                    </NavLink>
                   </div>
                 </div>
               </div>

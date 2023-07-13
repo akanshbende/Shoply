@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 import { authService } from "./userService";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { useNavigate } from "react-router-dom";
 
 export const registerUser = createAsyncThunk(
@@ -51,9 +51,10 @@ export const addProdToCart = createAsyncThunk(
 );
 export const getUserCart = createAsyncThunk(
   "user/cart/get",
-  async (thunkAPI) => {
+  async (data, thunkAPI) => {
+    console.log(data);
     try {
-      return await authService.getCart();
+      return await authService.getCart(data);
       console.log(userData);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -63,9 +64,9 @@ export const getUserCart = createAsyncThunk(
 );
 export const deleteCartProduct = createAsyncThunk(
   "user/cart/product/delete",
-  async (cartItemId, thunkAPI) => {
+  async (data, thunkAPI) => {
     try {
-      return await authService.removeProductFromCart(cartItemId);
+      return await authService.removeProductFromCart(data);
       console.log(userData);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -145,6 +146,20 @@ export const resetPassword = createAsyncThunk(
     }
   }
 );
+export const deleteUserCart = createAsyncThunk(
+  "user/cart/delete",
+  async (data, thunkAPI) => {
+    try {
+      console.log(data);
+      return await authService.emptyCart(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+      console.log(error);
+    }
+  }
+);
+export const resetState = createAction("Reset_all");
+
 const getCustomerfromLocalStorage = localStorage.getItem("customer")
   ? JSON.parse(localStorage.getItem("customer"))
   : null;
@@ -181,7 +196,7 @@ export const authSlice = createSlice({
         state.isSuccess = false;
         state.message = action.payload.toString(); // Convert to a serializable value
         if (state.isError === true) {
-          toast.error(action.payload.toString()); // Convert to a serializable value
+          toast.error(action.payload.response.data.message); // Convert to a serializable value
         }
       })
       .addCase(loginUser.pending, (state) => {
@@ -195,8 +210,6 @@ export const authSlice = createSlice({
 
         if (state.isSuccess === true) {
           localStorage.setItem("token", action.payload.token);
-          console.log("Login successful");
-          // console.log(localStorage.getItem("token"));
           toast.success("User Logged in Sucessfully");
         }
       })
@@ -206,7 +219,7 @@ export const authSlice = createSlice({
         state.isSuccess = false;
         state.message = action.payload; // Convert to a serializable value
         if (state.isError === true) {
-          toast.error(action.payload.toString()); // Convert to a serializable value
+          toast.error(action.payload.response.data.message); // Convert to a serializable value
         }
       })
       .addCase(getUserProductWishlist.pending, (state) => {
@@ -314,7 +327,7 @@ export const authSlice = createSlice({
         state.isSuccess = true;
         state.orderedProduct = action.payload;
         if (state.isSuccess === true) {
-          toast.success("Ordered Sucessfully");
+          toast.success("Ordered Placed Sucessfully");
         }
       })
       .addCase(createAnOrder.rejected, (state, action) => {
@@ -351,9 +364,21 @@ export const authSlice = createSlice({
         state.isError = false;
         state.isSuccess = true;
         state.updatedUser = action.payload;
-        if (state.isSuccess) {
-          toast.success("Profile updated successfully");
-        }
+
+        let currentUserData = JSON.parse(localStorage.getItem("customer"));
+        let newUserData = {
+          _id: currentUserData?._id,
+          token: currentUserData?.token,
+          firstname: action?.payload.firstname,
+          lastname: action?.payload?.lastname,
+          email: action?.payload?.email,
+          mobile: action?.payload?.mobile,
+        };
+        localStorage.setItem("customer", JSON.stringify(newUserData));
+        state.user = newUserData;
+
+        console.log(newUserData);
+        toast.success("Profile updated successfully");
       })
       .addCase(updateProfile.rejected, (state, action) => {
         state.isLoading = false;
@@ -405,7 +430,23 @@ export const authSlice = createSlice({
         if (state.isError) {
           toast.error("Something Went Wrong!!");
         }
-      });
+      })
+      .addCase(deleteUserCart.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteUserCart.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.deletedCart = action.payload;
+      })
+      .addCase(deleteUserCart.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.payload;
+      })
+      .addCase(resetState, () => initialState);
   },
 });
 

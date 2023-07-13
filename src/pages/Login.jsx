@@ -47,6 +47,22 @@ function Login() {
       <Container class1="login-wrapper py-5 home-wrapper-2  ">
         <div className="row">
           <div className="col-12">
+            <div className="d-flex align-items-center justify-content-center">
+              <img
+                src="/shoply_inverted.png"
+                alt="logo"
+                style={{
+                  width: "50px",
+                  height: "50px",
+                  padding: 10,
+                }}
+              />
+              <h3 style={{ color: "#16171d" }} className="mt-2">
+                Shoply
+              </h3>
+            </div>
+          </div>
+          <div className="col-12">
             <div className="auth-card">
               <h3 className="text-center">Login</h3>
               <form

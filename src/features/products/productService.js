@@ -4,7 +4,7 @@ import { base_url, config } from "../../utils/axiosConfig";
 const getProducts = async (data) => {
   const response = await axios.get(
     `${base_url}product?${data?.brand ? `brand=${data?.brand}&&` : ""}${
-      data?.tag ? `tag=${data?.tag}&&` : ""
+      data?.tag ? `tags=${data?.tag}&&` : ""
     }${data?.category ? `category=${data?.category}&&` : ""}${
       data?.minPrice ? `price[gte]=${data?.minPrice}&&` : ""
     }${data?.maxPrice ? `price[lte]=${data?.maxPrice}&&` : ""}${
@@ -17,8 +17,10 @@ const getProducts = async (data) => {
   }
 };
 const getSingleProduct = async (id) => {
+  console.log(id);
   const response = await axios.get(`${base_url}product/${id}`);
 
+  console.log(response);
   if (response.data) {
     return response.data;
   }

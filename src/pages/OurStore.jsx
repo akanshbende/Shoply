@@ -38,7 +38,7 @@ function OurStore() {
 
   const [sort, setSort] = useState(null);
   const productState = useSelector((state) => state.product.product);
-
+  console.log(productState);
   const dispatch = useDispatch();
   useEffect(() => {
     getProducts();
@@ -234,36 +234,10 @@ function OurStore() {
                     <option value="createdAt">Date, old to new</option>
                     <option value="-createdAt">Date, new to old</option>
                   </select>
-                  {console.log(sort)}
-                  {/* <Select
-                    placeholder="Featured"
-                    indicator={<KeyboardArrowDown />}
-                    size="md"
-                    value={sort}
-                    onChange={handleChange}
-                    sx={{
-                      // width: 200,
-                      // backgroundColor: "grey",
-                      // color: "#ffffff",
-                      [`& .${selectClasses.indicator}`]: {
-                        transition: "0.2s",
-                        [`&.${selectClasses.expanded}`]: {
-                          transform: "rotate(-180deg)",
-                        },
-                      },
-                    }}
-                  >
-                    <Option value="title">Alphabetically, A-Z</Option>
-                    <Option value="-title">Alphabetically, Z-A</Option>
-                    <Option value="price">Price, Iow to high</Option>
-                    <Option value="-price">Price, high to low</Option>
-                    <Option value="createdAt">Date, old to new</Option>
-                    <Option value="-createdAt">Date, new to old</Option>
-                  </Select> */}
                 </div>
-                <div className="d-flex align-items-center gap-10 mt-xxl-0 d-none d-xxl-flex">
+                <div className="d-flex align-items-center gap-10 mt-xxl-0 mt-3 mt-xxl-0  d-xxl-flex">
                   <p className="totalproducts mb-0">
-                    {productState.length}{" "}
+                    {productState.length}
                     {productState.length === 1 ? `Product` : `Products`}
                   </p>
                   <div className="d-flex gap-10 align-items-center grid">

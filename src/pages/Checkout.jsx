@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import BreadCrumb from "../Components/BreadCrumb";
 import Meta from "../Components/Meta";
 
@@ -21,7 +21,12 @@ import newipad from "/newipad.jpg";
 import applewatch from "/applewatch.jpg";
 import Container from "../Components/Container";
 import { useDispatch, useSelector } from "react-redux";
-import { createAnOrder, getUserCart } from "../features/user/userSlice";
+import {
+  createAnOrder,
+  deleteUserCart,
+  getUserCart,
+  resetState,
+} from "../features/user/userSlice";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import axios from "axios";
@@ -63,6 +68,7 @@ function Checkout() {
     validationSchema: shippingSchema,
     onSubmit: (values) => {
       // alert(JSON.stringify(values));
+      localStorage.setItem("address", JSON.stringify(values));
       setShippingInfo(values);
 
       setTimeout(() => {
@@ -72,6 +78,24 @@ function Checkout() {
     },
   });
 
+  const customerData = localStorage.getItem("customer");
+  const getTokenFromLocalStorage = customerData
+    ? JSON.parse(customerData)
+    : null;
+
+  const config2 = {
+    headers: {
+      Authorization: `Bearer ${
+        getTokenFromLocalStorage !== null ? getTokenFromLocalStorage.token : ""
+      }`,
+      Accept: "application/json",
+    },
+  };
+
+  useEffect(() => {
+    dispatch(getUserCart(config2));
+  }, []);
+
   const dispatch = useDispatch();
 
   const cartState = useSelector((state) => state.auth.cartProducts) || [];
@@ -80,7 +104,22 @@ function Checkout() {
 
   // console.log(totalAmount);
   const userCartState = useSelector((state) => state.auth.cartProducts);
-  // console.log(userCartState);
+
+  const authState = useSelector((state) => state.auth);
+
+  const navigate = useNavigate();
+  console.log(authState?.orderedProduct?.order);
+  console.log(authState?.orderedProduct?.success);
+  const val1 = authState?.orderedProduct?.order;
+  const val2 = authState?.orderedProduct?.success;
+
+  console.log(val1, val2);
+  useEffect(() => {
+    if (val1 !== null && val2 === true) {
+      navigate("/my-orders");
+    }
+  }, []);
+
   useEffect(() => {
     let sum = 0;
 
@@ -101,29 +140,19 @@ function Checkout() {
     <Link
       key="1"
       color="inherit"
-      href="/cart"
-      className="text-dark"
-      onClick={handleClick}
+      to="/cart"
+      className=" breadcrumb-item active"
     >
       Cart
     </Link>,
-    <Link
-      key="2"
-      color="inherit"
-      href=""
-      className="breadcrumb-item active"
-      onClick={handleClick}
-    >
-      Information
-    </Link>,
+    ,
     <Link
       key="3"
       color="inherit"
       href=""
-      className="breadcrumb-item active"
-      onClick={handleClick}
+      className="breadcrumb-item active text-dark"
     >
-      Shipping
+      Information & Shipping
     </Link>,
     <Link className="breadcrumb-item active" to="" key="4" color="text.primary">
       Payment
@@ -132,17 +161,17 @@ function Checkout() {
 
   useEffect(() => {
     let items = [];
-    for (let index = 0; index < cartState.length; index++) {
+    for (let index = 0; index < cartState?.length; index++) {
       items.push({
-        product: cartState[index].productId._id,
-        quantity: cartState[index].quantity,
-        color: cartState[index].color._id,
-        price: cartState[index].price,
+        product: cartState[index]?.productId?._id,
+        quantity: cartState[index]?.quantity,
+        color: cartState[index]?.color?._id,
+        price: cartState[index]?.price,
       });
       setCartProductState(items);
     }
   }, []);
-  console.log(cartProductState);
+  // console.log(cartProductState?.productId);
 
   //PAyment Integration
   const loadScript = (src) => {
@@ -202,21 +231,24 @@ function Checkout() {
           data,
           config
         );
-
-        setPaymentInfo({
-          razorpayPaymentId: response.razorpay_payment_id,
-          razorpayOrderId: response.razorpay_order_id,
-        });
+        // setPaymentInfo({
+        //   razorpayPaymentId: result.razorpay_payment_id,
+        //   razorpayOrderId: result.razorpay_order_id,
+        // });
         // console.log("ID :::" + response.razorpay_payment_id);
+
         dispatch(
           createAnOrder({
             totalPrice: totalAmount,
             totalPriceAfterDiscount: totalAmount,
             orderItems: cartProductState,
-            paymentInfo,
-            shippingInfo,
+            paymentInfo: result.data,
+            shippingInfo: JSON.parse(localStorage.getItem("address")),
           })
         );
+        dispatch(deleteUserCart(config2));
+        localStorage.removeItem("address");
+        dispatch(resetState());
       },
       prefill: {
         name: "Shoply",
@@ -253,7 +285,8 @@ function Checkout() {
               </Stack>
               <h4 className="title">Contact Information</h4>
               <p className="user-details">
-                Akansh Bende (akanshbende29@gmail.com)
+                {authState?.user?.firstname} {authState?.user?.lastname} ({" "}
+                {authState?.user?.email} )
               </p>
               <h4 className="mb-3">Shipping Address</h4>
               <form
@@ -393,7 +426,7 @@ function Checkout() {
                       />
                     </Link>
                     <Link to="/cart" className="button">
-                      <AddShoppingCartIcon /> Continue Shopping
+                      Continue Shopping
                     </Link>
                     <button className="button" type="submit">
                       <CurrencyRupeeIcon /> Place Order
@@ -412,13 +445,13 @@ function Checkout() {
                   return (
                     <div
                       key={index}
-                      className="d-flex gap-10 align-items-center"
+                      className="d-flex gap-10 align-items-center mb-3"
                     >
                       <div className="w-75 d-flex gap-30">
                         <div className="w-25 rounded">
                           <Badge badgeContent={item?.quantity} color="primary">
                             <img
-                              src={newipad}
+                              src={cartState[index]?.productId?.images[0]}
                               // src={item?.item?.productId.images[0].url}
                               alt=""
                               className="img-fluid rounded"
@@ -427,7 +460,17 @@ function Checkout() {
                         </div>
                         <div className="title">
                           <h5 className="total">{item?.productId.title}</h5>
-                          <p className="total-price"> {item?.color.title}</p>
+                          <h6 className="d-flex total-price gap-2">
+                            Color :
+                            <ul className="colors ps-0 ">
+                              <li
+                                style={{
+                                  backgroundColor: item?.color?.title,
+                                }}
+                                className={`color-item`}
+                              ></li>
+                            </ul>
+                          </h6>
                         </div>
                       </div>
                       <div className="flex-grow-1">

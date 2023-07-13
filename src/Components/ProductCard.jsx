@@ -4,11 +4,12 @@ import ReactStars from "react-rating-stars-component";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { IconButton } from "@mui/material";
+import { IconButton, Tooltip } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import { addTooWishlist } from "../features/products/productSlice";
+
 function ProductCard(props) {
   const { grid, data } = props;
   // console.log(data);
@@ -17,7 +18,7 @@ function ProductCard(props) {
   // console.log(data);
 
   const addToWish = (id) => {
-    console.log("Product Card > id : ", id);
+    // console.log("Product Card > id : ", id);
     dispatch(addTooWishlist(id));
     // console.log("Product Card : ", addTooWishlist(id));
     // console.log("Product Card : ", dispatch(addTooWishlist(id)));
@@ -28,36 +29,42 @@ function ProductCard(props) {
         return (
           <div
             key={index}
-            className={`${
-              location.pathname == "/product" ? `gr-${grid}` : "col-xxl-3"
-            } col-12 `}
+            className={`  
+            ${location.pathname == "/product" ? `gr-${grid}` : "col-3"} 
+            
+            
+           `}
           >
-            <div className="product-card position-relative ">
+            <div className="product-card position-relative col-12 col-xxl-3">
               <div
                 className="wishlist-icon position-absolute cursor-pointer"
                 onClick={(e) => {
                   addToWish(item?._id);
                 }}
               >
-                <IconButton aria-label="delete">
-                  <FavoriteBorderIcon />
-                </IconButton>
+                <Tooltip title="Add to Wishlist" arrow placement="right-end">
+                  <IconButton aria-label="fav">
+                    <FavoriteBorderIcon />
+                  </IconButton>
+                </Tooltip>
               </div>
               {/* Product image */}
-              <div className="product-image d-flex align-items-center justify-content-center">
+              <div className="product-image d-flex align-items-center justify-content-center  h-100">
                 <img
                   className="img-fluid"
                   src={item?.images[0]}
                   alt="product image"
                 />
                 <img
-                  className="img-fluid"
+                  className="img-fluid "
                   src={item?.images[1]}
                   alt="product image"
                   width={269}
                 />
               </div>
-              <div className="product-details">
+              <div
+                className={`product-details ${grid == 12 ? "w-50" : "auto"}`}
+              >
                 <h6 className="brand">{item?.brand}</h6>
                 <h5 className="product-title ">{item?.title}</h5>
                 <ReactStars
@@ -68,12 +75,14 @@ function ProductCard(props) {
                   activeColor="#ffd700"
                 />
                 <p
-                  className={`description ${grid == 12 ? "d-block" : "d-none"}`}
+                  className={`description overflow-wrap ${
+                    grid == 12 ? "d-block" : "d-none"
+                  }`}
                   // dangerouslySetInnerHTML={{ __html: item?.description }}
                 >
                   {item?.description}
                 </p>
-                <p className="price">{item?.price}</p>
+                <p className="price fw-bold">₹ {item?.price}</p>
               </div>
               <div className="action-bar position-absolute mt-3">
                 <div className="d-flex flex-column gap-15">
@@ -81,9 +90,17 @@ function ProductCard(props) {
                     to={"/product/" + item?._id}
                     className="border-0 bg-transparent"
                   >
-                    <IconButton className="product-btn" aria-label="delete">
-                      <VisibilityIcon />
-                    </IconButton>
+                    <Tooltip
+                      className="product-btn"
+                      title="View Product"
+                      arrow
+                      placement="right-end"
+                    >
+                      <IconButton aria-label="fav">
+                        <VisibilityIcon />
+                      </IconButton>
+                    </Tooltip>
+
                     {/*  <img src="/view.svg" alt="add cart" /> */}
                   </Link>
                   {/* <Link className="border-0 bg-transparent">

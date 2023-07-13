@@ -4,7 +4,7 @@ import BreadCrumb from "../Components/BreadCrumb";
 import ProductCard from "../Components/ProductCard";
 import ReactStars from "react-rating-stars-component";
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 
 // https://www.npmjs.com/package/react-image-magnify?activeTab=readme
 import applegear from "/applegear.webp";
@@ -29,7 +29,11 @@ import {
 } from "../features/products/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { addProdToCart } from "../features/user/userSlice";
+import { addProdToCart, getUserCart } from "../features/user/userSlice";
+import {
+  MagnifierContainer,
+  SideBySideMagnifier,
+} from "react-image-magnifiers";
 
 // import ReactImageZoom from "react-image-zoom";
 
@@ -45,13 +49,20 @@ function SingleProduct() {
   const [comments, setComments] = useState(null);
 
   const [popularProduct, setPopularProduct] = useState([]);
+  const [toggle, setToggle] = useState(false);
 
+  const [alreadyAdded, setAlreadyAdded] = useState(false);
+
+  const navigate = useNavigate();
   const location = useLocation();
   const getProductId = location.pathname.split("/")[2];
-  // console.log(getProductId);
+  console.log(getProductId);
   const productState = useSelector((state) => state?.product?.singleproduct);
+  const cartState = useSelector((state) => state?.auth?.cartProducts);
   const productsState = useSelector((state) => state?.product?.product);
   console.log(productState);
+  console.log(cartState);
+  // console.log(productState?.images[0]);
   // console.log(productState.color);
 
   useEffect(() => {
@@ -60,6 +71,15 @@ function SingleProduct() {
     // dispatch(getAllProducts());
   }, []);
 
+  useEffect(() => {
+    for (let index = 0; index < cartState?.length; index++) {
+      if (getProductId === cartState[index]?.productId?._id) {
+        setAlreadyAdded(true);
+      }
+    }
+  }, []);
+
+  //For bottom popular products
   useEffect(() => {
     let data = [];
     for (let index = 0; index < productsState.length; index++) {
@@ -76,14 +96,22 @@ function SingleProduct() {
       toast.error("Please Choose Color");
       return false;
     } else {
+      const productId = productState?._id;
+      const price = productState?.price;
+      // console.log(productId);
       dispatch(
         addProdToCart({
-          productId: productState?._id,
+          productId,
           quantity,
           color,
-          price: productState?.price,
+          price,
         })
       );
+      setTimeout(() => {
+        dispatch(getUserCart(config2));
+      }, 200);
+
+      // navigate("/cart");
     }
   };
 
@@ -115,14 +143,25 @@ function SingleProduct() {
       const comment = comments;
       const prodId = getProductId;
       dispatch(addRating({ star, comment, prodId }));
-      console.log(star);
-      console.log(comment);
-      console.log(prodId);
+
       setTimeout(() => {
         dispatch(getAProduct(getProductId));
       }, 100);
       return false;
     }
+  };
+  const customerData = localStorage.getItem("customer");
+  const getTokenFromLocalStorage = customerData
+    ? JSON.parse(customerData)
+    : null;
+
+  const config2 = {
+    headers: {
+      Authorization: `Bearer ${
+        getTokenFromLocalStorage !== null ? getTokenFromLocalStorage.token : ""
+      }`,
+      Accept: "application/json",
+    },
   };
 
   return (
@@ -137,19 +176,29 @@ function SingleProduct() {
             <div className="product-images-wrapper">
               <div className="main-product-image">
                 <div>
-                  <ImgMagnifiHover />
+                  {console.log(productState?.images[0])}
+                  <MagnifierContainer>
+                    <SideBySideMagnifier
+                      imageSrc={productState?.images[0]}
+                      imageAlt="Example"
+                      largeImageSrc={productState?.images[0]} // Optional
+                      // alwaysInPlace="false"
+                      // fillAvailableSpace="true"
+                      fillAlignTop={true}
+                      fillGapLeft={50}
+                      fillAvailableSpace={false}
+                      // style={{ gap: "10px" }}
+                    />
+                    {/* {console.log(productState?.images[0]?.url)} */}
+                  </MagnifierContainer>
                 </div>
               </div>
               <div className="other-product-images d-flex flex-wrap gap-15 d-none d-xxl-flex">
-                {productState &&
+                {productsState &&
                   productState?.images.map((item, index) => {
                     <div key={index}>
-                      <img
-                        // src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg"
-                        src={item?.url}
-                        className="img-fluid rounded"
-                        alt=""
-                      />
+                      <img src={item} className="img-fluid rounded" alt="" />
+                      {/* {console.log(item)} */}
                     </div>;
                   })}
               </div>
@@ -163,6 +212,7 @@ function SingleProduct() {
               <div className="border-bottom py-3">
                 <p className="price">₹ {productState?.price}</p>
                 <div className="d-flex align-items-center gap-10 ">
+                  {/* {console.log(productState?.totalrating)} */}
                   <ReactStars
                     count={5}
                     value={productState?.totalrating}
@@ -217,38 +267,64 @@ function SingleProduct() {
                     </span>
                   </div>
                 </div> */}
-                <div className="d-flex flex-column gap-10  mt-2 mb-3">
-                  <h3 className="product-heading">Color : </h3>
-                  <Color colorData={productState?.color} setColor={setColor} />
-                </div>
+                {alreadyAdded === false && (
+                  <>
+                    <div className="d-flex flex-column gap-10  mt-2 mb-3">
+                      <h3 className="product-heading">Color : </h3>
+                      <Color
+                        colorData={productState?.color}
+                        setColor={setColor}
+                      />
+                    </div>
+                  </>
+                )}
                 <div className="d-flex flex-row flex-wrap align-items-center gap-15 mt-2 mb-3">
-                  <h3 className="product-heading">Quantity :</h3>
-                  <div className="">
-                    <TextField
-                      sx={{ marginTop: 1, width: 70 }}
-                      size="small"
-                      id="outlined-number"
-                      label="Qty"
-                      type="number"
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                      InputProps={{ inputProps: { min: 0, max: 10 } }}
-                      onChange={(e) => setQuantity(e.target.value)}
-                      value={quantity}
-                    />
-                  </div>
+                  {alreadyAdded === false && (
+                    <>
+                      <h3 className="product-heading">Quantity :</h3>
+                      <div className="">
+                        <TextField
+                          sx={{ marginTop: 1, width: 70 }}
+                          size="small"
+                          id="outlined-number"
+                          label="Qty"
+                          type="number"
+                          InputLabelProps={{
+                            shrink: true,
+                          }}
+                          InputProps={{ inputProps: { min: 0, max: 10 } }}
+                          onChange={(e) => setQuantity(e.target.value)}
+                          value={quantity}
+                        />
+                      </div>
+                    </>
+                  )}
                   {/* buy item and addd to cart button */}
-                  <div className="d-flex gap-30 align-items-center ms-5">
+                  <div
+                    className={
+                      alreadyAdded
+                        ? "ms-0"
+                        : "ms-5" + " d-flex gap-30 align-items-center ms-5 "
+                    }
+                  >
                     <button
                       onClick={(e) => {
-                        uploadCart(productState?._id);
+                        alreadyAdded
+                          ? navigate("/cart")
+                          : uploadCart(productState?._id);
                       }}
                       className="button border-0"
                     >
-                      Add to Cart
+                      {alreadyAdded ? "Go To Cart" : "Add to Cart"}
                     </button>
-                    <Link to="" className="button signup">
+                    <Link
+                      to="/cart"
+                      className={
+                        alreadyAdded
+                          ? "d-none"
+                          : " button signup d-flex gap-30 align-items-center  "
+                      }
+                    >
                       Buy Item Now
                     </Link>
                   </div>
@@ -407,7 +483,7 @@ function SingleProduct() {
       </Container>
       <Container class1="popular-wrapper py-5 home-wrapper-2">
         <div className="row">
-          <div className="col-12">
+          <div className="col-12 ">
             <h3 className="section-heading">Our Popular Products</h3>
           </div>
         </div>

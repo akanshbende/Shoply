@@ -17,7 +17,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { addTooWishlist } from "../features/products/productSlice";
 import Meta from "../Components/Meta";
 import BreadCrumb from "../Components/BreadCrumb";
-
+import Carousel from "react-bootstrap/Carousel";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 //2.08 hr
 function Home() {
   const blogState = useSelector((state) => state?.blog.blog);
@@ -55,21 +59,72 @@ function Home() {
 
       <Container class1="home-wrapper-1 py-5">
         <div className="row">
-          <div className="col-lg-6 col-md-12 col-sm-12 ">
-            <div className="main-banner position-relative ">
-              <img
-                className="img-fluid rounded-3"
-                src={"/main-banner-1.jpg"}
-                alt="main banner"
-              />
-              <div className="main-banner-content position-absolute">
-                <h4>SUPERCHARGED FOR PROS</h4>
+          <div className="carosal-main col-lg-6 col-md-12 col-sm-12 ">
+            <Carousel controls={false}>
+              <Carousel.Item interval={2000}>
+                <div className="main-banner position-relative ">
+                  <img
+                    className="rounded-3  img-fluid "
+                    src={"/vp-8.webp"}
+                    // height="420px"
+                    alt="main banner"
+                  />
+                  <div
+                    className="main-banner-content  position-absolute ms-5  "
+                    style={{ top: 10, left: "25%" }}
+                  >
+                    <h4 style={{ marginLeft: 5, color: "#ffbf01" }}>
+                      AUGMENTED REALITY HEADSET
+                    </h4>
 
-                <h5>iPad S13+ Pro.</h5>
-                <p>From ₹999 or ₹99/mo.</p>
-                <Link className="button">Buy Now</Link>
-              </div>
-            </div>
+                    <h5 style={{ color: "white" }}>Apple Vision Pro</h5>
+                    <p style={{ color: "white" }}>
+                      From ₹3,00,000 or ₹30,000/mo.
+                    </p>
+                    <Link className="button ">Buy Now</Link>
+                  </div>
+                </div>
+              </Carousel.Item>
+              <Carousel.Item interval={2000}>
+                <div className="main-banner position-relative ">
+                  <img
+                    className="img-fluid rounded-3"
+                    src={"/ip1.webp"}
+                    alt="main banner"
+                  />
+                  <div className="main-banner-content  position-absolute">
+                    <h4 style={{ color: "#ffbf01" }}>
+                      THERE IS ALWAYS MORE TO EXPLORE
+                    </h4>
+
+                    <h5 style={{ color: "#eee0d7" }}>iPad Pro</h5>
+                    <p style={{ color: "#ffeee5", fontWeight: 500 }}>
+                      From ₹81,900 or ₹13,150/mo.
+                    </p>
+                    <Link className="button">Buy Now</Link>
+                  </div>
+                </div>
+              </Carousel.Item>
+              <Carousel.Item interval={2000}>
+                <div className="main-banner position-relative ">
+                  <img
+                    className="img-fluid rounded-3"
+                    src={"/jbl-speaker-1.jpg"}
+                    alt="main banner"
+                  />
+                  <div
+                    className="main-banner-content  position-absolute "
+                    style={{ top: 10, left: 10 }}
+                  >
+                    <h4>SUPERCHARGED FOR PROS</h4>
+
+                    <h5 style={{ color: "#797966" }}>JBL Pary Box 100</h5>
+                    <p className="fw-bold">From ₹9,999</p>
+                    <Link className="button">Buy Now</Link>
+                  </div>
+                </div>
+              </Carousel.Item>
+            </Carousel>
           </div>
           <div className=" col-xxl-6 col-lg-6  co-md-12 col-sm-12 col-12 col-12 mt-sm-3 mt-lg-0">
             <div className="d-flex mt-3 mt-xxl-0 flex-wrap gap-10 justify-content-between align-items-center">
@@ -82,9 +137,9 @@ function Home() {
                 <div className="small-banner-content position-absolute">
                   <h4>BEST SALE</h4>
 
-                  <h5>iPad S13+ Pro.</h5>
+                  <h5>MacBook Air</h5>
                   <p>
-                    From ₹99,999 <br /> or ₹99/mo.
+                    From ₹89,999 <br /> or ₹4999/mo.
                   </p>
                   {/* <Link className="button">Buy Now</Link> */}
                 </div>
@@ -98,9 +153,9 @@ function Home() {
                 <div className="small-banner-content position-absolute">
                   <h4>NEW ARRIVAL</h4>
 
-                  <h5>Buy IPad Air</h5>
+                  <h5> Apple Watch Pro</h5>
                   <p>
-                    From ₹999 <br /> or ₹41/mo.
+                    From ₹29,999 <br /> or ₹1499/mo.
                   </p>
                   {/* <Link className="button">Buy Now</Link> */}
                 </div>
@@ -114,9 +169,9 @@ function Home() {
                 <div className="small-banner-content position-absolute">
                   <h4>NEW ARRIVAL</h4>
 
-                  <h5>Buy IPad Air</h5>
+                  <h5>IPad Air</h5>
                   <p>
-                    From ₹999 <br /> or ₹41/mo.
+                    From ₹49,999 <br /> or ₹2999/mo.
                   </p>
                   {/* <Link className="button">Buy Now</Link> */}
                 </div>
@@ -130,9 +185,9 @@ function Home() {
                 <div className="small-banner-content position-absolute">
                   <h4>NEW ARRIVAL</h4>
 
-                  <h5>Buy IPad Air</h5>
+                  <h5>Headphone Max</h5>
                   <p>
-                    From ₹999 <br /> or ₹41/mo.
+                    From ₹39,999 <br /> or ₹1999/mo.
                   </p>
                   {/* <Link className="button">Buy Now</Link> */}
                 </div>
@@ -170,34 +225,46 @@ function Home() {
       <Container class1="home-wrapper-2 py-5">
         <div className="row">
           <div className="col-12">
-            <div className="categories d-flex flex-wrap justify-content-center justify-content-xxl-between align-items-center">
-              <div className="d-flex align-items-center">
+            <div className="categories col-12 d-flex flex-wrap justify-content-xxl-between align-items-center">
+              <div className="d-flex align-items-center gap-10">
                 <div>
                   <h6>Music & Gaming</h6>
                   <p>10 Items</p>
                 </div>
-                <img src="/camera.jpg" alt="camera" />
+                <div>
+                  <img src="/ctrl.webp" alt="camera" className="img-fluid " />
+                </div>
               </div>
               <div className="d-flex  align-items-center ">
                 <div>
                   <h6>Cameras</h6>
                   <p>10 Items</p>
                 </div>
-                <img src="/tv.jpg" alt="camera" />
+                <div>
+                  <img src="camera.webp" alt="camera" className="img-fluid " />
+                </div>
               </div>
               <div className="d-flex  align-items-center ">
                 <div>
                   <h6>Smart Tv</h6>
                   <p>10 Items</p>
                 </div>
-                <img src="/camera.jpg" alt="camera" />
+                <div>
+                  <img src="/tv.webp" alt="camera" className="img-fluid " />
+                </div>
               </div>
               <div className="d-flex  align-items-center ">
                 <div>
                   <h6>Smart Watches</h6>
                   <p>10 Items</p>
                 </div>
-                <img src="/headphone.jpg" alt="camera" />
+                <div>
+                  <img
+                    src="/applewatch.jpg"
+                    alt="camera"
+                    className="img-fluid "
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -214,17 +281,29 @@ function Home() {
             productState?.map((item, index) => {
               if (item.tags === "featured") {
                 return (
-                  <div key={index} className={"col-3"}>
-                    <div className="product-card position-relative ">
+                  <div
+                    key={index}
+                    className={"col-12 col-xxl-3 col-xl-6 mb-3 mb-xxl-0"}
+                  >
+                    <div
+                      className="product-card position-relative "
+                      style={{ height: "420px" }}
+                    >
                       <div
                         className="wishlist-icon position-absolute "
                         onClick={() => {
                           addToWish(item._id);
                         }}
                       >
-                        {/* <Link> */}
-                        <img src="/wish.svg" alt="" />
-                        {/* </Link> */}
+                        <Tooltip
+                          title="Add to Wishlist"
+                          arrow
+                          placement="right-end"
+                        >
+                          <IconButton aria-label="fav">
+                            <FavoriteBorderIcon />
+                          </IconButton>
+                        </Tooltip>
                       </div>
                       {/* Product image */}
                       <div className="product-image d-flex align-items-center justify-content-center">
@@ -256,17 +335,27 @@ function Home() {
                         >
                           {item?.description}
                         </p>
-                        <p className="price">{item?.price}</p>
+                        <p className="price fw-bold">{item?.price}</p>
                       </div>
                       <div className="action-bar position-absolute ">
                         <div className="d-flex flex-column gap-15">
-                          <button className="border-0 bg-transparent">
-                            <img
-                              onClick={() => navigate("/product/" + item?._id)}
-                              src="/view.svg"
-                              alt="add cart"
-                            />
-                          </button>
+                          <Link
+                            to={"/product/" + item?._id}
+                            className="border-0 bg-transparent"
+                          >
+                            <Tooltip
+                              className="product-btn"
+                              title="View Product"
+                              arrow
+                              placement="right-end"
+                            >
+                              <IconButton aria-label="fav">
+                                <VisibilityIcon />
+                              </IconButton>
+                            </Tooltip>
+
+                            {/*  <img src="/view.svg" alt="add cart" /> */}
+                          </Link>
                           {/* <button className="border-0 bg-transparent">
                             <img src="/prodcompare.svg" alt="add cart" />
                           </button> */}
@@ -353,6 +442,7 @@ function Home() {
                       price={item?.price}
                       sold={item?.sold}
                       quantity={item?.quantity}
+                      image={item?.images[0]}
                     />
                   );
                 }
@@ -368,24 +458,34 @@ function Home() {
           <div className="col-12">
             <h3 className="section-heading">Our Popular Products</h3>
           </div>
-        </div>
 
-        <div className="row d-flex flex-wrap">
           {productState &&
             productState?.map((item, index) => {
               if (item.tags === "popular") {
                 return (
-                  <div key={index} className={"col-3"}>
-                    <div className="product-card position-relative ">
+                  <div
+                    key={index}
+                    className={"col-12 col-xxl-3 col-xl-6 mb-4 mb-xxl-0"}
+                  >
+                    <div
+                      className="product-card position-relative "
+                      style={{ height: "420px" }}
+                    >
                       <div
-                        className="wishlist-icon position-absolute "
-                        onClick={() => {
-                          addToWish(item._id);
+                        className="wishlist-icon position-absolute cursor-pointer"
+                        onClick={(e) => {
+                          addToWish(item?._id);
                         }}
                       >
-                        {/* <Link> */}
-                        <img src="/wish.svg" alt="" />
-                        {/* </Link> */}
+                        <Tooltip
+                          title="Add to Wishlist"
+                          arrow
+                          placement="right-end"
+                        >
+                          <IconButton aria-label="fav">
+                            <FavoriteBorderIcon />
+                          </IconButton>
+                        </Tooltip>
                       </div>
                       {/* Product image */}
                       <div className="product-image d-flex align-items-center justify-content-center">
@@ -417,21 +517,32 @@ function Home() {
                         >
                           {item?.description}
                         </p>
-                        <p className="price">{item?.price}</p>
+                        <p className="price fw-bold">₹ {item?.price}</p>
                       </div>
                       <div className="action-bar position-absolute ">
                         <div className="d-flex flex-column gap-15">
-                          <button className="border-0 bg-transparent">
-                            <img
-                              onClick={() => navigate("/product/" + item?._id)}
-                              src="/view.svg"
-                              alt="add cart"
-                            />
-                          </button>
+                          <Link
+                            to={"/product/" + item?._id}
+                            className="border-0 bg-transparent"
+                          >
+                            <Tooltip
+                              className="product-btn"
+                              title="View Product"
+                              arrow
+                              placement="right-end"
+                            >
+                              <IconButton aria-label="fav">
+                                <VisibilityIcon />
+                              </IconButton>
+                            </Tooltip>
+
+                            {/*  <img src="/view.svg" alt="add cart" /> */}
+                          </Link>
+
                           {/* <button className="border-0 bg-transparent">
                             <img src="/prodcompare.svg" alt="add cart" />
-                          </button>
-                          <button className="border-0 bg-transparent">
+                          </button> */}
+                          {/* <button className="border-0 bg-transparent">
                             <img src="/add-cart.svg" alt="add cart" />
                           </button> */}
                         </div>
@@ -442,6 +553,7 @@ function Home() {
               }
             })}
         </div>
+
         {/* </div> */}
       </Container>
 
@@ -491,17 +603,18 @@ function Home() {
             <h3 className="section-heading">Our Latest Blogs</h3>
           </div>
         </div>
+        {console.log(blogState)}
         <div className="row d-flex flex-wrap">
           {/* <div className="col-12"> */}
           {blogState &&
             blogState?.map((item, index) => {
               return (
-                <div key={index} className="col-xxl-6 col-12 mb-3">
+                <div key={index} className="col-xxl-3 col-lg-6 col-12 mb-3">
                   <BlogCard
                     id={item?._id}
                     title={item?.title}
                     description={item?.description}
-                    image={item?.images[0]?.url}
+                    image={item?.images}
                     date={moment(item?.created_At).format(
                       "MMMM Do YYYY, h:mm:ss a"
                     )}
