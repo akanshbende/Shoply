@@ -194,12 +194,14 @@ function SingleProduct() {
                 </div>
               </div>
               <div className="other-product-images d-flex flex-wrap gap-15 d-none d-xxl-flex">
-                {productsState &&
-                  productState?.images.map((item, index) => {
-                    <div key={index}>
-                      <img src={item} className="img-fluid rounded" alt="" />
-                      {/* {console.log(item)} */}
-                    </div>;
+                {/* {console.log(productState?.images)} */}
+                {productState &&
+                  productState?.images?.map((item, index) => {
+                    return (
+                      <div key={index}>
+                        <img src={item} className="img-fluid rounded" alt="" />
+                      </div>
+                    );
                   })}
               </div>
             </div>
@@ -212,7 +214,7 @@ function SingleProduct() {
               <div className="border-bottom py-3">
                 <p className="price">₹ {productState?.price}</p>
                 <div className="d-flex align-items-center gap-10 ">
-                  {/* {console.log(productState?.totalrating)} */}
+                  {console.log(productState?.totalrating)}
                   <ReactStars
                     count={5}
                     value={productState?.totalrating}
@@ -429,7 +431,7 @@ function SingleProduct() {
                       setStars(e);
                     }}
                   />
-                  {console.log(stars)}
+                  {/* {console.log(stars)} */}
                 </div>
                 <div>
                   <textarea
@@ -445,7 +447,7 @@ function SingleProduct() {
                       setComments(e.target.value);
                     }}
                   ></textarea>
-                  {console.log(comments)}
+                  {/* {console.log(comments)} */}
                 </div>
                 <div className="d-flex justify-content-end">
                   <button

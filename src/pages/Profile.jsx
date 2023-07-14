@@ -90,115 +90,140 @@ function Profile() {
     <>
       <BreadCrumb title="My Profile" />
       <Container class1="cart-wrapper home-wrapper-2 py-3">
-        <div className="row">
-          <div className="col-6"></div>
-          <div className="col-6">
-            <div className="col-12 ">
-              <div className="d-flex align-items-center justify-content-center mb-3 gap-2">
-                <h3>Update Profile</h3>
+        <div className="row d-flex flex-wrap">
+          <div className="col-xxl-6 d-flex align-items-center justify-content-center">
+            <div className="my-profile-wrapper ">
+              <div className="col-12 d-flex align-items-center justify-content-center mb-3 gap-2">
+                <h3>My Profile</h3>
+              </div>
+              <div className="user-data d-flex flex-column flex-wrap mt-3">
+                <p className="d-flex flex-wrap align-items-center gap-10 mb-2">
+                  <h6 className="mb-0">Name : </h6>{" "}
+                  <span>
+                    {userState?.firstname} {userState?.lastname}
+                  </span>
+                </p>
+                <p className="d-flex flex-wrap align-items-center gap-10 mb-2">
+                  <h6 className="mb-0">Email : </h6>{" "}
+                  <span>{userState?.email}</span>
+                </p>
+                <p className="d-flex flex-wrap align-items-center gap-10 mb-2">
+                  <h6 className="mb-0">Mobile Number : </h6>{" "}
+                  <span>{userState?.mobile}</span>
+                </p>
               </div>
             </div>
-            <div className="col-12 d-flex align-items-center justify-content-center">
-              <Box
-                sx={{
-                  // backgroundColor: "#ffd458",
-                  width: "50%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <form action="" onSubmit={formik.handleSubmit}>
-                  <FormControl>
-                    <Box sx={{ marginBottom: 3 }}>
-                      <TextField
-                        name="firstname"
-                        disabled={edit}
-                        size="small"
-                        id="outlined-basic"
-                        label="First Name"
-                        variant="outlined"
-                        value={formik.values.firstname}
-                        onChange={formik.handleChange("firstname")}
-                        onBlur={formik.handleBlur("firstname")}
-                        fullWidth
-                        required
-                      />
-                      <div className="error ms-3">
-                        {formik.touched.firstname && formik.errors.firstname}
-                      </div>
-                    </Box>
+          </div>
+          {/* -------------------------------------------------------- */}
+          <div className="col-xxl-6 mt-3">
+            <div className="my-profile-update-wrapper">
+              <div className="col-12 ">
+                <div className="d-flex align-items-center justify-content-center mb-3 gap-2">
+                  <h3>Update Profile</h3>
+                </div>
+              </div>
+              <div className="col-12 d-flex align-items-center justify-content-center">
+                <Box
+                  sx={{
+                    // backgroundColor: "#ffd458",
+                    width: "50%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <form action="" onSubmit={formik.handleSubmit}>
+                    <FormControl>
+                      <Box sx={{ marginBottom: 3 }}>
+                        <TextField
+                          name="firstname"
+                          disabled={edit}
+                          size="small"
+                          id="outlined-basic"
+                          label="First Name"
+                          variant="outlined"
+                          value={formik.values.firstname}
+                          onChange={formik.handleChange("firstname")}
+                          onBlur={formik.handleBlur("firstname")}
+                          fullWidth
+                          required
+                        />
+                        <div className="error ms-3">
+                          {formik.touched.firstname && formik.errors.firstname}
+                        </div>
+                      </Box>
 
-                    <Box sx={{ marginBottom: 3 }}>
-                      <TextField
-                        name="lastname"
-                        disabled={edit}
-                        size="small"
-                        id="outlined-basic"
-                        label="Last Name"
-                        variant="outlined"
-                        value={formik.values.lastname}
-                        onChange={formik.handleChange("lastname")}
-                        onBlur={formik.handleBlur("lastname")}
-                        required
-                      />
-                      <div className="error ms-3">
-                        {formik.touched.lastname && formik.errors.lastname}
-                      </div>
-                    </Box>
-                    <Box sx={{ marginBottom: 3 }}>
-                      <TextField
-                        name="email"
-                        disabled={edit}
-                        size="small"
-                        id="outlined-basic"
-                        label="Email"
-                        variant="outlined"
-                        value={formik.values.email}
-                        onChange={formik.handleChange("email")}
-                        onBlur={formik.handleBlur("email")}
-                        required
-                      />
-                      <div className="error ms-3">
-                        {formik.touched.email && formik.errors.email}
-                      </div>
-                    </Box>
-                    <Box sx={{ marginBottom: 3 }}>
-                      <TextField
-                        name="mobile"
-                        disabled={edit}
-                        size="small"
-                        id="outlined-basic"
-                        label="Mobile"
-                        variant="outlined"
-                        value={formik.values.mobile}
-                        onChange={formik.handleChange("mobile")}
-                        onBlur={formik.handleBlur("mobile")}
-                        required
-                      />
-                      <div className="error ms-3">
-                        {formik.touched.mobile && formik.errors.mobile}
-                      </div>
-                    </Box>
-                    <Box className="d-flex align-items-center justify-content-between">
-                      {edit === false && (
-                        <Button variant="contained" type="submit">
-                          <SaveIcon /> Save
-                        </Button>
-                      )}
-                      {
-                        <Button
-                          variant="contained"
-                          onClick={() => setEdit(false)}
-                        >
-                          <EditNoteIcon /> Edit
-                        </Button>
-                      }
-                      {console.log(edit)}
-                    </Box>
-                  </FormControl>
-                </form>
-              </Box>
+                      <Box sx={{ marginBottom: 3 }}>
+                        <TextField
+                          name="lastname"
+                          disabled={edit}
+                          size="small"
+                          id="outlined-basic"
+                          label="Last Name"
+                          variant="outlined"
+                          value={formik.values.lastname}
+                          onChange={formik.handleChange("lastname")}
+                          onBlur={formik.handleBlur("lastname")}
+                          required
+                        />
+                        <div className="error ms-3">
+                          {formik.touched.lastname && formik.errors.lastname}
+                        </div>
+                      </Box>
+                      <Box sx={{ marginBottom: 3 }}>
+                        <TextField
+                          name="email"
+                          disabled={edit}
+                          size="small"
+                          id="outlined-basic"
+                          label="Email"
+                          variant="outlined"
+                          value={formik.values.email}
+                          onChange={formik.handleChange("email")}
+                          onBlur={formik.handleBlur("email")}
+                          required
+                        />
+                        <div className="error ms-3">
+                          {formik.touched.email && formik.errors.email}
+                        </div>
+                      </Box>
+                      <Box sx={{ marginBottom: 3 }}>
+                        <TextField
+                          name="mobile"
+                          disabled={edit}
+                          size="small"
+                          id="outlined-basic"
+                          label="Mobile"
+                          variant="outlined"
+                          value={formik.values.mobile}
+                          onChange={formik.handleChange("mobile")}
+                          onBlur={formik.handleBlur("mobile")}
+                          required
+                        />
+                        <div className="error ms-3">
+                          {formik.touched.mobile && formik.errors.mobile}
+                        </div>
+                      </Box>
+                      <Box className="d-flex align-items-center justify-content-between">
+                        {edit === false && (
+                          <Button variant="contained" type="submit">
+                            <SaveIcon /> Save
+                          </Button>
+                        )}
+                        {
+                          <Button
+                            variant="contained"
+                            onClick={() => setEdit(false)}
+                          >
+                            <EditNoteIcon /> Edit
+                          </Button>
+                        }
+                        {console.log(edit)}
+                      </Box>
+                    </FormControl>
+                  </form>
+                </Box>
+              </div>
             </div>
           </div>
         </div>

@@ -113,7 +113,8 @@ function Checkout() {
   const val1 = authState?.orderedProduct?.order;
   const val2 = authState?.orderedProduct?.success;
 
-  console.log(val1, val2);
+  console.log(val1);
+  console.log(val2);
   useEffect(() => {
     if (val1 !== null && val2 === true) {
       navigate("/my-orders");

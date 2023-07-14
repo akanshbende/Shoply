@@ -28,8 +28,8 @@ import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import ContactMailIcon from "@mui/icons-material/ContactMail";
 function Header() {
   const dispatch = useDispatch();
-  const [total, setTotal] = useState(null);
-  const [totalProducts, setTotalProducts] = useState(null);
+  const [total, setTotal] = useState(0);
+  const [totalProducts, setTotalProducts] = useState(0);
   const [paginate, setPaginate] = useState(true);
   const [productOpt, setProductOpt] = useState([]);
   // const options = range(0, 1000).map((o) => `Item ${o}`);
@@ -77,17 +77,17 @@ function Header() {
       setTotalProducts(totalProduct);
     }
   }, [cartState]);
-  console.log(cartState);
-  console.log(cartState?.length);
+  // console.log(cartState);
+  // console.log(cartState?.length);
 
-  console.log(total);
-  console.log(totalProducts);
+  // console.log(total);
+  // console.log(totalProducts);
 
   const badgeMark = cartState?.length === 0 ? 0 : totalProducts;
-  console.log(badgeMark);
+  // console.log(badgeMark);
 
   const totalMoney = cartState?.length === 0 ? 0 : total;
-  console.log(totalMoney);
+  // console.log(totalMoney);
   //Search Functionality
   useEffect(() => {
     let data = [];

@@ -1052,9 +1052,26 @@ footer .input-group-text:hover {
 .right-side {
   background-color: #ededed;
   border-radius: 10px;
-  box-shadow: 5px 5px px rgba(0, 0, 0, 0.2);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
 }
 /*CHECKOUT PAGE OR SHIPPING PAGE Ends*/
+
+/*+++++++++++++++++++++++PROFILE+++++++++++++++++++++++++++++++*/
+.my-profile-wrapper {
+  height: 250px;
+  width: max-content;
+  padding: 20px;
+  border-radius: 15px;
+  background-color: white;
+
+  box-shadow: 5px 5px 10px rgba(185, 185, 185, 0.2);
+}
+.my-profile-update-wrapper {
+  border-radius: 15px;
+
+  padding: 10px;
+}
+/*+++++++++++++++++++++++++PROFILE ENDS+++++++++++++++++++++++++++++*/
 
 /*----------------------ORDERS------------------------------------------*/
 .order-header h5 {
