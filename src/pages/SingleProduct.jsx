@@ -5,7 +5,7 @@ import ProductCard from "../Components/ProductCard";
 import ReactStars from "react-rating-stars-component";
 import { useState } from "react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
-
+import { MutatingDots } from "react-loader-spinner";
 // https://www.npmjs.com/package/react-image-magnify?activeTab=readme
 import applegear from "/applegear.webp";
 
@@ -34,6 +34,7 @@ import {
   MagnifierContainer,
   SideBySideMagnifier,
 } from "react-image-magnifiers";
+// import ReactImageMagnify from "react-image-magnify";
 
 // import ReactImageZoom from "react-image-zoom";
 
@@ -64,6 +65,8 @@ function SingleProduct() {
   console.log(cartState);
   // console.log(productState?.images[0]);
   // console.log(productState.color);
+  const rating = productState?.totalrating;
+  console.log(rating);
 
   useEffect(() => {
     dispatch(getAProduct(getProductId));
@@ -163,6 +166,16 @@ function SingleProduct() {
       Accept: "application/json",
     },
   };
+  const [visible, setVisible] = useState(true);
+  const visibleRotate = () => {
+    setTimeout(() => {
+      setVisible(false);
+    }, 500);
+  };
+
+  useEffect(() => {
+    visibleRotate();
+  }, []);
 
   return (
     <>
@@ -175,9 +188,9 @@ function SingleProduct() {
           <div className="col-xxl-6">
             <div className="product-images-wrapper">
               <div className="main-product-image">
-                <div>
+                <div className="d-flex align-items-center justify-content-center position-relative">
                   {console.log(productState?.images[0])}
-                  <MagnifierContainer>
+                  {/* <MagnifierContainer>
                     <SideBySideMagnifier
                       imageSrc={productState?.images[0]}
                       imageAlt="Example"
@@ -187,10 +200,33 @@ function SingleProduct() {
                       fillAlignTop={true}
                       fillGapLeft={50}
                       fillAvailableSpace={false}
-                      // style={{ gap: "10px" }}
                     />
-                    {/* {console.log(productState?.images[0]?.url)} */}
-                  </MagnifierContainer>
+                  </MagnifierContainer> */}
+                  <MutatingDots
+                    height="200"
+                    width="200"
+                    color="#ffaa48"
+                    secondaryColor="#ffaa48"
+                    radius="12.5"
+                    ariaLabel="mutating-dots-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                    visible={visible}
+                  />
+                  <ReactImageMagnify
+                    style={{ zIndex: 1000 }}
+                    {...{
+                      smallImage: {
+                        isFluidWidth: true,
+                        src: productState?.images[0],
+                      },
+                      largeImage: {
+                        src: productState?.images[0],
+                        width: 1600,
+                        height: 1500,
+                      },
+                    }}
+                  />
                 </div>
               </div>
               <div className="other-product-images d-flex flex-wrap gap-15 d-none d-xxl-flex">
@@ -217,7 +253,7 @@ function SingleProduct() {
                   {console.log(productState?.totalrating)}
                   <ReactStars
                     count={5}
-                    value={productState?.totalrating}
+                    value={rating}
                     edit={false}
                     size={24}
                     activeColor="#ffd700"

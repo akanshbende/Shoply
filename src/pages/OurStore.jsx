@@ -101,7 +101,7 @@ function OurStore() {
         <div className="row d-flex flex-wrap">
           {/* d-flex align-items-center justify-content-center */}
           {/* Left Side column: Filters etc.. */}
-          <div className="col-3 ">
+          <div className="col-xxl-3 col-1">
             {/* {(width = {400} ? <LeftPopOver /> : <LeftCategory />)} */}
             {width <= 425 ? (
               <LeftPopOver />
@@ -208,7 +208,7 @@ function OurStore() {
             <div className="filter-sort-grid mb-4">
               <div className="d-flex flex-wrap  justify-content-between align-items-center">
                 <div className="d-flex align-items-center gap-10">
-                  <p className="mb-0 d-block" style={{ width: "100px" }}>
+                  <p className="mb-0 d-block" style={{ maxWidth: "100px" }}>
                     Sort By :
                   </p>
                   {/* <InputLabel id="demo-select-small-label">Age</InputLabel> */}
@@ -235,7 +235,7 @@ function OurStore() {
                     <option value="-createdAt">Date, new to old</option>
                   </select>
                 </div>
-                <div className="d-flex align-items-center gap-10 mt-xxl-0 mt-3 mt-xxl-0  d-xxl-flex">
+                <div className="d-flex align-items-center gap-10 mt-xxl-0 mt-3 mt-xxl-0  d-xxl-flex d-none">
                   <p className="totalproducts mb-0">
                     {productState.length}
                     {productState.length === 1 ? `Product` : `Products`}

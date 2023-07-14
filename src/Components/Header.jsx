@@ -177,7 +177,7 @@ function Header() {
               </div>
             </div>
             <div className="col-lg-5 col-md-12 col-sm-12 mt-sm-3 mb-sm-3">
-              <div className="header-upper-links d-flex flex-wrap   m-xxl-0  align-items-center justify-content-xxl-between  justify-content-between">
+              <div className="header-upper-links d-flex flex-wrap  m-xxl-0  align-items-center justify-content-xxl-between  justify-content-between">
                 {/* <div className="main-func mb-2 mb-xxl-0 ">
                   <Link
                     to="/compare-product"

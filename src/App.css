@@ -110,11 +110,11 @@ a {
     height: 40px !important;
   }
 }
-@media screen and (max-width: 480px) {
+/* @media screen and (max-width: 480px) {
   .header-upper .main-func {
     margin-right: 50px;
   }
-}
+} */
 .header-bottom {
   background-color: var(--color-3b4149);
 }
@@ -499,6 +499,20 @@ footer .input-group-text:hover {
   box-shadow: 0 0 10px #0000001a;
   border-radius: 0.8rem;
   overflow: hidden;
+}
+@media screen and (max-width: 425px) {
+  .gr-4 {
+    width: 350px !important;
+  }
+  .gr-3 {
+    width: 350px !important;
+  }
+  .gr-6 {
+    width: 350px !important;
+  }
+  .gr-12 {
+    width: 350px !important;
+  }
 }
 /* for responsive i comment it  */
 /* .product-card .product-image {

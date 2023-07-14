@@ -258,7 +258,7 @@ export const authSlice = createSlice({
         state.isSuccess = false;
         state.message = action.payload; // Convert to a serializable value
         if (state.isError === true) {
-          toast.error(action.payload); // Convert to a serializable value
+          toast.error(action.payload.response.data.message); // Convert to a serializable value
         }
       })
       .addCase(getUserCart.pending, (state) => {
