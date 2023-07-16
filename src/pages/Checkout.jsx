@@ -32,6 +32,7 @@ import * as yup from "yup";
 import axios from "axios";
 import { config } from "../utils/axiosConfig";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
+import { toast } from "react-toastify";
 const shippingSchema = yup.object({
   firstName: yup.string().required("First Name is Required"),
   lastName: yup.string().required("Last Name is Required"),
@@ -115,11 +116,22 @@ function Checkout() {
 
   console.log(val1);
   console.log(val2);
-  useEffect(() => {
-    if (val1 !== null && val2 === true) {
-      navigate("/my-orders");
-    }
-  }, []);
+
+  const [placeOrder, setPlaceOrder] = useState(false);
+
+  const Order = () => {
+    setPlaceOrder(true);
+  };
+  console.log(placeOrder);
+
+  // useEffect(() => {
+  //   if (val1 !== null && val2 === true) {
+  //     navigate("/my-orders");
+  //   } else if (placeOrder === true) {
+  //     navigate("/my-orders");
+  //     toast.success("Product Ordered Sucessfully");
+  //   }
+  // }, []);
 
   useEffect(() => {
     let sum = 0;
@@ -133,10 +145,10 @@ function Checkout() {
     }
   }, [userCartState]);
 
-  function handleClick(event) {
-    event.preventDefault();
-    console.info("You clicked a breadcrumb.");
-  }
+  // function handleClick(event) {
+  //   event.preventDefault();
+  //   console.info("You clicked a breadcrumb.");
+  // }
   const breadcrumbs = [
     <Link
       key="1"
@@ -199,9 +211,14 @@ function Checkout() {
       alert("RazorPay SDK failed to load");
       return;
     }
-
+    //# BUG
+    // const result = await axios.post(
+    //   "http://localhost:5000/api/user/order/checkout",
+    //   { amount: totalAmount + shippingCharges },
+    //   config
+    // );
     const result = await axios.post(
-      "http://localhost:5000/api/user/order/checkout",
+      "https://shoplybackend2-production-5875.up.railway.app/api/user/order/checkout",
       { amount: totalAmount + shippingCharges },
       config
     );
@@ -227,8 +244,14 @@ function Checkout() {
           razorpayOrderId: response.razorpay_order_id,
         };
 
+        // #BUG
+        // const result = await axios.post(
+        //   "http://localhost:5000/api/user/order/paymentVerification",
+        //   data,
+        //   config
+        // );
         const result = await axios.post(
-          "http://localhost:5000/api/user/order/paymentVerification",
+          "https://shoplybackend2-production-5875.up.railway.app/api/user/order/paymentVerification",
           data,
           config
         );
@@ -248,13 +271,15 @@ function Checkout() {
           })
         );
         dispatch(deleteUserCart(config2));
+        dispatch(getUserCart(config2));
+        navigate("/my-orders");
         localStorage.removeItem("address");
         dispatch(resetState());
       },
       prefill: {
         name: "Shoply",
         email: "shoply@example.com",
-        contact: "9999999999",
+        contact: "987654321",
       },
       notes: {
         address: "Shoply Avenue, IT Park,Nagpur",
@@ -415,8 +440,8 @@ function Checkout() {
                   </div>
                 </div>
                 <div className="w-100">
-                  <div className="d-flex align-items-center justify-content-between">
-                    <Link to="/cart">
+                  <div className="d-flex flex-wrap align-items-center justify-content-between">
+                    <Link className=" mb-3 mt-xxl-0" to="/cart">
                       <Chip
                         icon={<KeyboardBackspaceIcon sx={{ left: 100 }} />}
                         label="Return to Cart"
@@ -426,10 +451,8 @@ function Checkout() {
                         }}
                       />
                     </Link>
-                    <Link to="/cart" className="button">
-                      Continue Shopping
-                    </Link>
-                    <button className="button" type="submit">
+
+                    <button className="button mb-3 mt-xxl-0" type="submit">
                       <CurrencyRupeeIcon /> Place Order
                     </button>
                   </div>
@@ -459,11 +482,11 @@ function Checkout() {
                             />
                           </Badge>
                         </div>
-                        <div className="title">
+                        <div className="title align-items-center">
                           <h5 className="total">{item?.productId.title}</h5>
-                          <h6 className="d-flex total-price gap-2">
+                          <h6 className="d-flex total-price gap-2 align-items-center">
                             Color :
-                            <ul className="colors ps-0 ">
+                            <ul className="colors ps-0 mb-0">
                               <li
                                 style={{
                                   backgroundColor: item?.color?.title,

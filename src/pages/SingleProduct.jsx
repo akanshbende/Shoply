@@ -67,6 +67,8 @@ function SingleProduct() {
   // console.log(productState.color);
   const rating = productState?.totalrating;
   console.log(rating);
+  const userState = useSelector((state) => state?.auth);
+  console.log(userState);
 
   useEffect(() => {
     dispatch(getAProduct(getProductId));
@@ -177,6 +179,21 @@ function SingleProduct() {
     visibleRotate();
   }, []);
 
+  console.log(productState?.ratings);
+  for (let index = 0; index < productState?.ratings.length; index++) {
+    var totalStarRatings = 0;
+
+    const element = productState?.ratings[index];
+    totalStarRatings = totalStarRatings + element?.star;
+
+    console.log(totalStarRatings);
+  }
+  var totalUsersRatings = productState?.ratings?.length;
+
+  const AverageRating = Math.round(totalStarRatings / totalUsersRatings);
+  console.log(AverageRating);
+  console.log(totalUsersRatings);
+
   return (
     <>
       {/* Tab heading */}
@@ -189,7 +206,7 @@ function SingleProduct() {
             <div className="product-images-wrapper">
               <div className="main-product-image">
                 <div className="d-flex align-items-center justify-content-center position-relative">
-                  {console.log(productState?.images[0])}
+                  {/* {console.log(productState?.images[0])} */}
                   {/* <MagnifierContainer>
                     <SideBySideMagnifier
                       imageSrc={productState?.images[0]}
@@ -250,15 +267,19 @@ function SingleProduct() {
               <div className="border-bottom py-3">
                 <p className="price">₹ {productState?.price}</p>
                 <div className="d-flex align-items-center gap-10 ">
-                  {console.log(productState?.totalrating)}
+                  {console.log(AverageRating)}
+
                   <ReactStars
                     count={5}
-                    value={rating}
+                    value={AverageRating}
                     edit={false}
                     size={24}
                     activeColor="#ffd700"
                   />
-                  <p className="mb-0 t-review">( 2 Reviews )</p>
+
+                  <p className="mb-0 t-review">
+                    ( {totalUsersRatings} Reviews )
+                  </p>
                 </div>
                 <a className="review-btn" href="#review">
                   Write a Review
@@ -275,7 +296,7 @@ function SingleProduct() {
                 </div>
                 <div className="d-flex align-items-center gap-10 my-2">
                   <h3 className="product-heading">Category : </h3>
-                  <p className="product-data">{productState?.catagory}</p>
+                  <p className="product-data">{productState?.category}</p>
                 </div>
                 <div className="d-flex align-items-center gap-10 my-2">
                   <h3 className="product-heading">Tags : </h3>
@@ -434,14 +455,18 @@ function SingleProduct() {
                 <div>
                   <h4 className="mb-2">Customer Reviews</h4>
                   <div className="d-flex align-items-center gap-10">
+                    {console.log(AverageRating)}
                     <ReactStars
                       count={5}
-                      value={3}
+                      value={AverageRating}
                       edit={false}
                       size={24}
                       activeColor="#ffd700"
                     />
-                    <p className="mb-0">Based on 2 Reviews</p>
+                    <p className="mb-0">
+                      Based on {totalUsersRatings ? totalUsersRatings : 0}{" "}
+                      Reviews
+                    </p>
                   </div>
                 </div>
                 {console.log(orderedProduct)}
@@ -501,7 +526,7 @@ function SingleProduct() {
                     return (
                       <div key={index} className="review ">
                         <div className="d-flex gap-10 align-items-center">
-                          <h6 className="mb-0">Akansh</h6>
+                          <h6 className="mb-0">{userState?.user?.firstname}</h6>
                           <ReactStars
                             count={5}
                             value={item?.star}

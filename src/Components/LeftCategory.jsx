@@ -74,32 +74,7 @@ function LeftCategory() {
       {/* Filtwr bt availability, color,size */}
       <div className="filter-card mb-3">
         <h4 className="filter-title">Filter By</h4>
-        <div>
-          {/* <h5 className="sub-title">Availability</h5>
-          <div className="form-check d-flex align-items-center gap-10">
-            <input
-              className="form-check-input mb-1"
-              type="checkbox"
-              value=""
-              id="defaultCheck1"
-            />
-            <label className="form-check-label" htmlFor="defaultCheck1">
-              In Stock (1)
-            </label>
-          </div> */}
-
-          {/* <div className="form-check d-flex align-items-center gap-10">
-            <input
-              className="form-check-input mb-1"
-              type="checkbox"
-              value=""
-              id="defaultCheck2"
-            />
-            <label className="form-check-label" htmlFor="defaultCheck2">
-              Out Of Stock (0)
-            </label>
-          </div> */}
-        </div>
+        <div></div>
         <h5 className="sub-title">Price</h5>
         <div className="d-flex align-items-center gap-10">
           <div className="form-floating">
@@ -171,81 +146,7 @@ function LeftCategory() {
               })}
           </div>
         </div>
-
-        {/* <h5 className="sub-title">Colors</h5>
-        <div>
-          <Color />
-        </div> */}
-        {/* <h5 className="sub-title">Size</h5> */}
-        {/* <div>
-        
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              value=""
-              id="color-1"
-            />
-            <label className="form-check-label" htmlFor="color-1">
-              S (2)
-            </label>
-          </div>
-         
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              value=""
-              id="color-2"
-            />
-            <label className="form-check-label" htmlFor="color-2">
-              M (1)
-            </label>
-          </div>
-        </div> */}
-        {/* ------------------PUT HERE--------------- */}
       </div>
-      {/* Filter product tags */}
-
-      {/* Random Products */}
-      {/* <div className="filter-card mb-3">
-        <h3 className="filter-title">Random Product</h3>
-        <div>
-          <div className="random-products mb-3 d-flex">
-            <div className="w-50">
-              <img className="img-fluid" src="/watch.jpg" alt="watch" />
-            </div>
-            <div className="w-50">
-              <h5>Kids headphones bulk 10 pack multi colored for students</h5>
-              <ReactStars
-                count={5}
-                value={3}
-                edit={false}
-                size={24}
-                activeColor="#ffd700"
-              />
-              <b>$300</b>
-            </div>
-          </div>
-          <div className="random-products d-flex">
-            <div className="w-50">
-              <img className="img-fluid" src="/watch.jpg" alt="watch" />
-            </div>
-            <div className="w-50">
-              <h5>Kids headphones bulk 10 pack multi colored for students</h5>
-              <ReactStars
-                count={5}
-                value={3}
-                edit={false}
-                size={24}
-                activeColor="#ffd700"
-              />
-              <b>$300</b>
-            </div>
-          </div>
-        </div>
-      </div> */}
-      {/* Product Brands */}
     </>
   );
 }

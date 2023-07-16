@@ -23,6 +23,9 @@ function ProductCard(props) {
     // console.log("Product Card : ", addTooWishlist(id));
     // console.log("Product Card : ", dispatch(addTooWishlist(id)));
   };
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
   return (
     <>
       {data?.map((item, index) => {
@@ -30,12 +33,21 @@ function ProductCard(props) {
           <div
             key={index}
             className={`  
-            ${location.pathname == "/product" ? `gr-${grid}` : "col-3"} 
+            ${
+              location.pathname == "/product"
+                ? `gr-${grid}`
+                : "col-xxl-3 col-12"
+            } 
             
             
            `}
           >
-            <div className="product-card position-relative col-12 col-xxl-3">
+            <div
+              className="product-card  position-relative  mb-3"
+              // style={{
+              //   height: "400px",
+              // }}
+            >
               <div
                 className="wishlist-icon position-absolute cursor-pointer"
                 onClick={(e) => {
@@ -51,19 +63,21 @@ function ProductCard(props) {
               {/* Product image */}
               <div className="product-image d-flex align-items-center justify-content-center  h-100">
                 <img
-                  className="img-fluid"
+                  className="img-fluid rounded"
                   src={item?.images[0]}
                   alt="product image"
                 />
                 <img
-                  className="img-fluid "
+                  className="img-fluid rounded"
                   src={item?.images[1]}
                   alt="product image"
                   width={269}
                 />
               </div>
               <div
-                className={`product-details ${grid == 12 ? "w-50" : "auto"}`}
+                className={`product-details mt-4 ${
+                  grid == 12 ? "w-50" : "auto"
+                }`}
               >
                 <h6 className="brand">{item?.brand}</h6>
                 <h5 className="product-title ">{item?.title}</h5>
@@ -89,6 +103,7 @@ function ProductCard(props) {
                   <Link
                     to={"/product/" + item?._id}
                     className="border-0 bg-transparent"
+                    onClick={scrollToTop}
                   >
                     <Tooltip
                       className="product-btn"

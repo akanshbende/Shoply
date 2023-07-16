@@ -5,6 +5,7 @@ import BreadCrumb from "../Components/BreadCrumb";
 
 import ReactStars from "react-rating-stars-component";
 import { useState } from "react";
+import { IconButton } from "@mui/material";
 
 import ProductCard from "../Components/ProductCard";
 import Color from "../Components/Color";
@@ -20,14 +21,17 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 
-import { TextField } from "@mui/material";
+import { TextField, Tooltip } from "@mui/material";
+import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
+import DensityMediumIcon from "@mui/icons-material/DensityMedium";
+import RotateLeftIcon from "@mui/icons-material/RotateLeft";
 function OurStore() {
   const [grid, setGrid] = useState(4);
   const [width, setWidth] = useState(window.innerWidth);
   const [brands, setBrands] = useState([]);
   const [categories, setCategories] = useState([]);
   const [tags, setTags] = useState([]);
-  const [colors, setColors] = useState([]);
 
   //Filter Status
   const [tag, setTag] = useState(null);
@@ -37,8 +41,29 @@ function OurStore() {
   const [maxPrice, setMaxPrice] = useState(null);
 
   const [sort, setSort] = useState(null);
-  const productState = useSelector((state) => state.product.product);
-  console.log(productState);
+  const productsState = useSelector((state) => state?.product?.product);
+  console.log(productsState);
+
+  const [restoreState, setRestoreState] = useState([]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setRestoreState(productsState);
+    }, 500);
+  }, []);
+  console.log(restoreState);
+  // const options = [
+  //   { name: "One", assigned: true },
+  //   { name: "Two", assigned: false },
+  //   { name: "Three", assigned: true },
+  // ];
+
+  // const filtered = options.reduce(
+  //   (result, { name, name="One" }) =>
+  //     assigned ? result.push(name) && result : result,
+  //   []
+  // );
+
   const dispatch = useDispatch();
   useEffect(() => {
     getProducts();
@@ -62,33 +87,45 @@ function OurStore() {
     };
   }, [width]);
 
-  // console.log(productState);
+  // console.log(productsState);
+
+  // const allProductState = useSelector((state) => state?.product?.allProducts);
+  // console.log(allProductState);
+
+  console.log(restoreState);
 
   useEffect(() => {
     let newBrands = [];
     let category = [];
     let newTags = [];
-    let newColors = [];
-    for (let index = 0; index < productState.length; index++) {
-      const element = productState[index];
-      // console.log(element.brand);
-      // console.log(element.category);
-      // const brand = element.brand;
-      // const categoryOfBrand = element.category;
+    // let newColors = [];
+
+    for (let index = 0; index < productsState?.length; index++) {
+      const element = productsState[index];
 
       newBrands.push(element.brand); //pushing brand in newBrand array
       category.push(element.category);
       newTags.push(element.tags);
-      newColors.push(element.color);
+      // newColors.push(element.color);
 
       setBrands(newBrands);
       setCategories(category);
       setTags(newTags);
-      setColors(newColors);
+      // setColors(newColors);
     }
-  }, [productState]);
+  }, [productsState]);
 
-  // con
+  const navigate = useNavigate();
+
+  console.log(productsState);
+  console.log(brands);
+  console.log(tags);
+  console.log(categories);
+
+  const resetProducts = () => {
+    dispatch(getAllProducts());
+    // navigate("/product");
+  };
 
   return (
     <>
@@ -104,18 +141,188 @@ function OurStore() {
           <div className="col-xxl-3 col-1">
             {/* {(width = {400} ? <LeftPopOver /> : <LeftCategory />)} */}
             {width <= 425 ? (
-              <LeftPopOver />
+              <>
+                <Link
+                  data-bs-toggle="offcanvas"
+                  to="#offcanvasExample"
+                  role="button"
+                  aria-controls="offcanvasExample"
+                >
+                  <Tooltip title="Delete">
+                    <IconButton>
+                      <DensityMediumIcon />
+                    </IconButton>
+                  </Tooltip>
+                </Link>
+
+                <div
+                  className="offcanvas offcanvas-start"
+                  tabindex="-1"
+                  id="offcanvasExample"
+                  aria-labelledby="offcanvasExampleLabel"
+                >
+                  <div className="offcanvas-header">
+                    <h3 className="offcanvas-title" id="offcanvasExampleLabel">
+                      Extras
+                    </h3>
+                    <button
+                      type="button"
+                      className="btn-close text-reset"
+                      data-bs-dismiss="offcanvas"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div className="offcanvas-body">
+                    {/* Filter Card by categories */}
+                    {/* <LeftCategory />
+                     */}
+
+                    <div className="filter-card mb-3">
+                      <button
+                        className="mb-3 w-50 p-2 rounded  "
+                        style={{
+                          backgroundColor: "#000000",
+                          color: "white",
+                          border: "none",
+                          outline: "none",
+                        }}
+                        onClick={resetProducts}
+                      >
+                        <RotateLeftIcon /> Reset Filter
+                      </button>
+                      <h4 className="filter-title">Shop By Categories</h4>
+                      <div>
+                        <ul className="ps-0">
+                          {categories &&
+                            [...new Set(categories)].map((item, index) => {
+                              return (
+                                <li
+                                  key={index}
+                                  onClick={() => setCategory(item)}
+                                >
+                                  {item}
+                                </li>
+                              );
+                            })}
+                        </ul>
+                      </div>
+                    </div>
+                    {/* Filtwr bt availability, color,size */}
+                    <div className="filter-card mb-3">
+                      <h4 className="filter-title">Filter By</h4>
+                      <div></div>
+                      <h5 className="sub-title">Price</h5>
+                      <div className="d-flex align-items-center gap-10">
+                        <div className="form-floating">
+                          <TextField
+                            id="outlined-number"
+                            variant="outlined"
+                            label="From"
+                            inputProps={{
+                              inputMode: "numeric",
+                              pattern: "[0-9]*",
+                            }}
+                            type="number"
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                            onChange={(e) => {
+                              setMinPrice(e.target.value);
+                            }}
+                          />
+                          {/* <label htmlFor="floatingInput">From</label> */}
+                        </div>
+                        <div className="form-floating">
+                          <TextField
+                            id="outlined-number"
+                            label="To"
+                            inputProps={{
+                              inputMode: "numeric",
+                              pattern: "[0-9]*",
+                            }}
+                            variant="outlined"
+                            type="number"
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                            onChange={(e) => {
+                              setMaxPrice(e.target.value);
+                            }}
+                          />
+                        </div>
+                      </div>
+                      <div className="mt-4 mb-3">
+                        <h4 className="sub-title">Product Tags</h4>
+                        <div className="product-tags d-flex flex-wrap align-items-center gap-10">
+                          {/* tags:headphone,laptop,Mobile,Wire */}
+                          {tags &&
+                            [...new Set(tags)].map((item, index) => {
+                              return (
+                                <span
+                                  key={index}
+                                  className="badge bg-light text-secondary rounded-3 py-2 px-3"
+                                  onClick={() => setTag(item)}
+                                >
+                                  {item}
+                                </span>
+                              );
+                            })}
+                        </div>
+                      </div>
+                      <div className="mt-4 mb-3">
+                        <h4 className="sub-title">Product Brands</h4>
+                        <div className="product-tags d-flex flex-wrap align-items-center gap-10">
+                          {/* tags:headphone,laptop,Mobile,Wire */}
+                          {/* {console.log(brands)} */}
+                          {brands &&
+                            [...new Set(brands)].map((item, index) => {
+                              return (
+                                <span
+                                  key={index}
+                                  className="badge bg-light text-secondary rounded-3 py-2 px-3"
+                                  onClick={() => setBrand(item)}
+                                >
+                                  {item}
+                                </span>
+                              );
+                            })}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </>
             ) : (
               <>
+                <button
+                  className="mb-3 w-50 p-2 rounded  "
+                  style={{
+                    backgroundColor: "#000000",
+                    color: "white",
+                    border: "none",
+                    outline: "none",
+                  }}
+                  onClick={resetProducts}
+                >
+                  <RotateLeftIcon /> Reset Filter
+                </button>
                 <div className="filter-card mb-3">
                   <h4 className="filter-title">Shop By Categories</h4>
                   <div>
                     <ul className="ps-0">
+                      {/* # BUG -other options are not rendering on clicking
+                      particular option */}
                       {categories &&
                         [...new Set(categories)].map((item, index) => {
                           return (
-                            <li key={index} onClick={() => setCategory(item)}>
-                              {item}
+                            <li
+                              className=" align"
+                              key={index}
+                              onClick={() => {
+                                setCategory(item);
+                              }}
+                            >
+                              <h5>{item}</h5>
                             </li>
                           );
                         })}
@@ -204,8 +411,7 @@ function OurStore() {
 
           {/* Right Side column: Filters etc.. */}
           <div className="col-9 ">
-            {/* 4:20 */}
-            <div className="filter-sort-grid mb-4">
+            <div className="filter-sort-grid mb-4 ms-4">
               <div className="d-flex flex-wrap  justify-content-between align-items-center">
                 <div className="d-flex align-items-center gap-10">
                   <p className="mb-0 d-block" style={{ maxWidth: "100px" }}>
@@ -237,8 +443,8 @@ function OurStore() {
                 </div>
                 <div className="d-flex align-items-center gap-10 mt-xxl-0 mt-3 mt-xxl-0  d-xxl-flex d-none">
                   <p className="totalproducts mb-0">
-                    {productState.length}
-                    {productState.length === 1 ? `Product` : `Products`}
+                    {productsState.length}
+                    {productsState.length === 1 ? `Product` : `Products`}
                   </p>
                   <div className="d-flex gap-10 align-items-center grid">
                     <img
@@ -278,13 +484,24 @@ function OurStore() {
               </div>
             </div>
             <div className="product-list pb-5">
-              <div className="d-flex gap-10 flex-wrap">
+              <div className="d-flex col-12 gap-10 flex-wrap">
                 {/* getting props form ProductCard */}
                 {/* sending grid as a prop to child */}
-                {productState && (
+                {productsState?.length === 0 && (
+                  <div className="col-12 d-flex flex-column  align-items-center justify-content-center gap-5 justify-content-center ">
+                    <img
+                      src="\no-product.png"
+                      // width={400}
+                      alt=""
+                      className="col-12 col-xxl-6"
+                    />
+                    <h1> No Product Found</h1>
+                  </div>
+                )}
+                {productsState && (
                   <ProductCard
                     grid={grid}
-                    data={productState ? productState : []}
+                    data={productsState ? productsState : []}
                   />
                 )}
               </div>

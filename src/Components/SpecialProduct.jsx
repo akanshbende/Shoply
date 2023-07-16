@@ -10,16 +10,22 @@ import ExpiryTimestamp from "./ExpiryTimestamp";
 function SpecialProduct(props) {
   const { title, brand, totalrating, price, sold, quantity, id, image } = props;
 
+  const randInt = () => {
+    return Math.floor(Math.random() * 3 + 1);
+  };
   const ratings = parseInt(totalrating);
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
   return (
     <>
       <div className="col-xxl-3  mb-3">
-        <div className="special-product-card " style={{ height: "570px" }}>
+        <div className="special-product-card " style={{ height: "560px" }}>
           <div className="d-flex flex-wrap d-flex align-items-center justify-content-center ">
             <div className="d-flex">
               <img
                 className="img-fluid rounded-3"
-                style={{ height: "200px" }}
+                style={{ height: "180px" }}
                 src={image}
                 alt="watch"
               />
@@ -27,7 +33,7 @@ function SpecialProduct(props) {
             <div className="special-product-content mt-3 ms-3 w-100">
               <h5 className="brand">{brand}</h5>
               {/* {console.log(totalrating)} */}
-              <h6 className="title">{title}</h6>
+              <h6 className="title w-100 text-truncate">{title}</h6>
               <ReactStars
                 count={5}
                 value={ratings}
@@ -40,7 +46,7 @@ function SpecialProduct(props) {
               </p>
               <div className="discount-till d-flex flex-wrap align-items-center gap-3 ">
                 <p className="">
-                  <b>1 </b>day
+                  <b>{randInt()}</b> day
                 </p>
                 <div className="d-flex ">
                   {/* <span className="badge rounded-circle p-xxl-3 p-sm-2 bg-danger">
@@ -74,7 +80,11 @@ function SpecialProduct(props) {
                   ></div>
                 </div>
               </div>
-              <Link className="button" to={"/product/" + id}>
+              <Link
+                className="button"
+                to={"/product/" + id}
+                onClick={scrollToTop}
+              >
                 View
               </Link>
             </div>

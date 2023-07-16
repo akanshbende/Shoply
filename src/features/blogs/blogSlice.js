@@ -12,6 +12,7 @@ export const getAllBlogs = createAsyncThunk("blogs/get", async (thunkAPI) => {
 });
 export const getABlog = createAsyncThunk("blog/get", async (id, thunkAPI) => {
   try {
+    console.log(id);
     return await blogService.getBlog(id);
     // console.log("product slice", userData);
   } catch (error) {

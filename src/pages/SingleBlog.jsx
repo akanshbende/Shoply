@@ -9,10 +9,12 @@ import blog from "../../public/blog-1.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { getABlog } from "../features/blogs/blogSlice";
 function SingleBlog() {
-  const blogState = useSelector((state) => state?.blog.blog);
-  console.log(blogState);
+  const singleBlogState = useSelector((state) => state?.blog?.singleBlog);
+  console.log(singleBlogState);
+  // console.log(singleBlogState?.length);
   const location = useLocation();
   const getBlogId = location.pathname.split("/")[2];
+  console.log(getBlogId);
   const dispatch = useDispatch();
   useEffect(() => {
     getblog();
@@ -23,39 +25,31 @@ function SingleBlog() {
   return (
     <>
       {/* Tab heading */}
-      <Meta title={blogState?.title} />
+      <Meta title={singleBlogState?.title} />
       {/* Home / Sign Up*/}
-      <BreadCrumb title={blogState?.title} />
+      <BreadCrumb title={singleBlogState?.title} />
       <Container className="blog-wrapper home-wrapper-2 py-5">
         <div className=" row">
           <div className="col-12">
-            {blogState &&
-              blogState?.map((item, index) => {
-                return (
-                  <div key={index} className="single-blog-card ">
-                    <Link
-                      to="/blogs"
-                      className="d-flex align-items-center gap-10"
-                    >
-                      <HiOutlineArrowLeft /> Go back to Blogs
-                    </Link>
-                    <h3 className="title d-flex align-items-center text-align-center justify-content-center ">
-                      {item?.title}{" "}
-                    </h3>
+            <div className="single-blog-card ">
+              <Link to="/blogs" className="d-flex align-items-center gap-10">
+                <HiOutlineArrowLeft /> Go back to Blogs
+              </Link>
+              <h3 className="title d-flex align-items-center text-align-center justify-content-center ">
+                {singleBlogState?.title}{" "}
+              </h3>
 
-                    <p className="m-5">
-                      <img
-                        // src={blogState?.images[0].url ? blogState?.images[0].url : blog}
-                        src={item?.images}
-                        alt="blog"
-                        className="img-fluid rounded-3 "
-                        style={{ float: "left", marginRight: "20px" }}
-                      />
-                      {item?.description}
-                    </p>
-                  </div>
-                );
-              })}
+              <p className="m-5">
+                <img
+                  // src={singleBlogState?.images[0].url ? singleBlogState?.images[0].url : blog}
+                  src={singleBlogState?.images}
+                  alt="blog"
+                  className="img-fluid rounded-3 "
+                  style={{ float: "left", marginRight: "20px" }}
+                />
+                {singleBlogState?.description}
+              </p>
+            </div>
           </div>
         </div>
       </Container>

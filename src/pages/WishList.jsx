@@ -40,7 +40,7 @@ function WishList() {
         <div className="row">
           {wishListState?.length === 0 && (
             <div className="d-flex align-items-center gap-5 justify-content-center flex-wrap">
-              <img src="public\wishlist_img.webp" width={400} alt="" />
+              <img src="\wishlist_img.png" className="img-fluid" alt="" />
               <h1> Your Wishlist is Empty</h1>
             </div>
           )}

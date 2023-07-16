@@ -2,6 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 function BlogCard(props) {
   const { id, title, description, date, image } = props;
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
   return (
     <>
       <div
@@ -34,7 +37,7 @@ function BlogCard(props) {
             {/* text-overflow: ellipsis */}
             {description}
           </p>
-          <Link className="button" to="/blog/:id">
+          <Link className="button" to={`/blog/${id}`} onClick={scrollToTop}>
             Read More
           </Link>
         </div>

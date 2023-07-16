@@ -22,6 +22,7 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import NorthIcon from "@mui/icons-material/North";
 //2.08 hr
 function Home() {
   const blogState = useSelector((state) => state?.blog.blog);
@@ -58,6 +59,17 @@ function Home() {
       {/* <BreadCrumb title="Shoply" />  */}
 
       <Container class1="home-wrapper-1 py-5">
+        {/* <div
+          className="up"
+          style={{
+            position: "absolute",
+            bottom: "5%",
+            left: "90%",
+            zIndex: 10000,
+          }}
+        >
+          <NorthIcon />
+        </div> */}
         <div className="row">
           <div className="carosal-main col-lg-6 col-md-12 col-sm-12 ">
             <Carousel controls={false}>
@@ -283,11 +295,11 @@ function Home() {
                 return (
                   <div
                     key={index}
-                    className={"col-12 col-xxl-3 col-xl-6 mb-3 mb-xxl-0"}
+                    className={"col-12 col-xxl-3 col-xl-6 mb-3 mb-xxl-0 "}
                   >
                     <div
                       className="product-card position-relative "
-                      style={{ height: "420px" }}
+                      style={{ height: "510px" }}
                     >
                       <div
                         className="wishlist-icon position-absolute "
@@ -316,7 +328,6 @@ function Home() {
                           className="img-fluid"
                           src={item?.images[1]}
                           alt="product image"
-                          width={269}
                         />
                       </div>
                       <div className="product-details">
@@ -469,7 +480,7 @@ function Home() {
                   >
                     <div
                       className="product-card position-relative "
-                      style={{ height: "420px" }}
+                      style={{ height: "510px" }}
                     >
                       <div
                         className="wishlist-icon position-absolute cursor-pointer"
@@ -498,7 +509,6 @@ function Home() {
                           className="img-fluid"
                           src={item?.images[1]}
                           alt="product image"
-                          width={269}
                         />
                       </div>
                       <div className="product-details">

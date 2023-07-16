@@ -85,7 +85,7 @@ function Profile() {
   // useEffect(() => {
   //   dispatch(updatedProfile());
   // }, [userState]);
-
+  // MODIFY Update profile UI
   return (
     <>
       <BreadCrumb title="My Profile" />
@@ -93,6 +93,12 @@ function Profile() {
         <div className="row d-flex flex-wrap">
           <div className="col-xxl-6 d-flex align-items-center justify-content-center">
             <div className="my-profile-wrapper ">
+              {/* <div className="profile-image">
+                <img
+                  src="https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png"
+                  alt=""
+                />
+              </div> */}
               <div className="col-12 d-flex align-items-center justify-content-center mb-3 gap-2">
                 <h3>My Profile</h3>
               </div>

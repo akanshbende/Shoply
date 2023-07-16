@@ -1,4 +1,8 @@
+// FIXME - now  host
+// //LOCAL  HOST  STRING
 // export const base_url = "http://localhost:5000/api/";
+
+// // HOST STRING
 export const base_url =
   "https://shoplybackend2-production-5875.up.railway.app/api/";
 

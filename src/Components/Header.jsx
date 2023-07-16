@@ -203,7 +203,7 @@ function Header() {
                 </div>
                 <div className="main-func mb-2 mb-xxl-0">
                   <Link
-                    to={authState?.user === null ? "/login" : ""}
+                    to={authState?.user === null ? "/login" : location.pathname}
                     className="d-flex align-items-center text-white"
                   >
                     <PersonIcon />
